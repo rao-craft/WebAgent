@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="HandheldFriendly" content="True" />
+<meta name="MobileOptimized" content="320" />
+<meta name="theme-color" content="#ee4e3a">
+
+<title>Swift 6.4: What’s New in Concurrency - SwiftLee</title>
+<link crossorigin data-rocket-preconnect href="https://www.youtube.com" rel="preconnect">
+<link crossorigin data-rocket-preconnect href="https://static.ads-twitter.com" rel="preconnect">
+<link crossorigin data-rocket-preconnect href="https://segabc.avanderlee.com" rel="preconnect"><link rel="preload" data-rocket-preload as="image" href="https://www.avanderlee.com/wp-content/uploads/2025/08/Avatar_2022_masked_360x360.webp" fetchpriority="high">
+
+<link rel="profile" href="https://gmpg.org/xfn/11">
+<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+	<style>img:is([sizes="auto" i], [sizes^="auto," i]) { contain-intrinsic-size: 3000px 1500px }</style>
+	
+	<!-- This site is optimized with the Yoast SEO Premium plugin v25.7.1 (Yoast SEO v27.8) - https://yoast.com/product/yoast-seo-premium-wordpress/ -->
+	<meta name="description" content="Explore the new features in Swift 6.4 introduced at WWDC 2026, focusing on Concurrency improvements and convenience changes." />
+	<link rel="canonical" href="https://www.avanderlee.com/concurrency/swift-6-4-whats-new-in-concurrency/" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Swift 6.4: What’s New in Concurrency" />
+	<meta property="og:description" content="Explore the new features in Swift 6.4 introduced at WWDC 2026, focusing on Concurrency improvements and convenience changes." />
+	<meta property="og:url" content="https://www.avanderlee.com/concurrency/swift-6-4-whats-new-in-concurrency/" />
+	<meta property="og:site_name" content="SwiftLee" />
+	<meta property="article:published_time" content="2026-06-21T07:05:27+00:00" />
+	<meta property="article:modified_time" content="2026-06-21T07:06:35+00:00" />
+	<meta property="og:image" content="https://swiftlee-banners.herokuapp.com/imagegenerator.php?title=Swift+6.4%3A+What%E2%80%99s+New+in+Concurrency" />
+	<meta property="og:image:width" content="2048" />
+	<meta property="og:image:height" content="1338" />
+	<meta property="og:image:type" content="image/png" />
+	<meta name="author" content="Antoine van der Lee" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:image" content="https://swiftlee-banners.herokuapp.com/imagegenerator.php?title=Swift+6.4%3A+What%E2%80%99s+New+in+Concurrency" />
+	<meta name="twitter:creator" content="@twannl" />
+	<meta name="twitter:site" content="@twannl" />
+	<meta name="twitter:label1" content="Written by" />
+	<meta name="twitter:data1" content="Antoine van der Lee" />
+	<meta name="twitter:label2" content="Est. reading time" />
+	<meta name="twitter:data2" content="7 minutes" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https:\/\/schema.org","@graph":[{"@type":"Article","@id":"https:\/\/www.avanderlee.com\/concurrency\/swift-6-4-whats-new-in-concurrency\/#article","isPartOf":{"@id":"https:\/\/www.avanderlee.com\/concurrency\/swift-6-4-whats-new-in-concurrency\/"},"author":{"name":"Antoine van der Lee","@id":"https:\/\/www.avanderlee.com\/#\/schema\/person\/37e483f0475f992424966c4ddbc86625"},"headline":"Swift 6.4: What’s New in Concurrency","datePublished":"2026-06-21T07:05:27+00:00","dateModified":"2026-06-21T07:06:35+00:00","mainEntityOfPage":{"@id":"https:\/\/www.avanderlee.com\/concurrency\/swift-6-4-whats-new-in-concurrency\/"},"wordCount":1546,"publisher":{"@id":"https:\/\/www.avanderlee.com\/#\/schema\/person\/37e483f0475f992424966c4ddbc86625"},"image":{"@id":"https:\/\/www.avanderlee.com\/concurrency\/swift-6-4-whats-new-in-concurrency\/#primaryimage"},"thumbnailUrl":"https:\/\/www.avanderlee.com\/wp-content\/uploads\/2026\/06\/swift_6_4_concurrency-1024x669.png","articleSection":["Concurrency","Swift"],"inLanguage":"en-US"},{"@type":"WebPage","@id":"https:\/\/www.avanderlee.com\/concurrency\/swift-6-4-whats-new-in-concurrency\/","url":"https:\/\/www.avanderlee.com\/concurrency\/swift-6-4-whats-new-in-concurrency\/","name":"Swift 6.4: What’s New in Concurrency - SwiftLee","isPartOf":{"@id":"https:\/\/www.avanderlee.com\/#website"},"primaryImageOfPage":{"@id":"https:\/\/www.avanderlee.com\/concurrency\/swift-6-4-whats-new-in-concurrency\/#primaryimage"},"image":{"@id":"https:\/\/www.avanderlee.com\/concurrency\/swift-6-4-whats-new-in-concurrency\/#primaryimage"},"thumbnailUrl":"https:\/\/www.avanderlee.com\/wp-content\/uploads\/2026\/06\/swift_6_4_concurrency-1024x669.png","datePublished":"2026-06-21T07:05:27+00:00","dateModified":"2026-06-21T07:06:35+00:00","description":"Explore the new features in Swift 6.4 introduced at WWDC 2026, focusing on Concurrency improvements and convenience changes.","breadcrumb":{"@id":"https:\/\/www.avanderlee.com\/concurrency\/swift-6-4-whats-new-in-concurrency\/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https:\/\/www.avanderlee.com\/concurrency\/swift-6-4-whats-new-in-concurrency\/"]}]},{"@type":"ImageObject","inLanguage":"en-US","@id":"https:\/\/www.avanderlee.com\/concurrency\/swift-6-4-whats-new-in-concurrency\/#primaryimage","url":"https:\/\/www.avanderlee.com\/wp-content\/uploads\/2026\/06\/swift_6_4_concurrency-scaled.png","contentUrl":"https:\/\/www.avanderlee.com\/wp-content\/uploads\/2026\/06\/swift_6_4_concurrency-scaled.png","width":2048,"height":1338,"caption":"An overview of all the proposals that got implemented into Swift 6.4, partly related to Concurrency."},{"@type":"BreadcrumbList","@id":"https:\/\/www.avanderlee.com\/concurrency\/swift-6-4-whats-new-in-concurrency\/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"SwiftLee","item":"https:\/\/www.avanderlee.com\/"},{"@type":"ListItem","position":2,"name":"Concurrency","item":"https:\/\/www.avanderlee.com\/category\/concurrency\/"},{"@type":"ListItem","position":3,"name":"Swift 6.4: What’s New in Concurrency"}]},{"@type":"WebSite","@id":"https:\/\/www.avanderlee.com\/#website","url":"https:\/\/www.avanderlee.com\/","name":"SwiftLee - Learn SwiftUI & Swift Programming","description":"A weekly blog about Swift, SwiftUI and Xcode Tips and Tricks","publisher":{"@id":"https:\/\/www.avanderlee.com\/#\/schema\/person\/37e483f0475f992424966c4ddbc86625"},"alternateName":"SwiftLee","potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https:\/\/www.avanderlee.com\/?s={search_term_string}"},"query-input":{"@type":"PropertyValueSpecification","valueRequired":true,"valueName":"search_term_string"}}],"inLanguage":"en-US"},{"@type":["Person","Organization"],"@id":"https:\/\/www.avanderlee.com\/#\/schema\/person\/37e483f0475f992424966c4ddbc86625","name":"Antoine van der Lee","image":{"@type":"ImageObject","inLanguage":"en-US","@id":"https:\/\/www.avanderlee.com\/wp-content\/uploads\/2025\/08\/Avatar_2022_masked_360x360.webp","url":"https:\/\/www.avanderlee.com\/wp-content\/uploads\/2025\/08\/Avatar_2022_masked_360x360.webp","contentUrl":"https:\/\/www.avanderlee.com\/wp-content\/uploads\/2025\/08\/Avatar_2022_masked_360x360.webp","width":360,"height":360,"caption":"Antoine van der Lee"},"logo":{"@id":"https:\/\/www.avanderlee.com\/wp-content\/uploads\/2025\/08\/Avatar_2022_masked_360x360.webp"},"description":"iOS Developer since 2010, former Staff iOS Engineer at WeTransfer and currently full-time Indie Developer & Founder at SwiftLee. Writing a new blog post every week related to Swift, iOS and Xcode. Regular speaker and workshop host.","sameAs":["https:\/\/www.avanderlee.com","https:\/\/x.com\/twannl"],"knowsAbout":["Swift","SwiftUI","app development","iOS","macOS","watchOS","Xcode","RocketSim"],"jobTitle":"App Developer & Software Engineer","worksFor":"SwiftLee B.V."}]}</script>
+	<!-- / Yoast SEO Premium plugin. -->
+
+
+<link rel='dns-prefetch' href='//insights-tag.convertkit.com' />
+<link rel='dns-prefetch' href='//www.googletagmanager.com' />
+
+<link rel='preconnect' href='https://insights-tag.convertkit.com' />
+<link rel="alternate" type="application/rss+xml" title="SwiftLee &raquo; Feed" href="https://www.avanderlee.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="SwiftLee &raquo; Comments Feed" href="https://www.avanderlee.com/comments/feed/" />
+<script type="text/javascript" id="wpp-js" src="https://www.avanderlee.com/wp-content/plugins/wordpress-popular-posts/assets/js/wpp.min.js?ver=7.3.3" data-sampling="0" data-sampling-rate="100" data-api-url="https://www.avanderlee.com/wp-json/wordpress-popular-posts" data-post-id="203529" data-token="f88a17568d" data-lang="0" data-debug="0" defer="defer"></script>
+<link rel='stylesheet' id='pt-cv-public-style-css' href='https://www.avanderlee.com/wp-content/plugins/content-views-query-and-display-post-page/public/assets/css/cv.css?ver=4.1' type='text/css' media='all' />
+<link rel='stylesheet' id='pt-cv-public-pro-style-css' href='https://www.avanderlee.com/wp-content/plugins/pt-content-views-pro/public/assets/css/cvpro.min.css?ver=7.1' type='text/css' media='all' />
+<style id='wp-emoji-styles-inline-css' type='text/css'>
+
+	img.wp-smiley, img.emoji {
+		display: inline !important;
+		border: none !important;
+		box-shadow: none !important;
+		height: 1em !important;
+		width: 1em !important;
+		margin: 0 0.07em !important;
+		vertical-align: -0.1em !important;
+		background: none !important;
+		padding: 0 !important;
+	}
+</style>
+<link rel='stylesheet' id='wp-block-library-css' href='https://www.avanderlee.com/wp-includes/css/dist/block-library/style.min.css?ver=6.8.12' type='text/css' media='all' />
+<style id='classic-theme-styles-inline-css' type='text/css'>
+/*! This file is auto-generated */
+.wp-block-button__link{color:#fff;background-color:#32373c;border-radius:9999px;box-shadow:none;text-decoration:none;padding:calc(.667em + 2px) calc(1.333em + 2px);font-size:1.125em}.wp-block-file__button{background:#32373c;color:#fff;text-decoration:none}
+</style>
+<link rel='stylesheet' id='wp-components-css' href='https://www.avanderlee.com/wp-includes/css/dist/components/style.min.css?ver=6.8.12' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-preferences-css' href='https://www.avanderlee.com/wp-includes/css/dist/preferences/style.min.css?ver=6.8.12' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-editor-css' href='https://www.avanderlee.com/wp-includes/css/dist/block-editor/style.min.css?ver=6.8.12' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-reusable-blocks-css' href='https://www.avanderlee.com/wp-includes/css/dist/reusable-blocks/style.min.css?ver=6.8.12' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-patterns-css' href='https://www.avanderlee.com/wp-includes/css/dist/patterns/style.min.css?ver=6.8.12' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-editor-css' href='https://www.avanderlee.com/wp-includes/css/dist/editor/style.min.css?ver=6.8.12' type='text/css' media='all' />
+<link rel='stylesheet' id='sticky_block-css-css' href='https://www.avanderlee.com/wp-content/plugins/sticky-block/dist/blocks.style.build.css?ver=1.11.1' type='text/css' media='all' />
+<style id='global-styles-inline-css' type='text/css'>
+:root{--wp--preset--aspect-ratio--square: 1;--wp--preset--aspect-ratio--4-3: 4/3;--wp--preset--aspect-ratio--3-4: 3/4;--wp--preset--aspect-ratio--3-2: 3/2;--wp--preset--aspect-ratio--2-3: 2/3;--wp--preset--aspect-ratio--16-9: 16/9;--wp--preset--aspect-ratio--9-16: 9/16;--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);}:where(.is-layout-flex){gap: 0.5em;}:where(.is-layout-grid){gap: 0.5em;}body .is-layout-flex{display: flex;}.is-layout-flex{flex-wrap: wrap;align-items: center;}.is-layout-flex > :is(*, div){margin: 0;}body .is-layout-grid{display: grid;}.is-layout-grid > :is(*, div){margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+:where(.wp-block-post-template.is-layout-flex){gap: 1.25em;}:where(.wp-block-post-template.is-layout-grid){gap: 1.25em;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}:where(.wp-block-columns.is-layout-grid){gap: 2em;}
+:root :where(.wp-block-pullquote){font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel='stylesheet' id='mkaz-code-syntax-prism-css-css' href='https://www.avanderlee.com/wp-content/themes/casper/assets/prism/prism.css?ver=1635438754' type='text/css' media='all' />
+<link rel='stylesheet' id='rss-retriever-css' href='https://www.avanderlee.com/wp-content/plugins/wp-rss-retriever/inc/css/rss-retriever.css?ver=1.6.10' type='text/css' media='all' />
+<link rel='stylesheet' id='ivory-search-styles-css' href='https://www.avanderlee.com/wp-content/plugins/add-search-to-menu/public/css/ivory-search.min.css?ver=5.5.11' type='text/css' media='all' />
+<link rel='stylesheet' id='hollerbox-popups-css' href='https://www.avanderlee.com/wp-content/plugins/holler-box/assets/css/popups.css?ver=2.3.10.1' type='text/css' media='all' />
+<link rel='stylesheet' id='add-anchor-links-style-css' href='https://www.avanderlee.com/wp-content/plugins/add-anchor-links/assets/css/add-anchor-links.css?ver=1.0.2' type='text/css' media='all' />
+<link rel='stylesheet' id='casper-style-css' href='https://www.avanderlee.com/wp-content/themes/casper/style.css?ver=6.8.12' type='text/css' media='all' />
+<link rel='stylesheet' id='swiftleestyles-css' href='https://www.avanderlee.com/wp-content/themes/casper/swiftlee-style.css?ver=6.8.12' type='text/css' media='all' />
+<link rel='stylesheet' id='swiftlee-course-landingspage-styles-css' href='https://www.avanderlee.com/wp-content/themes/casper/course-landingspage-style.css?ver=1794219619' type='text/css' media='all' />
+<script data-minify="1" type="text/javascript" src="https://www.avanderlee.com/wp-content/cache/min/1/wp-content/themes/casper/js/prism.js?ver=1766476932" id="modified-code-syntax-prism-js-js" defer="defer" data-wp-strategy="defer"></script>
+<script data-minify="1" type="text/javascript" src="https://www.avanderlee.com/wp-content/cache/min/1/wp-content/plugins/stop-user-enumeration/frontend/js/frontend.js?ver=1766476932" id="stop-user-enumeration-js" defer="defer" data-wp-strategy="defer"></script>
+<script type="text/javascript" src="https://www.avanderlee.com/wp-includes/js/jquery/jquery.min.js?ver=3.7.1" id="jquery-core-js" data-rocket-defer defer></script>
+<script type="text/javascript" src="https://www.avanderlee.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.4.1" id="jquery-migrate-js" data-rocket-defer defer></script>
+<link rel="https://api.w.org/" href="https://www.avanderlee.com/wp-json/" /><link rel="alternate" title="JSON" type="application/json" href="https://www.avanderlee.com/wp-json/wp/v2/posts/203529" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.avanderlee.com/xmlrpc.php?rsd" />
+<meta name="generator" content="WordPress 6.8.12" />
+<link rel='shortlink' href='https://www.avanderlee.com/?p=203529' />
+<link rel="alternate" title="oEmbed (JSON)" type="application/json+oembed" href="https://www.avanderlee.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.avanderlee.com%2Fconcurrency%2Fswift-6-4-whats-new-in-concurrency%2F" />
+<link rel="alternate" title="oEmbed (XML)" type="text/xml+oembed" href="https://www.avanderlee.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.avanderlee.com%2Fconcurrency%2Fswift-6-4-whats-new-in-concurrency%2F&#038;format=xml" />
+
+<!-- This site is using AdRotate Professional v5.14.2 to display their advertisements - https://ajdg.solutions/ -->
+<!-- AdRotate CSS -->
+<style type="text/css" media="screen">
+	.gotngnp { margin:0px; padding:0px; overflow:hidden; line-height:1; zoom:1; }
+	.gotngnp img { height:auto; }
+	.gotngnp-col { position:relative; float:left; }
+	.gotngnp-col:first-child { margin-left: 0; }
+	.gotngnp-col:last-child { margin-right: 0; }
+	.woocommerce-page .gotngnp, .bbpress-wrapper .gotngnp { margin: 20px auto; clear:both; }
+	@media only screen and (max-width: 480px) {
+		.gotngnp-col, .gotngnp-dyn, .gotngnp-single { width:100%; margin-left:0; margin-right:0; }
+		.woocommerce-page .gotngnp, .bbpress-wrapper .gotngnp { margin: 10px auto; }
+	}
+</style>
+<!-- /AdRotate CSS -->
+
+<meta name="generator" content="Site Kit by Google 1.181.0" /><style>[class*=" icon-oc-"],[class^=icon-oc-]{speak:none;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.icon-oc-one-com-white-32px-fill:before{content:"901"}.icon-oc-one-com:before{content:"900"}#one-com-icon,.toplevel_page_onecom-wp .wp-menu-image{speak:none;display:flex;align-items:center;justify-content:center;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.onecom-wp-admin-bar-item>a,.toplevel_page_onecom-wp>.wp-menu-name{font-size:16px;font-weight:400;line-height:1}.toplevel_page_onecom-wp>.wp-menu-name img{width:69px;height:9px;}.wp-submenu-wrap.wp-submenu>.wp-submenu-head>img{width:88px;height:auto}.onecom-wp-admin-bar-item>a img{height:7px!important}.onecom-wp-admin-bar-item>a img,.toplevel_page_onecom-wp>.wp-menu-name img{opacity:.8}.onecom-wp-admin-bar-item.hover>a img,.toplevel_page_onecom-wp.wp-has-current-submenu>.wp-menu-name img,li.opensub>a.toplevel_page_onecom-wp>.wp-menu-name img{opacity:1}#one-com-icon:before,.onecom-wp-admin-bar-item>a:before,.toplevel_page_onecom-wp>.wp-menu-image:before{content:'';position:static!important;background-color:rgba(240,245,250,.4);border-radius:102px;width:18px;height:18px;padding:0!important}.onecom-wp-admin-bar-item>a:before{width:14px;height:14px}.onecom-wp-admin-bar-item.hover>a:before,.toplevel_page_onecom-wp.opensub>a>.wp-menu-image:before,.toplevel_page_onecom-wp.wp-has-current-submenu>.wp-menu-image:before{background-color:#76b82a}.onecom-wp-admin-bar-item>a{display:inline-flex!important;align-items:center;justify-content:center}#one-com-logo-wrapper{font-size:4em}#one-com-icon{vertical-align:middle}.imagify-welcome{display:none !important;}
+		</style><link rel="apple-touch-icon" sizes="180x180" href="/wp-content/uploads/fbrfg/apple-touch-icon.png?v=2">
+<link rel="icon" type="image/png" sizes="32x32" href="/wp-content/uploads/fbrfg/favicon-32x32.png?v=2">
+<link rel="icon" type="image/png" sizes="16x16" href="/wp-content/uploads/fbrfg/favicon-16x16.png?v=2">
+<link rel="manifest" href="/wp-content/uploads/fbrfg/site.webmanifest?v=2">
+<link rel="mask-icon" href="/wp-content/uploads/fbrfg/safari-pinned-tab.svg?v=2" color="#ee4e3a">
+<link rel="shortcut icon" href="/wp-content/uploads/fbrfg/favicon.ico?v=2">
+<meta name="msapplication-TileColor" content="#ee4e3a">
+<meta name="msapplication-config" content="/wp-content/uploads/fbrfg/browserconfig.xml?v=2">
+<meta name="theme-color" content="#ffffff">		<style id="hollerbox-frontend-styles">
+
+            .no-click {
+                cursor: not-allowed;
+                /*pointer-events: none;*/
+            }
+
+					</style>
+		            <style id="wpp-loading-animation-styles">@-webkit-keyframes bgslide{from{background-position-x:0}to{background-position-x:-200%}}@keyframes bgslide{from{background-position-x:0}to{background-position-x:-200%}}.wpp-widget-block-placeholder,.wpp-shortcode-placeholder{margin:0 auto;width:60px;height:3px;background:#dd3737;background:linear-gradient(90deg,#dd3737 0%,#571313 10%,#dd3737 100%);background-size:200% auto;border-radius:3px;-webkit-animation:bgslide 1s infinite linear;animation:bgslide 1s infinite linear}</style>
+            		<script>
+			document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+		</script>
+		
+   	<style type="text/css">
+					.blog-title a, .blog-description, .social-icons a { color: #fafafa; }
+		
+								    .site-head { background-color: #ee4e3a; }
+		                
+		
+					a:hover, body .blog-title a:hover, body .social-icons a:hover { color: #ee4e3a; }
+							.main-navigation a { color: ; }
+		                        			.blog-logo img {
+				-webkit-border-radius: 50%;
+			    -moz-border-radius: 50%;
+			    border-radius: 50%;
+			}
+                			.blog-logo img {
+			    border: 3px solid white;
+			    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+			    -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+			    box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+			}
+                			.site-head:after {
+			    display: none;
+			}
+            </style>
+    <script data-nowprocket>/* <![CDATA[ */window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }/* ]]> */</script><script defer data-nowprocket data-domain="avanderlee.com" data-api="/qwerty/abc" src="/qwerty/def"></script><script data-minify="1" defer data-cfasync="false" src="https://www.avanderlee.com/wp-content/cache/min/1/wp-content/themes/casper/js/forms.js?ver=1766476932"></script>	<script type="text/javascript">
+	var _segq = _segq || [];
+	var _segs = _segs || {};
+	(function () {var dc = document.createElement('script');dc.type = 'text/javascript';dc.async = true;dc.src = '//segabc.avanderlee.com/tag/aEkjjq.js';var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(dc,s);})();
+	</script>
+    	<style type="text/css">
+			.site-title a,
+		.site-description {
+			color: #fafafa;
+		}
+		</style>
+				<style type="text/css">
+					</style>
+					<script id='ivory-search-js-extras'>
+			var IvoryAjaxVars = {"ajaxurl":"https:\/\/www.avanderlee.com\/wp-admin\/admin-ajax.php","ajax_nonce":"e0759437af"};
+							var IvorySearchVars = {"is_analytics_enabled":"1"};
+							</script>
+			<style id="rocket-lazyrender-inline-css">[data-wpr-lazyrender] {content-visibility: auto;}</style><meta name="generator" content="WP Rocket 3.20.0.3" data-wpr-features="wpr_defer_js wpr_minify_js wpr_preconnect_external_domains wpr_automatic_lazy_rendering wpr_oci wpr_image_dimensions wpr_desktop" /></head>
+
+<body class="wp-singular post-template-default single single-post postid-203529 single-format-standard wp-theme-casper casper">
+
+ 
+    <!--<div class="giveaway-banner giveaway-banner-desktop">
+        <a href="https://www.avanderlee.com/giveaway-do-ios-2026" target="_blank" onclick="plausible('Giveaway Banner');">Win a ticket for Do iOS Conference, enter in 10 seconds. Go to the giveaway →</a>
+    </div>
+    <div class="giveaway-banner giveaway-banner-mobile">
+        <a href="https://www.avanderlee.com/giveaway-do-ios-2026" target="_blank" onclick="plausible('Giveaway Banner');">Giveaway: Free Do iOS ticket giveaway.</a>
+    </div>-->
+    <header id="masthead" role="banner" class="site-head site-header" >
+                <nav id="site-navigation" class="main-navigation" role="navigation">
+            <div class="menu-main-menu-container"><ul id="menu-main-menu" class="menu"><li id="menu-item-202545" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-202545"><a href="https://courses.avanderlee.com">Courses</a></li>
+<li id="menu-item-202977" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-202977"><a href="https://swiftlee-weekly.com/?utm_source=avanderlee&#038;utm_medium=menu">Newsletter</a></li>
+<li id="menu-item-802" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-802"><a href="https://www.avanderlee.com/about/">About</a></li>
+<li id="menu-item-2028" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2028"><a href="https://www.avanderlee.com/sponsor/">Sponsorship</a></li>
+</ul></div>        </nav><!-- #site-navigation -->
+                            <!-- HOMEPAGE RENEWED LANDINGSPAGE (CENTERED TEXT ONLY) -->
+            <div  id="centered_header_container" class="header-container">
+                                        <a class="profile-picture blog-logo" href='https://www.avanderlee.com/' rel='home'><img fetchpriority="high" width="360" height="360" src='https://www.avanderlee.com/wp-content/uploads/2025/08/Avatar_2022_masked_360x360.webp' alt='SwiftLee'></a>
+                                <h2 class="blog-title"><a class="blog-logo" href=https://www.avanderlee.com/ rel="home">SwiftLee</a></h2>                
+                <!-- <h2>Swift is moving fast.</h2>
+                <h3>How do you stay current?</h3> -->
+                
+                <h2>The Swift Concurrency Playbook</h2>
+                <p class="header-description">A <strong>FREE 5-day email course</strong> revealing the <strong>5 biggest mistakes</strong> iOS developers make with async/await that lead to App Store rejections And migration projects taking months instead of days (even if you've been writing Swift for years)</p>
+
+                <div  class="newsletter_subscribe_form">
+                    <form action="https://app.kit.com/forms/8604816/subscriptions" method="POST" accept-charset="utf-8">
+                        <div class="form-fields">
+                            <input class="newsletter-email" type="email" name="email_address" placeholder="Your email address" required="">
+                            <input type="submit" value="Send me lesson #1"/>
+                        </div>
+                        <input type="hidden" name="source" value="regular-header" style="display:none">                        
+                    </form>
+                </div>
+                                <p class="form-caption">5 lessons | 100% free | For iOS developers</p>
+            </div>
+            </header><!-- #masthead -->
+<main  id="content" class="content" role="main">
+     
+    <div  class="rocketsim_upsell" data-dd-action-name="rocketsim_button_c">
+        <a href="https://www.rocketsim.app?utm_source=swiftlee&utm_medium=web&utm_campaign=rocketsim-sticky" target="_blank" data-dd-action-name="rocketsim_button" onclick="plausible('RocketSim Sticky Button');">
+            <img data-src="https://www.avanderlee.com/wp-content/themes/casper/img/rocketsim_icon.png" width="48" height="48" alt="Give your simulator superpowers" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjwvc3ZnPg==" class="lazyload" style="--smush-placeholder-width: 48px; --smush-placeholder-aspect-ratio: 48/48;" />
+            <p data-dd-action-name="rocketsim_button_p"><strong>RocketSim:</strong> An Essential Developer Tool<br/>as recommended by Apple</p>
+        </a>
+    </div>
+    
+    		<p id="breadcrumbs" class="breadcrumbs hentry"><span><span><a href="https://www.avanderlee.com/">SwiftLee</a></span> &gt; <span><a href="https://www.avanderlee.com/category/concurrency/">Concurrency</a></span> &gt; <span class="breadcrumb_last" aria-current="page">Swift 6.4: What’s New in Concurrency</span></span></p>
+		
+			<article  id="post-203529" class="post-203529 post type-post status-publish format-standard hentry category-concurrency category-swift">
+	<div  class="post-actions">
+		<a href="https://twitter.com/intent/tweet?via=twannl&hashtags=swiftlee,ios,swiftlang&url=https%3A%2F%2Fwww.avanderlee.com%2Fconcurrency%2Fswift-6-4-whats-new-in-concurrency%2F&text=Swift+6.4%3A+What%E2%80%99s+New+in+Concurrency" title="Share on Twitter" class="social-share" aria-label="Share on Twitter" target="_blank" rel="nofollow noopener noreferrer">
+			<svg class="svgIcon-use" width="29" height="29">
+				<path d="M22.053 7.54a4.474 4.474 0 0 0-3.31-1.455 4.526 4.526 0 0 0-4.526 4.524c0 .35.04.7.082 1.05a12.9 12.9 0 0 1-9.3-4.77c-.39.69-.61 1.46-.65 2.26.03 1.6.83 2.99 2.02 3.79-.72-.02-1.41-.22-2.02-.57-.01.02-.01.04 0 .08-.01 2.17 1.55 4 3.63 4.44-.39.08-.79.13-1.21.16-.28-.03-.57-.05-.81-.08.54 1.77 2.21 3.08 4.2 3.15a9.564 9.564 0 0 1-5.66 1.94c-.34-.03-.7-.06-1.05-.08 2 1.27 4.38 2.02 6.94 2.02 8.31 0 12.86-6.9 12.84-12.85.02-.24.01-.43 0-.65.89-.62 1.65-1.42 2.26-2.34-.82.38-1.69.62-2.59.72a4.37 4.37 0 0 0 1.94-2.51c-.84.53-1.81.9-2.83 1.13z"></path>
+			</svg>
+		</a>
+		<a href="https://www.linkedin.com/feed/?shareActive=true&text=Swift+6.4%3A+What%E2%80%99s+New+in+Concurrency+by+%40Antoine+van+der+Lee%3A%0A%0Ahttps%3A%2F%2Fwww.avanderlee.com%2Fconcurrency%2Fswift-6-4-whats-new-in-concurrency%2F" title="Share on LinkedIn" class="social-share" aria-label="Share on LinkedIn" target="_blank" rel="nofollow noopener noreferrer">
+			<svg height="23" width="23" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 382 382" xml:space="preserve">
+				<g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+				<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+				<g id="SVGRepo_iconCarrier"> 
+					<path d="M347.445,0H34.555C15.471,0,0,15.471,0,34.555v312.889C0,366.529,15.471,382,34.555,382h312.889 C366.529,382,382,366.529,382,347.444V34.555C382,15.471,366.529,0,347.445,0z M118.207,329.844c0,5.554-4.502,10.056-10.056,10.056 H65.345c-5.554,0-10.056-4.502-10.056-10.056V150.403c0-5.554,4.502-10.056,10.056-10.056h42.806 c5.554,0,10.056,4.502,10.056,10.056V329.844z M86.748,123.432c-22.459,0-40.666-18.207-40.666-40.666S64.289,42.1,86.748,42.1 s40.666,18.207,40.666,40.666S109.208,123.432,86.748,123.432z M341.91,330.654c0,5.106-4.14,9.246-9.246,9.246H286.73 c-5.106,0-9.246-4.14-9.246-9.246v-84.168c0-12.556,3.683-55.021-32.813-55.021c-28.309,0-34.051,29.066-35.204,42.11v97.079 c0,5.106-4.139,9.246-9.246,9.246h-44.426c-5.106,0-9.246-4.14-9.246-9.246V149.593c0-5.106,4.14-9.246,9.246-9.246h44.426 c5.106,0,9.246,4.14,9.246,9.246v15.655c10.497-15.753,26.097-27.912,59.312-27.912c73.552,0,73.131,68.716,73.131,106.472 L341.91,330.654L341.91,330.654z">
+					</path> 
+				</g>	
+			</svg>
+		</a>
+	</div>
+	<div  class="article-table-of-contents">
+		<div id="ez-toc-container" class="ez-toc-v2_0_75 counter-hierarchy ez-toc-counter ez-toc-transparent ez-toc-container-direction">
+<div class="ez-toc-title-container"><p class="ez-toc-title" style="cursor:inherit">In this article</p>
+</div><nav><ul class='ez-toc-list ez-toc-list-level-1 ' ><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-1" href="#finding-swift-version-related-proposals" >Finding Swift version-related proposals</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-2" href="#async-defer-statements" >Async defer statements</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-3" href="#task-cancellation-shields" >Task cancellation shields</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-4" href="#warnings-for-ignored-throwing-tasks" >Warnings for ignored throwing tasks</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-5" href="#typed-throwing-task-initializers" >Typed throwing task initializers</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-6" href="#async-result-support" >Async Result support</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-7" href="#weak-let-references" >Weak let references</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-8" href="#explicitly-non-sendable-types" >Explicitly non-Sendable types</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-9" href="#get-weekly-swift-evolution-updates" >Get weekly Swift Evolution updates</a></li><li class='ez-toc-page-1 ez-toc-heading-level-2'><a class="ez-toc-link ez-toc-heading-10" href="#conclusion" >Conclusion</a></li></ul></nav></div>
+		
+			<a class="orange-bordered-arrow-button"
+			href="https://www.swiftconcurrencycourse.com?utm_source=swiftlee&amp;utm_medium=blog&amp;utm_campaign=article-toc"
+			title="Learn more about Swift Concurrency using this in-depth course."
+			target="_blank">
+				Swift Concurrency Course
+			</a>
+
+			</div>
+    <header  class="post-header">
+                	<span class="post-meta">
+        	    <span class="terms"><a href="https://www.avanderlee.com/category/concurrency/" title="View all posts in Concurrency" rel="category tag" class="pt-cv-tax-concurrency">Concurrency</a> <a href="https://www.avanderlee.com/category/swift/" title="View all posts in Swift" rel="category tag" class="pt-cv-tax-swift">Swift</a> </span><span class="posted-on"><a href="https://www.avanderlee.com/concurrency/swift-6-4-whats-new-in-concurrency/" rel="bookmark"><time class="entry-date published" datetime="2026-06-21T09:05:27+02:00">Jun 21, 2026</time><time class="updated" datetime="2026-06-21T09:06:35+02:00">Jun 21, 2026</time></a></span><span class="span-reading-time rt-reading-time"><span class="rt-label rt-prefix">&nbsp;&nbsp;&bull;&nbsp;</span> <span class="rt-time"> 7</span> <span class="rt-label rt-postfix">min read</span></span>        	</span>
+		        <h1 class="post-title"><a href="https://www.avanderlee.com/concurrency/swift-6-4-whats-new-in-concurrency/" rel="bookmark">Swift 6.4: What’s New in Concurrency</a></h1>
+        
+    </header>
+    		<section  class="post-content">
+		    
+<p>Apple released Swift 6.4 during WWDC 2026, introducing a range of convenience improvements for both the general Swift language and the Concurrency APIs. While Swift is open-source, many of the changes might still have surprised you. At the same time, WWDC sessions do not cover all the new changes (if you have even had a chance to watch many of them yet).
+
+
+
+<p>I follow the Swift Evolution proposals every week for <a href="https://swiftlee-weekly.com/tomorrow" type="link" id="https://swiftlee-weekly.com/tomorrow">my newsletter</a> to inform 30K+ iOS developers about the latest Swift changes in progress, so I was keen to dive deeper into the concurrency changes. Here&#8217;s an overview for you!<div class="gotngnp gotngnp-1"><div class="gotngnp-single aotngnp-164"><span class="swiftlee-ad"><span class="sponsor-title"><a onClick=" plausible('Ad Click', {props: {partner: 'WarpBuild'}});" href="https://www.warpbuild.com/start?utm_source=swiftlee&amp;utm_medium=web&amp;utm_campaign=warpbuild" target="_blank" rel="sponsored">Unlimited macOS runners. No more CI queue.</a></span><span class="sponsor-content">More pull requests from AI tools mean more macOS jobs waiting in line. WarpBuild gives you unlimited concurrency on M5 Pro Macs, so every job starts right away. Teams at Raycast, Braintrust and WhatNot run CI on WarpBuild. Pay only for what you use. Use code START50 for $50 in free credits.</span><img class="pixel" alt="" style="width:0 !important; height:0 !important;" width="0" height="0" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" onload=" plausible('Ad Impression', {props: {partner: 'WarpBuild'}});" /></div></div>
+
+
+
+<h2 class="wp-block-heading" id="h-finding-swift-version-related-proposals"><a href="#finding-swift-version-related-proposals" aria-hidden="true" class="aal_anchor" id="finding-swift-version-related-proposals"><svg aria-hidden="true" class="aal_svg" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Finding Swift version-related proposals</h2>
+
+
+<div class="wp-block-image">
+<figure class="aligncenter size-large"><img decoding="async" width="1024" height="669" data-src="https://www.avanderlee.com/wp-content/smush-webp/2026/06/swift_6_4_concurrency-1024x669.png.webp" alt="An overview of all the proposals that got implemented into Swift 6.4, partly related to Concurrency." class="wp-image-203531 lazyload" data-srcset="https://www.avanderlee.com/wp-content/smush-webp/2026/06/swift_6_4_concurrency-1024x669.png.webp 1024w, https://www.avanderlee.com/wp-content/smush-webp/2026/06/swift_6_4_concurrency-800x523.png.webp 800w, https://www.avanderlee.com/wp-content/smush-webp/2026/06/swift_6_4_concurrency-500x327.png.webp 500w, https://www.avanderlee.com/wp-content/smush-webp/2026/06/swift_6_4_concurrency-768x502.png.webp 768w, https://www.avanderlee.com/wp-content/uploads/2026/06/swift_6_4_concurrency-1536x1004.png 1536w, https://www.avanderlee.com/wp-content/uploads/2026/06/swift_6_4_concurrency-scaled.png 2048w" data-sizes="(max-width: 1024px) 100vw, 1024px" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjwvc3ZnPg==" style="--smush-placeholder-width: 1024px; --smush-placeholder-aspect-ratio: 1024/669;" /><figcaption class="wp-element-caption">An overview of all the proposals that got implemented into Swift 6.4, partly related to Concurrency.</figcaption></figure></div>
+
+
+<p>A brief introduction on how I keep track of all the changes: <a href="https://www.avanderlee.com/swift/swift-evolution-proposals/">Swift Evolution: Reading and learning from proposals</a>. I&#8217;m using this technique to save you from keeping track, by showing an overview in my free weekly newsletter (30K Subscribers). <a href="https://swiftlee-weekly.com/tomorrow" type="link" id="https://swiftlee-weekly.com/tomorrow">Join SwiftLee Weekly</a>.
+
+
+
+<p>I keep track of Swift changes by reading Swift Evolution proposals every week. It’s the best way to understand not only what changed, but also why a feature was introduced and which trade-offs were discussed.
+
+
+
+<p>I explained my approach in <a href="https://www.avanderlee.com/swift/swift-evolution-proposals/" type="link" id="https://www.avanderlee.com/swift/swift-evolution-proposals/">Swift Evolution: Reading and learning from proposals</a>. I use the same habit to summarize the most important Swift updates in SwiftLee Weekly, <a href="https://swiftlee-weekly.com/tomorrow" type="link" id="https://swiftlee-weekly.com/tomorrow">my free weekly newsletter read by 30K+ Swift developers</a>.
+
+
+
+<p>Now that you know the story behind this overview, it&#8217;s time to dive into the first Swift 6.4 Concurrency change.
+
+
+
+<h2 class="wp-block-heading" id="h-async-defer-statements"><a href="#async-defer-statements" aria-hidden="true" class="aal_anchor" id="async-defer-statements"><svg aria-hidden="true" class="aal_svg" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Async defer statements</h2>
+
+
+
+<p>Swift 6.4 implements&nbsp;<a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0493-defer-async.md">SE-0493: Support&nbsp;<code>async</code>&nbsp;calls in&nbsp;<code>defer</code>&nbsp;bodies</a>. This is one of those changes that feels obvious once you need it.
+
+
+
+<p>Before Swift 6.4, you could not call an asynchronous function inside a&nbsp;<code>defer</code>&nbsp;body, even if the surrounding function was already&nbsp;<code>async</code>. That was annoying for cleanup work, since&nbsp;<code>defer</code>&nbsp;is exactly the place where you want to guarantee cleanup on every exit path.
+
+
+
+<p>In Swift 6.4, the following code becomes valid:
+
+
+
+<pre class="wp-block-code"><code lang="swift" class="language-swift">func importArticles() async throws {
+    let importer = ArticleImporter()
+    await importer.open()
+
+    defer {
+        await importer.close() // We can now use await in here.
+    }
+
+    try await importer.importLatestArticles()
+}</code></pre>
+
+
+
+<p>The&nbsp;<code>defer</code>&nbsp;body still runs when leaving scope, just like before. The difference is that Swift now implicitly awaits the asynchronous cleanup before the function returns.
+
+
+
+<p>I like this change because it removes the temptation to write manual cleanup on every possible exit path. If a function can throw after setup,&nbsp;<code>defer</code>&nbsp;keeps the setup and teardown close together.
+
+
+
+<p>One detail to keep in mind: asynchronous&nbsp;<code>defer</code>&nbsp;does not hide cancellation. If the current task is already cancelled, code inside the&nbsp;<code>defer</code>&nbsp;body can still observe cancellation. This brings us to the next Swift 6.4 change.
+
+
+
+
+	<div class="article-inline-container">
+		<div class="inline-image">
+			<img fetchpriority="high" decoding="async" width="500" height="500" src="https://www.avanderlee.com/wp-content/smush-webp/2025/09/tscp-cover-500x500.png.webp" alt="FREE 5-day email course: The Swift Concurrency Playbook by Antoine van der Lee" class="wp-image-203174" srcset="https://www.avanderlee.com/wp-content/smush-webp/2025/09/tscp-cover-500x500.png.webp 500w, https://www.avanderlee.com/wp-content/smush-webp/2025/09/tscp-cover-800x800.png.webp 800w, https://www.avanderlee.com/wp-content/smush-webp/2025/09/tscp-cover-768x768.png.webp 768w, https://www.avanderlee.com/wp-content/uploads/2025/09/tscp-cover.png 1024w" sizes="(max-width: 500px) 100vw, 500px">
+		</div>
+		<div class="inline-text">
+			<p class="inline-container-title">FREE 5-Day Email Course: The Swift Concurrency Playbook
+			<p class="inline-container-description">A <strong>FREE 5-day email course</strong> revealing the <strong>5 biggest mistakes</strong> iOS developers make with with async/await that lead to App Store rejections And migration projects taking months instead of days (even if you've been writing Swift for years)
+		
+			<div class="inline-container-footer">
+				<a class="inline-container-button plausible-event-name=Go+To+Concurrency+Playbook" href="https://www.swiftconcurrencyplaybook.com?utm_source=swiftlee&utm_medium=article&utm_campaign=inline-banner&source=swiftlee&ref=swiftlee-inline-banner" target="_blank">Get the Course</a>
+			</div>
+		</div>
+	</div><img decoding="async" class="pixel" alt="" style="width:0 !important; height:0 !important;" width="0" height="0" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" onload="plausible('Inline Concurrency Playbook Banner Impression');"><h2 class="wp-block-heading" id="h-task-cancellation-shields"><a href="#task-cancellation-shields" aria-hidden="true" class="aal_anchor" id="task-cancellation-shields"><svg aria-hidden="true" class="aal_svg" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Task cancellation shields</h2>
+
+
+
+<p>Swift 6.4 adds&nbsp;<a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0504-task-cancellation-shields.md">SE-0504: Task Cancellation Shields</a>. A task cancellation shield temporarily prevents code from observing cancellation while a closure is running.
+
+
+
+<p>This sounds a bit abstract, so let&#8217;s look at the shape first:
+
+
+
+<pre class="wp-block-code"><code lang="swift" class="language-swift">func closeDatabaseConnection() async {
+    await withTaskCancellationShield {
+        print(Task.isCancelled) // Always false inside the shield, even if outer task is cancelled.
+        await database.close()
+    }
+}</code></pre>
+
+
+
+<p>If the surrounding task was already cancelled before entering the shield, that cancellation still exists. The shield only makes code inside the closure observe&nbsp;<code>Task.isCancelled == false</code>, allowing cleanup work like&nbsp;<code>database.close()</code>&nbsp;to run. Once the closure returns,&nbsp;<code>Task.isCancelled</code>&nbsp;reports the original cancellation state again.
+
+
+
+<p>This is especially useful together with async&nbsp;<code>defer</code>:
+
+
+
+<pre class="wp-block-code"><code lang="swift" class="language-swift">func writeArticles(_ articles: [Article]) async throws {
+    let transaction = await database.beginTransaction()
+
+    defer {
+        await withTaskCancellationShield {
+            // We want this to always run, even if cancelled.
+            await transaction.rollbackIfNeeded()
+        }
+    }
+
+    try await transaction.insert(articles)
+    try await transaction.commit()
+}</code></pre>
+
+
+
+<p>I would not use cancellation shields everywhere. To be honest, I have not missed this feature in my own projects so far (although that could be a chicken-egg story). However, it is valuable for short cleanup or rollback work that must finish even if the task was canceled.
+
+
+
+<p>In other words: use cancellation shields to finish work you already started, not to hide cancellation from long-running operations.
+
+
+
+<h2 class="wp-block-heading" id="h-warnings-for-ignored-throwing-tasks"><a href="#warnings-for-ignored-throwing-tasks" aria-hidden="true" class="aal_anchor" id="warnings-for-ignored-throwing-tasks"><svg aria-hidden="true" class="aal_svg" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Warnings for ignored throwing tasks</h2>
+
+
+
+<p>Swift 6.4 improves error handling for unstructured tasks through&nbsp;<a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0520-discardableresult-task-initializers.md">SE-0520: Discardable result use in Task initializers</a>. The change helps you catch a subtle bug: creating a throwing task and then ignoring its returned task handle.
+
+
+
+<p>Before this change, the following code could silently ignore errors:
+
+
+
+<pre class="wp-block-code"><code lang="swift" class="language-swift">Task {
+    try await importArticles()
+}</code></pre>
+
+
+
+<p>That&#8217;s troublesome, since you might unexpectedly hide errors in your code. So, the task can throw, but nobody awaits <code>task.value</code>, and the task body does not handle the error. In Swift 6.4, Xcode warns you:
+
+
+
+<pre class="wp-block-code"><code lang="swift" class="language-swift">// warning: Unstructured throwing task was not used,
+// which may accidentally ignore errors thrown inside the task
+Task {
+    try await importArticles()
+}</code></pre>
+
+
+
+<p>You can fix the warning by handling errors inside the task:
+
+
+
+<pre class="wp-block-code"><code lang="swift" class="language-swift">Task {
+    do {
+        try await importArticles()
+    } catch {
+        print("Importing articles failed with error: \(error)")
+    }
+}</code></pre>
+
+
+
+<p>Or you can store the task handle and await the value later:
+
+
+
+<pre class="wp-block-code"><code lang="swift" class="language-swift">let importTask = Task {
+    try await importArticles()
+}
+
+do {
+    try await importTask.value
+} catch {
+    print("Importing articles failed with error: \(error)")
+}</code></pre>
+
+
+
+<p>This is a small diagnostic improvement, but it can prevent real bugs. I have seen many codebases use&nbsp;<code>Task { ... }</code>&nbsp;as a quick escape hatch from synchronous code. The new warning nudges you to decide what should happen when that task fails.
+
+
+
+<p>If you really want to ignore the task handle, you can still write:
+
+
+
+<pre class="wp-block-code"><code lang="swift" class="language-swift">_ = Task {
+    try await importArticles()
+}</code></pre>
+
+
+
+<p>I would only do this when ignoring the failure is truly intentional. In most cases, handling the error inside the task is clearer.
+
+
+
+<h2 class="wp-block-heading" id="h-typed-throwing-task-initializers"><a href="#typed-throwing-task-initializers" aria-hidden="true" class="aal_anchor" id="typed-throwing-task-initializers"><svg aria-hidden="true" class="aal_svg" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Typed throwing task initializers</h2>
+
+
+
+<p>The same proposal builds on typed throws support in task initializers. This allows a&nbsp;<code>Task</code>&nbsp;to carry a more specific failure type:
+
+
+
+<pre class="wp-block-code"><code lang="swift" class="language-swift">let task: Task&lt;String, URLError&gt; = Task {
+    throw URLError(.badURL)
+}</code></pre>
+
+
+
+<p>You can see the difference in the updated initializer shape:
+
+
+
+<pre class="wp-block-code"><code lang="swift" class="language-swift">public init(
+    priority: TaskPriority? = nil,
+    operation: sending @escaping @isolated(any) () async throws(Failure) -&gt; Success
+)</code></pre>
+
+
+
+<p>The important part is&nbsp;<code>throws(Failure)</code>. It matches the same typed throws model you can use in regular asynchronous functions.
+
+
+
+<p>In practice, this can make error handling clearer when you already know the failure type. I would not rewrite every task just to specify a typed failure, but it is nice to have the option when you&#8217;re building APIs that expose task handles.
+
+
+
+<h2 class="wp-block-heading" id="h-async-result-support"><a href="#async-result-support" aria-hidden="true" class="aal_anchor" id="async-result-support"><svg aria-hidden="true" class="aal_svg" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Async Result support</h2>
+
+
+
+<p>Swift 6.4 also implements&nbsp;<a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0530-async-result-support.md">SE-0530: Async Result Support</a>. The&nbsp;<code>Result</code>&nbsp;type already had a&nbsp;<code>catching</code>&nbsp;initializer for synchronous throwing work, but there was no built-in equivalent for async throwing work.
+
+
+
+<p>You can now write:
+
+
+
+<pre class="wp-block-code"><code lang="swift" class="language-swift">let result = await Result {
+    try await importArticles()
+}</code></pre>
+
+
+
+<p>Without this initializer, you would typically write the conversion yourself:
+
+
+
+<pre class="wp-block-code"><code lang="swift" class="language-swift">let result: Result&lt;[Article], Error&gt;
+
+do {
+    result = .success(try await importArticles())
+} catch {
+    result = .failure(error)
+}</code></pre>
+
+
+
+<p>The new initializer is not a major language change, but it removes boilerplate in places where you intentionally want to store the outcome instead of throwing immediately.
+
+
+
+<p>I reach for&nbsp;<code>Result</code>&nbsp;less often now that async/await exists, but it is still useful when you need to pass success or failure around as a value. For example, when storing outcomes in a view model, logging failures, or collecting multiple results.
+
+
+
+<h2 class="wp-block-heading" id="h-weak-let-references"><a href="#weak-let-references" aria-hidden="true" class="aal_anchor" id="weak-let-references"><svg aria-hidden="true" class="aal_svg" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Weak let references</h2>
+
+
+
+<p>While we&#8217;re focused on Swift 6.4 in this article, I do also want to shine a light on Swift 6.3, which introduced <a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0481-weak-let.md">SE-0481: <code>weak let</code></a>. This change is not limited to concurrency, but it helps with <code>Sendable</code> checking.
+
+
+
+<p>Before Swift 6.3, weak references had to be declared using&nbsp;<code>var</code>, even if you never assigned a new value yourself:
+
+
+
+<pre class="wp-block-code"><code lang="swift" class="language-swift">protocol ArticlePreviewDelegate: AnyObject, Sendable {
+    func didSelectArticle()
+}
+
+final class ArticlePreviewController: Sendable {
+    weak var delegate: ArticlePreviewDelegate?
+
+    init(delegate: ArticlePreviewDelegate?) {
+        self.delegate = delegate
+    }
+}</code></pre>
+
+
+
+<p>This causes a problem for&nbsp;<code>Sendable</code>&nbsp;classes, since a mutable stored property is not allowed:
+
+
+
+<pre class="wp-block-code"><code lang="swift" class="language-swift">// Stored property 'delegate' of 'Sendable'-conforming class
+// 'ArticlePreviewController' is mutable</code></pre>
+
+
+
+<p>With Swift 6.3, you can write:
+
+
+
+<pre class="wp-block-code"><code lang="swift" class="language-swift">final class ArticlePreviewController: Sendable {
+    weak let delegate: ArticlePreviewDelegate?
+
+    init(delegate: ArticlePreviewDelegate?) {
+        self.delegate = delegate
+    }
+}</code></pre>
+
+
+
+<p>The weak reference can still become&nbsp;<code>nil</code>&nbsp;when the delegate disappears. That does not mean you are assigning a different delegate yourself. It only means the weak reference stops being able to observe the object once it has been deallocated.
+
+
+
+<p>This distinction matters for&nbsp;<code>Sendable</code>&nbsp;checking. You can no longer replace the delegate after initialization, so the stored property behaves like an immutable reference from your code&#8217;s point of view.
+
+
+
+<h2 class="wp-block-heading" id="h-explicitly-non-sendable-types"><a href="#explicitly-non-sendable-types" aria-hidden="true" class="aal_anchor" id="explicitly-non-sendable-types"><svg aria-hidden="true" class="aal_svg" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Explicitly non-Sendable types</h2>
+
+
+
+<p>Swift 6.4 implements&nbsp;<a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0518-tilde-sendable.md">SE-0518:&nbsp;<code>~Sendable</code>&nbsp;for explicitly marking non-<code>Sendable</code>&nbsp;types</a>. It allows you to communicate that a type has been audited and should not conform to&nbsp;<code>Sendable</code>.
+
+
+
+<p>For example:
+
+
+
+<pre class="wp-block-code"><code lang="swift" class="language-swift">enum ExecutionResult: ~Sendable {
+    case success
+    case failure(NonSendable)
+}</code></pre>
+
+
+
+<p>The tilde tells Swift to suppress automatic <code class="">Sendable</code> inference for this type. It also communicates intent to other developers: this enum has been audited and is intentionally non-sendable because one of its cases contains a non-sendable associated value.
+
+
+
+<p>This is especially useful for public APIs. If a public type does not conform to&nbsp;<code>Sendable</code>, users might wonder whether you forgot to add the conformance. With&nbsp;<code>~Sendable</code>, you can make it explicit that the type is intentionally non-sendable.
+
+
+
+<p>There are a few rules to remember:
+
+
+
+<ul class="wp-block-list">
+<li>You write <code>~Sendable</code> on the type declaration itself, not in an extension.</li>
+
+
+
+<li>You cannot combine <code>Sendable</code> and <code>~Sendable</code> on the same type.</li>
+
+
+
+<li>A subclass can still conform to <code>Sendable</code> if it makes itself thread-safe.</li>
+</ul>
+
+
+
+<p>That last point is important. Before this proposal, some libraries used an unavailable <code>Sendable</code> conformance to express &#8220;this type is not sendable.&#8221; The downside is that subclasses inherited that unavailable conformance too. <code>~Sendable</code> gives library authors a cleaner way to document intent without blocking safe subclasses.
+
+
+
+<h2 class="wp-block-heading" id="h-get-weekly-swift-evolution-updates"><a href="#get-weekly-swift-evolution-updates" aria-hidden="true" class="aal_anchor" id="get-weekly-swift-evolution-updates"><svg aria-hidden="true" class="aal_svg" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Get weekly Swift Evolution updates</h2>
+
+
+
+<p>Swift Concurrency keeps evolving, and it can be hard to keep up with every accepted proposal, Xcode change, and WWDC detail. I cover these updates every Tuesday in <a href="https://swiftlee-weekly.com/tomorrow">SwiftLee Weekly</a>, read by 30K+ Swift and iOS developers.
+
+
+
+<p>You’ll receive a 5-minute email with the most important Swift changes, practical code snippets, and articles worth reading. If you want to stay ahead without checking Swift Evolution yourself every week, <a href="https://swiftlee-weekly.com/tomorrow">join SwiftLee Weekly</a>.
+
+
+
+<div class="gotngnp gotngnp-1"><div class="gotngnp-single aotngnp-164"><span class="swiftlee-ad"><span class="sponsor-title"><a onClick=" plausible('Ad Click', {props: {partner: 'WarpBuild'}});" href="https://www.warpbuild.com/start?utm_source=swiftlee&amp;utm_medium=web&amp;utm_campaign=warpbuild" target="_blank" rel="sponsored">Unlimited macOS runners. No more CI queue.</a></span><span class="sponsor-content">More pull requests from AI tools mean more macOS jobs waiting in line. WarpBuild gives you unlimited concurrency on M5 Pro Macs, so every job starts right away. Teams at Raycast, Braintrust and WhatNot run CI on WarpBuild. Pay only for what you use. Use code START50 for $50 in free credits.</span><img decoding="async" class="pixel" alt="" style="width:0 !important; height:0 !important;" width="0" height="0" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" onload=" plausible('Ad Impression', {props: {partner: 'WarpBuild'}});" /></div></div><h2 class="wp-block-heading" id="h-conclusion"><a href="#conclusion" aria-hidden="true" class="aal_anchor" id="conclusion"><svg aria-hidden="true" class="aal_svg" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Conclusion</h2>
+
+
+
+<p>Swift 6.4 brings several practical improvements to Swift Concurrency. Async&nbsp;<code>defer</code>&nbsp;makes cleanup easier, cancellation shields help with rare but important rollback scenarios, and the new task warning prevents errors from being silently ignored. On top of that,&nbsp;<code>weak let</code>&nbsp;and&nbsp;<code>~Sendable</code>&nbsp;make&nbsp;<code>Sendable</code>&nbsp;adoption more expressive.
+
+
+
+<p>If you are migrating a codebase to Swift 6, these updates are worth knowing. Not every feature will change how you write code every day, but together they remove friction from strict concurrency adoption.
+
+
+
+<p>If you want to improve your Swift Concurrency knowledge even more, check out the <a href="https://www.avanderlee.com/swift-concurrency-course-swift-6-migration/">Swift Concurrency Course</a>, <strong>which is now updated for Swift 6.4</strong>. Feel free to contact me or tweet me on Twitter if you have any additional tips or feedback.
+
+
+
+<p>Thanks!
+		    			<div data-wpr-lazyrender="1" class="clear">&nbsp;</div>
+		</section>
+			<!--<div class="swiftlee-jobs-rss">
+		<h3>Featured SwiftLee Jobs</h3>
+		<div class="draftboard-jobs">
+			<div class="wp-rss-aggregator wpra-list-template">
+				<ul class="wpra-item-list rss-aggregator ">
+					<li class="wpra-item feed-item ">
+						<a href="https://app.draftboard.com/apply/wJrDDWo1E" target="_blank" rel="nofollow" class="">Lead Software Engineer @ M7 Health • $105K - $185K</a>
+					</li>
+					<li class="wpra-item feed-item ">
+						<a href="https://app.draftboard.com/apply/pDHmbO" target="_blank" rel="nofollow" class="">Test Automation Lead, Engineering Productivity @ Ordergroove • $140K - $170K</a>
+					</li>
+					<li class="wpra-item feed-item ">
+						<a href="https://app.draftboard.com/apply/LDYe0FVqe" target="_blank" rel="nofollow" class="">Mobile Product Manager @ Tap</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		
+			</div>-->
+	<footer data-wpr-lazyrender="1" class="post-footer">
+
+	    <section class="author">
+	    	<img data-src='https://www.avanderlee.com/wp-content/uploads/2025/08/Avatar_2022_masked_360x360.webp' alt="Antoine van der Lee" class="avatar avatar-100 photo lazyload" height="100" width="100" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjwvc3ZnPg==" style="--smush-placeholder-width: 100px; --smush-placeholder-aspect-ratio: 100/100;">
+	    	<!-- <img alt='' data-src='https://secure.gravatar.com/avatar/32fd4c4ef3a248702e4154514e6cdc39c34cd500ca7ff6b10709c21ae59238f2?s=100&#038;d=mm&#038;r=g' data-srcset='https://secure.gravatar.com/avatar/32fd4c4ef3a248702e4154514e6cdc39c34cd500ca7ff6b10709c21ae59238f2?s=200&#038;d=mm&#038;r=g 2x' class='avatar avatar-100 photo lazyload' height='100' width='100' decoding='async' src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjwvc3ZnPg==' style='--smush-placeholder-width: 100px; --smush-placeholder-aspect-ratio: 100/100;' /> -->
+	    	<p class="author-subtitle">Written by</p>
+	        <h4><a href="https://www.avanderlee.com" title="Visit Antoine van der Lee&#8217;s website" rel="author external">Antoine van der Lee</a></h4>
+	        <p class="author-description">iOS Developer since 2010, former Staff iOS Engineer at <a href="https://www.wetransfer.com" target="_blank" rel="noopener noreferrer">WeTransfer</a> and currently full-time Indie Developer & Founder at SwiftLee. Writing a new blog post every week related to Swift, iOS and Xcode. Regular speaker and workshop host.</p>
+			<div class="author-follow-links">
+				<div class="links-subtitle"><p>Follow me on:</p></div>
+				<div class="link-buttons">
+					<a href="https://www.youtube.com/@avanderlee?sub_confirmation=1" class="plausible-event-name=Go+To+YouTube">YouTube</a>
+					<a href="https://www.linkedin.com/in/ajvanderlee" class="plausible-event-name=Go+To+LinkedIn" target="_blank">LinkedIn</a>
+					<a href="https://twitter.com/intent/user?original_referer=https%3A%2F%2Fwww.avanderlee.com&region=count_link&screen_name=twannl&tw_p=followbutton" target="_blank">Twitter/X</a>
+				</div>
+	    	</div>
+			<span class="going-indie-promo">
+				<p class="author-subtitle">Are you ready to</p>
+				<h4>Turn your side projects into independence?</h4>
+				<p>
+				Learn my proven steps to transform your passion into profit.
+				</p>
+				<div class="author-follow-links">
+					<div class="link-buttons">
+						<a href="https://www.going-indie.com?utm_source=swiftlee&utm_medium=article_footer&utm_campaign=author_section" target="_blank">Going Indie Course</a>
+						<a href="https://podcast.going-indie.com?utm_source=swiftlee&utm_medium=article_footer&utm_campaign=author_section" target="_blank">Going Indie Podcast</a>
+					</div>
+				</div>
+			</span>
+			<div class="clear">&nbsp;</div>
+	    </section>
+	</footer>
+
+	<!-- <div class='onesignal-customlink-container'></div> -->
+</article><!-- #post-## -->
+
+				<nav class="pagination navigation post-navigation" role="navigation">
+		<div class="nav-links">
+			<div class="older-posts"><a href="https://www.avanderlee.com/ai-development/swiftui-best-practices-xcode-27-agent-skill/" rel="prev">SwiftUI Best Practices, straight from Apple&#8217;s Xcode 27 Agent Skill <span class="meta-nav">&rarr;</span></a></div>				<div class="page-number">&bull;</div>
+				<div class="newer-posts"><a href="https://www.avanderlee.com/swift/memberwise-initializers/" rel="next"><span class="meta-nav">&larr;</span> Memberwise Initializer in Swift explained with Code Examples</a></div>		</div><!-- .nav-links -->
+	</nav><!-- .navigation -->
+	
+			
+		
+
+	<div data-wpr-lazyrender="1" id="secondary" class="widget-area" role="complementary">
+		<aside id="similar_posts_widget" class="widget widget_rrm_similar_posts"><h3 class="widget-title">Other also read</h3><div class="pt-cv-wrapper">    <div class="pt-cv-view pt-cv-grid pt-cv-colsys">       <div data-id="pt-cv-page-1" class="pt-cv-page" data-cvc="3"><div class="col-md-4 col-sm-4 col-xs-12 pt-cv-content-item pt-cv-1-col">
+            <div class="pt-cv-ifield">
+               <h3 class="pt-cv-title"><a href="https://www.avanderlee.com/swift/sendable-protocol-closures/" class="_self" target="_self">Sendable and @Sendable closures explained with code examples</a></h3>
+               <div class="pt-cv-content">
+Sendable is a protocol in Swift that indicates a type is safe to share across concurrency domains like actors, tasks, ...<br><a href="https://www.avanderlee.com/swift/sendable-protocol-closures/" class="_self pt-cv-readmore btn btn-success" target="_self">Read More</a></div>
+               <div class="pt-cv-meta-fields"><span class="entry-date">Aug 09, 2026</span> <span class="terms"> <a href="https://www.avanderlee.com/category/concurrency/" title="View all posts in Concurrency" rel="category tag" class="pt-cv-tax-concurrency">Concurrency</a> <a href="https://www.avanderlee.com/category/swift/" title="View all posts in Swift" rel="category tag" class="pt-cv-tax-swift">Swift</a> </span></div>
+            </div>
+         </div>
+
+<div class="col-md-4 col-sm-4 col-xs-12 pt-cv-content-item pt-cv-1-col">
+            <div class="pt-cv-ifield">
+               <h3 class="pt-cv-title"><a href="https://www.avanderlee.com/swift/defer-usage-swift/" class="_self" target="_self">Defer in Swift explained with Code Examples</a></h3>
+               <div class="pt-cv-content">
+Although the defer keyword was already introduced in Swift 2.0, it&#8217;s still quite uncommon to use it in projects. Its ...<br><a href="https://www.avanderlee.com/swift/defer-usage-swift/" class="_self pt-cv-readmore btn btn-success" target="_self">Read More</a></div>
+               <div class="pt-cv-meta-fields"><span class="entry-date">Jul 06, 2026</span> <span class="terms"> <a href="https://www.avanderlee.com/category/swift/" title="View all posts in Swift" rel="category tag" class="pt-cv-tax-swift">Swift</a> </span></div>
+            </div>
+         </div>
+
+<div class="col-md-4 col-sm-4 col-xs-12 pt-cv-content-item pt-cv-1-col">
+            <div class="pt-cv-ifield">
+               <h3 class="pt-cv-title"><a href="https://www.avanderlee.com/ai-development/how-to-free-up-xcode-disk-space-safely-with-an-ai-agent/" class="_self" target="_self">How to free up Xcode disk space safely with an AI Agent</a></h3>
+               <div class="pt-cv-content">
+Xcode disk space can grow rapidly without you noticing. Especially these days, with multiple agents turning multiple worktrees into silent ...<br><a href="https://www.avanderlee.com/ai-development/how-to-free-up-xcode-disk-space-safely-with-an-ai-agent/" class="_self pt-cv-readmore btn btn-success" target="_self">Read More</a></div>
+               <div class="pt-cv-meta-fields"><span class="entry-date">Jul 27, 2026</span> <span class="terms"> <a href="https://www.avanderlee.com/category/ai-development/" title="View all posts in AI Development" rel="category tag" class="pt-cv-tax-ai-development">AI Development</a> <a href="https://www.avanderlee.com/category/xcode/" title="View all posts in Xcode" rel="category tag" class="pt-cv-tax-xcode">Xcode</a> </span></div>
+            </div>
+         </div>
+</div></div></div><!-- Similar Posts took 76.568 ms --></aside><aside id="block-2" class="widget widget_block"><p>
+
+<div id="sb_youtube_sbyUCbIuxA6MQ9AtKgQJy3zNHg3" 
+	 class="sb_youtube sby_layout_grid sby_col_3 sby_mob_col_1 sby_palette_inherit  sby_width_resp" 
+	data-feedid="sby_UCbIuxA6M-Q9AtKgQJy3zNHg#3" 
+	data-shortcode-atts="{&quot;feed&quot;:&quot;3&quot;}" 
+	data-cols="3" 
+	data-colsmobile="1" 
+	data-num="3" 
+	data-nummobile="3" 
+	data-channel-subscribers="3.2K subscribers"	data-subscribe-btn="1" 
+	data-subscribe-btn-text="Subscribe" 
+	data_channel_header_colors ="{&quot;channelName&quot;:&quot;&quot;,&quot;subscribeCount&quot;:&quot;&quot;,&quot;buttonBackground&quot;:&quot;&quot;,&quot;buttonText&quot;:&quot;&quot;}"
+	 data-options="{&quot;cta&quot;:{&quot;type&quot;:&quot;related&quot;,&quot;defaultPosts&quot;:[{&quot;videoID&quot;:&quot;nbgGxzOMqpg&quot;,&quot;thumbnail&quot;:&quot;https:\/\/i.ytimg.com\/vi\/nbgGxzOMqpg\/mqdefault.jpg&quot;,&quot;title&quot;:&quot;I Put the iOS Simulator in Cursor, Claude Code &amp; Codex&quot;},{&quot;videoID&quot;:&quot;wVAp04tX4Io&quot;,&quot;thumbnail&quot;:&quot;https:\/\/i.ytimg.com\/vi\/wVAp04tX4Io\/mqdefault.jpg&quot;,&quot;title&quot;:&quot;Skip the Xcode Instruments Tutorial, Do This Instead&quot;},{&quot;videoID&quot;:&quot;hDFOy-ynJ6I&quot;,&quot;thumbnail&quot;:&quot;https:\/\/i.ytimg.com\/vi\/hDFOy-ynJ6I\/mqdefault.jpg&quot;,&quot;title&quot;:&quot;AI Wrote Swift Code That Looked Fine\u2026 Until Xcode Instruments Exposed It&quot;}],&quot;defaultLink&quot;:&quot;&quot;,&quot;defaultText&quot;:&quot;Learn More&quot;,&quot;openType&quot;:&quot;same&quot;,&quot;color&quot;:&quot;&quot;,&quot;textColor&quot;:&quot;&quot;},&quot;descriptionlength&quot;:150}" data-sby-flags="resizeDisable" data-postid="203529" data-sby-supports-lightbox="1" 
+	 data-videocardlayout="vertical" 
+>
+	        <div class="sby_items_wrap" style="padding: 0px;">
+		<div class="sby_item  sby_new sby_transition" id="sby_VVViSXV4QTZNLVE5QXRLZ1FKeTN6TkhnLm5iZ0d4ek9NcXBn" data-date="1788782283" data-video-id="nbgGxzOMqpg" data-video-title="I Put the iOS Simulator in Cursor, Claude Code &amp; Codex" data-live-date="0" data-channel-id="UCbIuxA6M-Q9AtKgQJy3zNHg" >
+    <div class="sby_inner_item">
+        <div class="sby_video_thumbnail_wrap sby_item_video_thumbnail_wrap">
+            <a class="sby_video_thumbnail sby_item_video_thumbnail" style="background-image:url(https://www.avanderlee.com/wp-content/plugins/youtube-feed-pro/img/placeholder.png)" href="https://www.youtube.com/watch?v=nbgGxzOMqpg" target="_blank" rel="noopener" data-full-res="https://i.ytimg.com/vi/nbgGxzOMqpg/maxresdefault.jpg" data-img-src-set="{&quot;120&quot;:&quot;https:\/\/i.ytimg.com\/vi\/nbgGxzOMqpg\/default.jpg&quot;,&quot;320&quot;:&quot;https:\/\/i.ytimg.com\/vi\/nbgGxzOMqpg\/mqdefault.jpg&quot;,&quot;480&quot;:&quot;https:\/\/i.ytimg.com\/vi\/nbgGxzOMqpg\/hqdefault.jpg&quot;,&quot;640&quot;:&quot;https:\/\/i.ytimg.com\/vi\/nbgGxzOMqpg\/sddefault.jpg&quot;}" data-video-id="nbgGxzOMqpg"  data-user="Antoine van der Lee" data-url="https://www.youtube.com/watch?v=nbgGxzOMqpg" data-avatar="https://yt3.ggpht.com/u3y5kMGWK1NDNhsN-L3sU8FT98tgajFcLQTQVl0RouFSTLEcdcW3-9NuZKPJyMh7Ej9AVWuK5vs=s88-c-k-c0x00ffffff-no-rj" data-title="See how RocketSim brings your iOS app into Cursor, Claude Code, and Codex, giving your AI coding agent visual context from the Simulator.&lt;br /&gt;
+&lt;br /&gt;
+Get RocketSim on the Mac App Store:&lt;br /&gt;
+https://www.rocketsim.app&lt;br /&gt;
+&lt;br /&gt;
+In this video, I’m sharing the first proof of concept for RocketSim 17. Your running iOS app becomes interactive inside the browser of your favorite AI coding tool.&lt;br /&gt;
+&lt;br /&gt;
+You will see how to:&lt;br /&gt;
+&lt;br /&gt;
+- Interact with your running iOS app&lt;br /&gt;
+- Inspect the complete accessibility hierarchy&lt;br /&gt;
+- Select UI elements and describe visual changes&lt;br /&gt;
+- Capture screenshots with your feedback&lt;br /&gt;
+- Copy an agent-ready prompt into Cursor, Claude Code, or Codex&lt;br /&gt;
+- Connect visual feedback directly to the code your agent can edit&lt;br /&gt;
+&lt;br /&gt;
+This workflow helps bridge the gap between your iOS Simulator and the AI agent working on your code. Instead of manually describing where an element lives, you can select it and give your agent the relevant context.&lt;br /&gt;
+&lt;br /&gt;
+This is an early RocketSim 17 proof of concept and is not yet a released feature.&lt;br /&gt;
+&lt;br /&gt;
+Which AI coding tool do you use today, and how are you using AI for app development? Tell me about your workflow in the comments. Your feedback will also help me decide whether I should ship this feature soon.&lt;br /&gt;
+&lt;br /&gt;
+CHAPTERS&lt;br /&gt;
+&lt;br /&gt;
+0:00 - Bring the iOS Simulator into AI tools&lt;br /&gt;
+0:12 - RocketSim 17 proof of concept&lt;br /&gt;
+0:28 - Accessibility and Simulator context&lt;br /&gt;
+0:42 - Add visual feedback to app elements&lt;br /&gt;
+1:03 - Copy an agent-ready prompt&lt;br /&gt;
+1:25 - Connect Simulator feedback to code&lt;br /&gt;
+&lt;br /&gt;
+ABOUT ME&lt;br /&gt;
+&lt;br /&gt;
+I’m Antoine van der Lee, Swift developer, indie founder, and educator.&lt;br /&gt;
+&lt;br /&gt;
+I create practical content about Swift, Swift Concurrency, AI-assisted development, and building profitable apps as an indie developer.&lt;br /&gt;
+&lt;br /&gt;
+Subscribe for more deep dives into iOS development, RocketSim, and AI-powered workflows.&lt;br /&gt;
+&lt;br /&gt;
+#CursorAI #ClaudeCode #iOSDevelopment #AIForDevelopers #RocketSim" data-video-title="I Put the iOS Simulator in Cursor, Claude Code &amp; Codex" data-channel-id="UCbIuxA6M-Q9AtKgQJy3zNHg" data-views="0 views" data-published-date="1788782283" data-formatted-published-date="Sep 07, 2026 12:58 pm" data-comment-count="0">
+                <img width="1600" height="900" decoding="async" data-src="https://www.avanderlee.com/wp-content/plugins/youtube-feed-pro/img/placeholder.png" alt="See how RocketSim brings your iOS app into Cursor, Claude Code, and Codex, giving your AI coding agent visual context from the Simulator.
+
+Get RocketSim on the Mac App Store:
+https://www.rocketsim.app
+
+In this video, I’m sharing the first proof of concept for RocketSim 17. Your running iOS app becomes interactive inside the browser of your favorite AI coding tool.
+
+You will see how to:
+
+- Interact with your running iOS app
+- Inspect the complete accessibility hierarchy
+- Select UI elements and describe visual changes
+- Capture screenshots with your feedback
+- Copy an agent-ready prompt into Cursor, Claude Code, or Codex
+- Connect visual feedback directly to the code your agent can edit
+
+This workflow helps bridge the gap between your iOS Simulator and the AI agent working on your code. Instead of manually describing where an element lives, you can select it and give your agent the relevant context.
+
+This is an early RocketSim 17 proof of concept and is not yet a released feature.
+
+Which AI coding tool do you use today, and how are you using AI for app development? Tell me about your workflow in the comments. Your feedback will also help me decide whether I should ship this feature soon.
+
+CHAPTERS
+
+0:00 - Bring the iOS Simulator into AI tools
+0:12 - RocketSim 17 proof of concept
+0:28 - Accessibility and Simulator context
+0:42 - Add visual feedback to app elements
+1:03 - Copy an agent-ready prompt
+1:25 - Connect Simulator feedback to code
+
+ABOUT ME
+
+I’m Antoine van der Lee, Swift developer, indie founder, and educator.
+
+I create practical content about Swift, Swift Concurrency, AI-assisted development, and building profitable apps as an indie developer.
+
+Subscribe for more deep dives into iOS development, RocketSim, and AI-powered workflows.
+
+#CursorAI #ClaudeCode #iOSDevelopment #AIForDevelopers #RocketSim" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjwvc3ZnPg==" class="lazyload" style="--smush-placeholder-width: 1600px; --smush-placeholder-aspect-ratio: 1600/900;">
+                
+                <div class="sby_thumbnail_hover sby_item_video_thumbnail_hover">
+                    <div class="sby_thumbnail_hover_inner">
+                                                    <span class="sby_video_title" >I Put the iOS Simulator in Cursor, Claude Code &amp; Codex</span>
+                        
+                        
+                        
+                        
+                                            </div>
+                </div>
+
+                <span class="sby-screenreader">YouTube Video VVViSXV4QTZNLVE5QXRLZ1FKeTN6TkhnLm5iZ0d4ek9NcXBn</span>
+                                    <div class="sby_play_btn" >
+                        <span class="sby_play_btn_bg"></span>
+                    <svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="youtube" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="svg-inline--fa fa-youtube fa-w-18"><path fill="currentColor" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" class=""></path></svg>                    </div>
+                                <span class="sby_loader sby_hidden" style="background-color: rgb(255, 255, 255);"></span>
+            </a>
+
+            
+        </div>
+
+        
+<div class="sby_info sby_info_item">
+	<div class="sby-video-info-bottom sby-comments-enabled">
+		<div class="sby-video-info">
+							<p class="sby_video_title_wrap" >
+					<span class="sby_video_title">I Put the iOS Simulator in Cursor, Claude Code &amp; Codex</span>
+				</p>
+			
+			
+			
+			
+					</div>
+
+								</div>
+</div>    </div>
+</div><div class="sby_item  sby_new sby_transition" id="sby_VVViSXV4QTZNLVE5QXRLZ1FKeTN6TkhnLndWQXAwNHRYNElv" data-date="1786708489" data-video-id="wVAp04tX4Io" data-video-title="Skip the Xcode Instruments Tutorial, Do This Instead" data-live-date="0" data-channel-id="UCbIuxA6M-Q9AtKgQJy3zNHg" >
+    <div class="sby_inner_item">
+        <div class="sby_video_thumbnail_wrap sby_item_video_thumbnail_wrap">
+            <a class="sby_video_thumbnail sby_item_video_thumbnail" style="background-image:url(https://www.avanderlee.com/wp-content/plugins/youtube-feed-pro/img/placeholder.png)" href="https://www.youtube.com/watch?v=wVAp04tX4Io" target="_blank" rel="noopener" data-full-res="https://i.ytimg.com/vi/wVAp04tX4Io/maxresdefault.jpg" data-img-src-set="{&quot;120&quot;:&quot;https:\/\/i.ytimg.com\/vi\/wVAp04tX4Io\/default.jpg&quot;,&quot;320&quot;:&quot;https:\/\/i.ytimg.com\/vi\/wVAp04tX4Io\/mqdefault.jpg&quot;,&quot;480&quot;:&quot;https:\/\/i.ytimg.com\/vi\/wVAp04tX4Io\/hqdefault.jpg&quot;,&quot;640&quot;:&quot;https:\/\/i.ytimg.com\/vi\/wVAp04tX4Io\/sddefault.jpg&quot;}" data-video-id="wVAp04tX4Io"  data-user="Antoine van der Lee" data-url="https://www.youtube.com/watch?v=wVAp04tX4Io" data-avatar="https://yt3.ggpht.com/u3y5kMGWK1NDNhsN-L3sU8FT98tgajFcLQTQVl0RouFSTLEcdcW3-9NuZKPJyMh7Ej9AVWuK5vs=s88-c-k-c0x00ffffff-no-rj" data-title="You don&#039;t need to master Xcode Instruments for iOS performance profiling. RocketTrace records a trace on a real iPhone and returns ranked findings: hangs, hitches, SwiftUI, and Swift Concurrency.&lt;br /&gt;
+&lt;br /&gt;
+Join the RocketTrace early-access waitlist: https://www.rockettrace.app/?utm_source=youtube&amp;utm_medium=video&amp;utm_campaign=rockettrace_prelaunch&amp;utm_content=device_demo&lt;br /&gt;
+&lt;br /&gt;
+Instruments is powerful, but picking the right template and reading trace timelines is a skill of its own. RocketTrace is the app I&#039;m building to skip that learning curve: select a recent Xcode build, record on your connected iPhone, click through your app, and get readable opportunities ranked by impact instead of intimidating timelines. Every finding includes a ready-made prompt you can copy, so your coding agent can start on the fix immediately.&lt;br /&gt;
+&lt;br /&gt;
+In this demo, I profile one of my own apps on a physical device and walk through the full analysis: Time Profiler, SwiftUI, Swift Concurrency, Hangs, and Hitches.&lt;br /&gt;
+&lt;br /&gt;
+Chapters:&lt;br /&gt;
+00:00 What RocketTrace is&lt;br /&gt;
+00:07 Starting a new performance trace&lt;br /&gt;
+00:24 Selecting a recent Xcode build&lt;br /&gt;
+00:29 Recording on a physical iPhone&lt;br /&gt;
+00:59 Exercising the app during the trace&lt;br /&gt;
+01:22 Why Instruments feels intimidating&lt;br /&gt;
+01:47 Automatic per-instrument analysis&lt;br /&gt;
+02:29 First findings: Hangs&lt;br /&gt;
+02:58 SwiftUI and Concurrency insights&lt;br /&gt;
+03:22 Debug vs release builds: an honest note&lt;br /&gt;
+04:00 Full results: healthy checks and top opportunities&lt;br /&gt;
+04:38 Copy a prompt, guide your coding agent&lt;br /&gt;
+05:13 Join the beta waitlist&lt;br /&gt;
+&lt;br /&gt;
+I&#039;m sending out beta invites in batches. Sign up and tell me what you hope to get out of RocketTrace: https://www.rockettrace.app/?utm_source=youtube&amp;utm_medium=video&amp;utm_campaign=rockettrace_prelaunch&amp;utm_content=device_demo&lt;br /&gt;
+&lt;br /&gt;
+#iOSDev #Swift #Xcode" data-video-title="Skip the Xcode Instruments Tutorial, Do This Instead" data-channel-id="UCbIuxA6M-Q9AtKgQJy3zNHg" data-views="0 views" data-published-date="1786708489" data-formatted-published-date="Aug 14, 2026 12:54 pm" data-comment-count="0">
+                <img width="1600" height="900" decoding="async" data-src="https://www.avanderlee.com/wp-content/plugins/youtube-feed-pro/img/placeholder.png" alt="You don&#039;t need to master Xcode Instruments for iOS performance profiling. RocketTrace records a trace on a real iPhone and returns ranked findings: hangs, hitches, SwiftUI, and Swift Concurrency.
+
+Join the RocketTrace early-access waitlist: https://www.rockettrace.app/?utm_source=youtube&amp;utm_medium=video&amp;utm_campaign=rockettrace_prelaunch&amp;utm_content=device_demo
+
+Instruments is powerful, but picking the right template and reading trace timelines is a skill of its own. RocketTrace is the app I&#039;m building to skip that learning curve: select a recent Xcode build, record on your connected iPhone, click through your app, and get readable opportunities ranked by impact instead of intimidating timelines. Every finding includes a ready-made prompt you can copy, so your coding agent can start on the fix immediately.
+
+In this demo, I profile one of my own apps on a physical device and walk through the full analysis: Time Profiler, SwiftUI, Swift Concurrency, Hangs, and Hitches.
+
+Chapters:
+00:00 What RocketTrace is
+00:07 Starting a new performance trace
+00:24 Selecting a recent Xcode build
+00:29 Recording on a physical iPhone
+00:59 Exercising the app during the trace
+01:22 Why Instruments feels intimidating
+01:47 Automatic per-instrument analysis
+02:29 First findings: Hangs
+02:58 SwiftUI and Concurrency insights
+03:22 Debug vs release builds: an honest note
+04:00 Full results: healthy checks and top opportunities
+04:38 Copy a prompt, guide your coding agent
+05:13 Join the beta waitlist
+
+I&#039;m sending out beta invites in batches. Sign up and tell me what you hope to get out of RocketTrace: https://www.rockettrace.app/?utm_source=youtube&amp;utm_medium=video&amp;utm_campaign=rockettrace_prelaunch&amp;utm_content=device_demo
+
+#iOSDev #Swift #Xcode" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjwvc3ZnPg==" class="lazyload" style="--smush-placeholder-width: 1600px; --smush-placeholder-aspect-ratio: 1600/900;">
+                
+                <div class="sby_thumbnail_hover sby_item_video_thumbnail_hover">
+                    <div class="sby_thumbnail_hover_inner">
+                                                    <span class="sby_video_title" >Skip the Xcode Instruments Tutorial, Do This Instead</span>
+                        
+                        
+                        
+                        
+                                            </div>
+                </div>
+
+                <span class="sby-screenreader">YouTube Video VVViSXV4QTZNLVE5QXRLZ1FKeTN6TkhnLndWQXAwNHRYNElv</span>
+                                    <div class="sby_play_btn" >
+                        <span class="sby_play_btn_bg"></span>
+                    <svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="youtube" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="svg-inline--fa fa-youtube fa-w-18"><path fill="currentColor" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" class=""></path></svg>                    </div>
+                                <span class="sby_loader sby_hidden" style="background-color: rgb(255, 255, 255);"></span>
+            </a>
+
+            
+        </div>
+
+        
+<div class="sby_info sby_info_item">
+	<div class="sby-video-info-bottom sby-comments-enabled">
+		<div class="sby-video-info">
+							<p class="sby_video_title_wrap" >
+					<span class="sby_video_title">Skip the Xcode Instruments Tutorial, Do This Instead</span>
+				</p>
+			
+			
+			
+			
+					</div>
+
+								</div>
+</div>    </div>
+</div><div class="sby_item  sby_new sby_transition" id="sby_VVViSXV4QTZNLVE5QXRLZ1FKeTN6TkhnLmhERk95LXluSjZJ" data-date="1779780781" data-video-id="hDFOy-ynJ6I" data-video-title="AI Wrote Swift Code That Looked Fine… Until Xcode Instruments Exposed It" data-live-date="0" data-channel-id="UCbIuxA6M-Q9AtKgQJy3zNHg" >
+    <div class="sby_inner_item">
+        <div class="sby_video_thumbnail_wrap sby_item_video_thumbnail_wrap">
+            <a class="sby_video_thumbnail sby_item_video_thumbnail" style="background-image:url(https://www.avanderlee.com/wp-content/plugins/youtube-feed-pro/img/placeholder.png)" href="https://www.youtube.com/watch?v=hDFOy-ynJ6I" target="_blank" rel="noopener" data-full-res="https://i.ytimg.com/vi/hDFOy-ynJ6I/maxresdefault.jpg" data-img-src-set="{&quot;120&quot;:&quot;https:\/\/i.ytimg.com\/vi\/hDFOy-ynJ6I\/default.jpg&quot;,&quot;320&quot;:&quot;https:\/\/i.ytimg.com\/vi\/hDFOy-ynJ6I\/mqdefault.jpg&quot;,&quot;480&quot;:&quot;https:\/\/i.ytimg.com\/vi\/hDFOy-ynJ6I\/hqdefault.jpg&quot;,&quot;640&quot;:&quot;https:\/\/i.ytimg.com\/vi\/hDFOy-ynJ6I\/sddefault.jpg&quot;}" data-video-id="hDFOy-ynJ6I"  data-user="Antoine van der Lee" data-url="https://www.youtube.com/watch?v=hDFOy-ynJ6I" data-avatar="https://yt3.ggpht.com/u3y5kMGWK1NDNhsN-L3sU8FT98tgajFcLQTQVl0RouFSTLEcdcW3-9NuZKPJyMh7Ej9AVWuK5vs=s88-c-k-c0x00ffffff-no-rj" data-title="AI can write Swift code that compiles, runs, and even produces the correct output.&lt;br /&gt;
+&lt;br /&gt;
+But that doesn’t mean it performs well.&lt;br /&gt;
+&lt;br /&gt;
+In this video, I break down a real Swift Concurrency performance issue using Xcode Instruments and show how hidden bottlenecks, hangs, suspension points, and actor isolation problems can quietly destroy your app’s responsiveness.&lt;br /&gt;
+&lt;br /&gt;
+Starting from a wallpaper generator with terrible UI hangs, we progressively optimize the implementation using:&lt;br /&gt;
+&lt;br /&gt;
+- nonisolated&lt;br /&gt;
+- Actors&lt;br /&gt;
+- Task Groups&lt;br /&gt;
+- @concurrent&lt;br /&gt;
+- Suspension point optimization&lt;br /&gt;
+- Xcode Instruments analysis&lt;br /&gt;
+&lt;br /&gt;
+Along the way, we use Swift Tasks, Swift Actors, Hangs, and Time Profiler to verify every optimization step with actual data instead of assumptions.&lt;br /&gt;
+&lt;br /&gt;
+I also explore an important question for modern iOS development:&lt;br /&gt;
+&lt;br /&gt;
+Can we trust AI-generated code?&lt;br /&gt;
+&lt;br /&gt;
+AI tools like Cursor, Claude, GPT-5.5, and Opus can generate working Swift Concurrency code, but they often produce overly complex or poorly performing implementations unless you know how to validate the output yourself.&lt;br /&gt;
+&lt;br /&gt;
+This video is about building that verification skillset.&lt;br /&gt;
+&lt;br /&gt;
+You’ll learn:&lt;br /&gt;
+&lt;br /&gt;
+- Why Swift Concurrency performance can silently fail&lt;br /&gt;
+- How actor isolation impacts execution&lt;br /&gt;
+- What suspension points really are&lt;br /&gt;
+- Why @concurrent changes execution behavior&lt;br /&gt;
+- How to profile Swift apps with Xcode Instruments&lt;br /&gt;
+- How to analyze task lifecycles and queue sizes&lt;br /&gt;
+- Why release builds matter for performance testing&lt;br /&gt;
+- How AI-generated code can introduce hidden performance issues&lt;br /&gt;
+- A practical mental model for concurrency optimization&lt;br /&gt;
+&lt;br /&gt;
+If you’re working with Swift 6, AI-assisted development, or modern iOS performance optimization, this video will help you reason about concurrency at a much deeper level.&lt;br /&gt;
+&lt;br /&gt;
+👍 If this video helps, consider liking and subscribing for more advanced Swift, Swift Concurrency, performance engineering, and AI-assisted development content.&lt;br /&gt;
+&lt;br /&gt;
+Subscribe here:&lt;br /&gt;
+https://www.youtube.com/@AvanderLee?sub_confirmation=1&lt;br /&gt;
+&lt;br /&gt;
+CHAPTERS&lt;br /&gt;
+&lt;br /&gt;
+0:00 – Why AI-generated Swift code can hurt performance&lt;br /&gt;
+1:50 – The wallpaper generator performance problem&lt;br /&gt;
+2:44 – Main actor inheritance explained&lt;br /&gt;
+3:24 – Swift 6.2 default actor isolation&lt;br /&gt;
+4:41 – Why Xcode Instruments matters more than ever&lt;br /&gt;
+5:31 – Swift Concurrency Instruments overview&lt;br /&gt;
+6:51 – Profiling the first performance issue&lt;br /&gt;
+8:25 – Fixing hangs using actors and nonisolated&lt;br /&gt;
+10:47 – Introducing task groups for parallelism&lt;br /&gt;
+13:28 – Removing actor bottlenecks with @concurrent&lt;br /&gt;
+15:47 – Understanding suspension points&lt;br /&gt;
+17:03 – Why suspension points slow your app&lt;br /&gt;
+19:21 – Optimizing task execution flow&lt;br /&gt;
+20:31 – Comparing performance improvements&lt;br /&gt;
+21:29 – Full optimization recap&lt;br /&gt;
+22:45 – Testing AI-generated concurrency code&lt;br /&gt;
+25:28 – Using AI to analyze Instruments output&lt;br /&gt;
+26:05 – Avoiding premature optimization&lt;br /&gt;
+28:07 – Why developers still need verification skills&lt;br /&gt;
+&lt;br /&gt;
+🔗 References &amp; Links&lt;br /&gt;
+&lt;br /&gt;
+Swift Concurrency Course&lt;br /&gt;
+https://www.swiftconcurrencycourse.com&lt;br /&gt;
+&lt;br /&gt;
+Swift Concurrency Agent Skill (GitHub)&lt;br /&gt;
+https://github.com/AvdLee/Swift-Concurrency-Agent-Skill&lt;br /&gt;
+&lt;br /&gt;
+RocketSim&lt;br /&gt;
+https://www.rocketsim.app&lt;br /&gt;
+&lt;br /&gt;
+SwiftLee&lt;br /&gt;
+https://www.avanderlee.com&lt;br /&gt;
+&lt;br /&gt;
+⸻&lt;br /&gt;
+&lt;br /&gt;
+👋 About Me&lt;br /&gt;
+&lt;br /&gt;
+I’m Antoine van der Lee — Swift developer, indie founder, and educator.&lt;br /&gt;
+&lt;br /&gt;
+I create advanced content about:&lt;br /&gt;
+&lt;br /&gt;
+- Swift &amp; Swift Concurrency&lt;br /&gt;
+- AI-assisted development&lt;br /&gt;
+- Xcode &amp; performance tooling&lt;br /&gt;
+- Indie app development&lt;br /&gt;
+- Building scalable iOS apps&lt;br /&gt;
+&lt;br /&gt;
+I’m the founder of:&lt;br /&gt;
+&lt;br /&gt;
+- SwiftLee&lt;br /&gt;
+- RocketSim&lt;br /&gt;
+- Swift Concurrency Course&lt;br /&gt;
+- SwiftLee Weekly&lt;br /&gt;
+&lt;br /&gt;
+Subscribe for senior-level Swift engineering content focused on real-world development and modern tooling.&lt;br /&gt;
+&lt;br /&gt;
+#SwiftConcurrency #XcodeInstruments #iosdevelopment #Swift6 #AIcoding #CursorAI #SwiftUI #PerformanceOptimization #Xcode #iOSDev" data-video-title="AI Wrote Swift Code That Looked Fine… Until Xcode Instruments Exposed It" data-channel-id="UCbIuxA6M-Q9AtKgQJy3zNHg" data-views="0 views" data-published-date="1779780781" data-formatted-published-date="May 26, 2026 8:33 am" data-comment-count="0">
+                <img width="1600" height="900" decoding="async" data-src="https://www.avanderlee.com/wp-content/plugins/youtube-feed-pro/img/placeholder.png" alt="AI can write Swift code that compiles, runs, and even produces the correct output.
+
+But that doesn’t mean it performs well.
+
+In this video, I break down a real Swift Concurrency performance issue using Xcode Instruments and show how hidden bottlenecks, hangs, suspension points, and actor isolation problems can quietly destroy your app’s responsiveness.
+
+Starting from a wallpaper generator with terrible UI hangs, we progressively optimize the implementation using:
+
+- nonisolated
+- Actors
+- Task Groups
+- @concurrent
+- Suspension point optimization
+- Xcode Instruments analysis
+
+Along the way, we use Swift Tasks, Swift Actors, Hangs, and Time Profiler to verify every optimization step with actual data instead of assumptions.
+
+I also explore an important question for modern iOS development:
+
+Can we trust AI-generated code?
+
+AI tools like Cursor, Claude, GPT-5.5, and Opus can generate working Swift Concurrency code, but they often produce overly complex or poorly performing implementations unless you know how to validate the output yourself.
+
+This video is about building that verification skillset.
+
+You’ll learn:
+
+- Why Swift Concurrency performance can silently fail
+- How actor isolation impacts execution
+- What suspension points really are
+- Why @concurrent changes execution behavior
+- How to profile Swift apps with Xcode Instruments
+- How to analyze task lifecycles and queue sizes
+- Why release builds matter for performance testing
+- How AI-generated code can introduce hidden performance issues
+- A practical mental model for concurrency optimization
+
+If you’re working with Swift 6, AI-assisted development, or modern iOS performance optimization, this video will help you reason about concurrency at a much deeper level.
+
+👍 If this video helps, consider liking and subscribing for more advanced Swift, Swift Concurrency, performance engineering, and AI-assisted development content.
+
+Subscribe here:
+https://www.youtube.com/@AvanderLee?sub_confirmation=1
+
+CHAPTERS
+
+0:00 – Why AI-generated Swift code can hurt performance
+1:50 – The wallpaper generator performance problem
+2:44 – Main actor inheritance explained
+3:24 – Swift 6.2 default actor isolation
+4:41 – Why Xcode Instruments matters more than ever
+5:31 – Swift Concurrency Instruments overview
+6:51 – Profiling the first performance issue
+8:25 – Fixing hangs using actors and nonisolated
+10:47 – Introducing task groups for parallelism
+13:28 – Removing actor bottlenecks with @concurrent
+15:47 – Understanding suspension points
+17:03 – Why suspension points slow your app
+19:21 – Optimizing task execution flow
+20:31 – Comparing performance improvements
+21:29 – Full optimization recap
+22:45 – Testing AI-generated concurrency code
+25:28 – Using AI to analyze Instruments output
+26:05 – Avoiding premature optimization
+28:07 – Why developers still need verification skills
+
+🔗 References &amp; Links
+
+Swift Concurrency Course
+https://www.swiftconcurrencycourse.com
+
+Swift Concurrency Agent Skill (GitHub)
+https://github.com/AvdLee/Swift-Concurrency-Agent-Skill
+
+RocketSim
+https://www.rocketsim.app
+
+SwiftLee
+https://www.avanderlee.com
+
+⸻
+
+👋 About Me
+
+I’m Antoine van der Lee — Swift developer, indie founder, and educator.
+
+I create advanced content about:
+
+- Swift &amp; Swift Concurrency
+- AI-assisted development
+- Xcode &amp; performance tooling
+- Indie app development
+- Building scalable iOS apps
+
+I’m the founder of:
+
+- SwiftLee
+- RocketSim
+- Swift Concurrency Course
+- SwiftLee Weekly
+
+Subscribe for senior-level Swift engineering content focused on real-world development and modern tooling.
+
+#SwiftConcurrency #XcodeInstruments #iosdevelopment #Swift6 #AIcoding #CursorAI #SwiftUI #PerformanceOptimization #Xcode #iOSDev" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjwvc3ZnPg==" class="lazyload" style="--smush-placeholder-width: 1600px; --smush-placeholder-aspect-ratio: 1600/900;">
+                
+                <div class="sby_thumbnail_hover sby_item_video_thumbnail_hover">
+                    <div class="sby_thumbnail_hover_inner">
+                                                    <span class="sby_video_title" >AI Wrote Swift Code That Looked Fine… Until Xcode Instruments Exposed It</span>
+                        
+                        
+                        
+                        
+                                            </div>
+                </div>
+
+                <span class="sby-screenreader">YouTube Video VVViSXV4QTZNLVE5QXRLZ1FKeTN6TkhnLmhERk95LXluSjZJ</span>
+                                    <div class="sby_play_btn" >
+                        <span class="sby_play_btn_bg"></span>
+                    <svg aria-hidden="true" focusable="false" data-prefix="fab" data-icon="youtube" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="svg-inline--fa fa-youtube fa-w-18"><path fill="currentColor" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z" class=""></path></svg>                    </div>
+                                <span class="sby_loader sby_hidden" style="background-color: rgb(255, 255, 255);"></span>
+            </a>
+
+            
+        </div>
+
+        
+<div class="sby_info sby_info_item">
+	<div class="sby-video-info-bottom sby-comments-enabled">
+		<div class="sby-video-info">
+							<p class="sby_video_title_wrap" >
+					<span class="sby_video_title">AI Wrote Swift Code That Looked Fine… Until Xcode Instruments Exposed It</span>
+				</p>
+			
+			
+			
+			
+					</div>
+
+								</div>
+</div>    </div>
+</div>    </div>
+    
+	<div class="sby_footer">
+
+
+</div>
+    <div class="sby_cta_items_wraps sby_cta_wrap">
+	<div class="sby_cta_inner_wrap">
+
+	</div>
+</div>
+
+	
+</div>
+
+<style type="text/css">body #sb_youtube_sbyUCbIuxA6MQ9AtKgQJy3zNHg3 .sby_caption_wrap .sby_caption { font-size: 13px !important}body #sb_youtube_sbyUCbIuxA6MQ9AtKgQJy3zNHg3 .sby_follow_btn a:hover { box-shadow:inset 0 0 10px 20px rgb(255, 255, 255, .25) !important}body #sb_youtube_sbyUCbIuxA6MQ9AtKgQJy3zNHg3[data-videostyle=boxed] .sby_items_wrap .sby_item .sby_inner_item { background-color: #ffffff !important}</style></p>
+</aside>		<div class="clear">&nbsp;</div>
+	</div><!-- #secondary -->
+	<footer  id="colophon" class="site-footer" role="contentinfo">
+					<a class="subscribe icon-feed" href="https://www.avanderlee.com/feed/"><span class="tooltip">Subscribe!</span></a>
+				<div  class="site-info inner">
+							<div id="site-footer-widgets" class="site-footer-widgets widget-area" role="complementary">
+					<div id="site-footer-widgets-inner">
+						<div class="widget_text site-footer-widget"><h3>Categories</h3><div class="textwidget custom-html-widget"><ul>
+	<li><a href="/category/swift">Swift</a></li>
+	<li><a href="/category/swiftui">SwiftUI</a></li>
+	<li><a href="/category/swift-testing">Swift Testing</a></li>
+	<li><a href="/category/concurrency">Concurrency</a></li>
+	<li><a href="/category/xcode">Xcode</a></li>
+	<li><a href="/category/debugging">Debugging</a></li>
+</ul></div></div><div class="widget_text site-footer-widget"><h3>Socials</h3><div class="textwidget custom-html-widget"><ul>
+		<li><a href="https://www.youtube.com/@avanderlee?sub_confirmation=1" class="plausible-event-name=Go+To+YouTube">YouTube</a></li>
+		<li><a href="https://nl.linkedin.com/in/ajvanderlee" class="plausible-event-name=Go+To+LinkedIn">LinkedIn</a></li>
+	<li><a href="https://www.twitter.com/twannl">Twitter</a></li>
+	<li><a href="https://bsky.app/profile/avanderlee.com">Bluesky</a></li>
+		<li><a href="https://www.instagram.com/swiftlee_">Instagram</a></li>
+	<li><a href="https://www.tiktok.com/@avanderlee">TikTok</a></li>
+		<li><a href="https://www.github.com/avdlee">GitHub</a></li>
+</ul></div></div><div class="widget_text site-footer-widget"><h3>Info</h3><div class="textwidget custom-html-widget"><ul>
+			<li><a href="https://swiftlee-weekly.com/?utm_source=avanderlee&utm_medium=referral&utm_campaign=swiftlee_weekly&utm_content=footer">Newsletter</a></li>
+			<li><a href="/feed">RSS</a></li>
+	<li><a href="/about">About</a></li>
+	<li><a href="https://shop.spreadshirt.nl/swiftlee/">Shop</a></li>
+	<li><a href="/sponsor">Sponsor</a></li>
+		<li><a href="/cdn-cgi/l/email-protection#bdded2d3c9dcdec9fddccbdcd3d9d8cfd1d8d893ded2d0">Contact</a></li>
+			<li><a href="https://intro.co/antoinevanderlee?utm_source=swiftlee&utm_medium=blog&utm_campaign=site-footer">Book a 1:1 with Antoine</a></li>
+</ul></div></div><div class="widget_text site-footer-widget"><h3>Apps</h3><div class="textwidget custom-html-widget"><ul>
+	<li><a href="https://rocketsim.app/?utm_source=avanderlee&utm_medium=referral&utm_campaign=rocketsim&utm_content=footer">RocketSim</a></li>
+	<li><a href="https://rockettrace.app/?utm_source=avanderlee&utm_medium=referral&utm_campaign=rockettrace&utm_content=footer">RocketTrace</a></li>
+	<li><a href="https://mcp-beast.ai/mac-app-ios-developers?utm_source=avanderlee&utm_medium=referral&utm_campaign=mcp_beast&utm_content=footer">MCP Beast</a></li>
+	<li><a href="https://videocompression.app/?utm_source=avanderlee&utm_medium=referral&utm_campaign=video_compressor&utm_content=footer">Video Compressor</a></li>
+</ul></div></div>					</div>
+				</div><!-- #primary-sidebar -->
+					    <section class="copyright">
+		    	Copyright &copy; 2015-2026 <a href="https://www.avanderlee.com">SwiftLee</a>. All Rights Reserved. 
+		    </section>
+		</div><!-- .site-info -->
+	</footer><!-- #colophon -->
+</main><!-- /#content -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="speculationrules">
+{"prefetch":[{"source":"document","where":{"and":[{"href_matches":"\/*"},{"not":{"href_matches":["\/wp-*.php","\/wp-admin\/*","\/wp-content\/uploads\/*","\/wp-content\/*","\/wp-content\/plugins\/*","\/wp-content\/themes\/casper\/*","\/*\\?(.+)"]}},{"not":{"selector_matches":"a[rel~=\"nofollow\"]"}},{"not":{"selector_matches":".no-prefetch, .no-prefetch a"}}]},"eagerness":"conservative"}]}
+</script>
+
+		<div  id="hollerbox-popup-content">
+					</div>
+		<!-- YouTube Feeds JS -->
+<script type="text/javascript">
+
+</script>
+<link rel='stylesheet' id='ez-toc-css' href='https://www.avanderlee.com/wp-content/plugins/easy-table-of-contents/assets/css/screen.min.css?ver=2.0.75' type='text/css' media='all' />
+<style id='ez-toc-inline-css' type='text/css'>
+div#ez-toc-container .ez-toc-title {font-size: 100%;}div#ez-toc-container .ez-toc-title {font-weight: 500;}div#ez-toc-container ul li , div#ez-toc-container ul li a {font-size: 95%;}div#ez-toc-container ul li , div#ez-toc-container ul li a {font-weight: 500;}div#ez-toc-container nav ul ul li {font-size: 90%;}
+</style>
+<link rel='stylesheet' id='sby_styles-css' href='https://www.avanderlee.com/wp-content/plugins/youtube-feed-pro/css/sb-youtube.min.css?ver=2.6.0' type='text/css' media='all' />
+<script type="text/javascript" id="hollerbox-popups-js-before">
+/* <![CDATA[ */
+HollerBox = {"cookie_lifetime":2678400,"active":[],"home_url":"https:\/\/www.avanderlee.com","nav":{"home":"https:\/\/www.avanderlee.com","login":"https:\/\/www.avanderlee.com\/login\/","lost_password":"https:\/\/www.avanderlee.com\/login\/?action=lostpassword","register":"https:\/\/www.avanderlee.com\/login\/?action=register","privacy_page":""},"is_preview":false,"is_frontend":true,"is_builder_preview":false,"is_user_logged_in":false,"routes":{"root":"https:\/\/www.avanderlee.com\/wp-json\/hollerbox","conversion":"https:\/\/www.avanderlee.com\/wp-json\/hollerbox\/conversion","impression":"https:\/\/www.avanderlee.com\/wp-json\/hollerbox\/impression","submit":"https:\/\/www.avanderlee.com\/wp-json\/hollerbox\/submit","closed":"https:\/\/www.avanderlee.com\/wp-json\/hollerbox\/closed"},"nonces":{"_wprest":"f88a17568d"},"settings":{"credit_disabled":false,"gdpr_enabled":false,"gdpr_text":"<p>I consent to the terms and conditions.<\/p>","cookie_compliance":false,"cookie_name":"viewed_cookie_policy","cookie_value":"yes","script_debug_mode":false,"stacked_delay":5}}
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://www.avanderlee.com/wp-content/plugins/holler-box/assets/js/popups.min.js?ver=2.3.10.1" id="hollerbox-popups-js" data-rocket-defer defer></script>
+<script data-minify="1" type="text/javascript" src="https://www.avanderlee.com/wp-content/cache/min/1/tag/aEkjjq.js?ver=1766476932" id="ck-insights-js" data-rocket-defer defer></script>
+<script type="text/javascript" src="https://www.avanderlee.com/wp-content/plugins/wp-smush-pro/app/assets/js/smush-lazy-load.min.js?ver=3.20.0" id="smush-lazy-load-js" data-rocket-defer defer></script>
+<script type="text/javascript" id="sby_scripts-js-extra">
+/* <![CDATA[ */
+var sbyOptions = {"isAdmin":"","adminAjaxUrl":"https:\/\/www.avanderlee.com\/wp-admin\/admin-ajax.php","placeholder":"https:\/\/www.avanderlee.com\/wp-content\/plugins\/youtube-feed-pro\/img\/placeholder.png","placeholderNarrow":"https:\/\/www.avanderlee.com\/wp-content\/plugins\/youtube-feed-pro\/img\/placeholder-narrow.png","lightboxPlaceholder":"https:\/\/www.avanderlee.com\/wp-content\/plugins\/youtube-feed-pro\/img\/lightbox-placeholder.png","lightboxPlaceholderNarrow":"https:\/\/www.avanderlee.com\/wp-content\/plugins\/youtube-feed-pro\/img\/lightbox-placeholder-narrow.png","autoplay":"1","semiEagerload":"","eagerload":"","nonce":"19a9e5cf28","isPro":"1","isCustomizer":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://www.avanderlee.com/wp-content/plugins/youtube-feed-pro/js/sb-youtube.min.js?ver=2.6.0" id="sby_scripts-js" data-rocket-defer defer></script>
+<script id="ocvars">var ocSiteMeta = {plugins: {"a3e4aa5d9179da09d8af9b6802f861a8": 1,"b904efd4c2b650207df23db3e5b40c86": 0}}</script></body>
+</html>
+
+<!-- This website is like a Rocket, isn't it? Performance optimized by WP Rocket. Learn more: https://wp-rocket.me -->

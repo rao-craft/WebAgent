@@ -1,0 +1,49 @@
+{
+  "$id" : "https://github.com/rao-craft/WebAgent/blob/main/Schema/web.answer.schema.json",
+  "$schema" : "https://json-schema.org/draft/2020-12/schema",
+  "allOf" : [
+    {
+      "$ref" : "https://github.com/riteshpakala/Granite/blob/main/Schema/granite-agent-answer.schema.json"
+    }
+  ],
+  "description" : "A granite-answer/1 answer; what web makes and expects is one of its own kinds.",
+  "properties" : {
+    "expected" : {
+      "items" : {
+        "properties" : {
+          "kind" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          }
+        },
+        "required" : [
+          "kind",
+          "name"
+        ],
+        "type" : "object"
+      },
+      "type" : "array"
+    },
+    "made" : {
+      "items" : {
+        "properties" : {
+          "kind" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          }
+        },
+        "required" : [
+          "kind",
+          "name"
+        ],
+        "type" : "object"
+      },
+      "type" : "array"
+    }
+  },
+  "title" : "What web answers (granite-answer/1)"
+}

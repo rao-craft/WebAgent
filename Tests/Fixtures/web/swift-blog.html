@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>
+       Swift 6.4 Released | Swift.org 
+    </title>
+    
+    <meta name="author" content="Apple Inc." />
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    
+    <meta
+      name="description"
+      content="Swift 6.4 is now available. Swift aims to be a great choice across the stack, from apps and servers to systems code, embedded devices, and the browser. This release deepens that support, and makes everyday code easier to write. Highlights include:
+"
+    />
+     
+    <link rel="license" href="/LICENSE.txt" />
+    <link
+      rel="stylesheet"
+      media="all"
+      href="/assets/stylesheets/new-stylesheets/application.css"
+    />
+    <script src="/assets/javascripts/new-javascripts/color-scheme-toggle.js"></script>
+    
+    <link
+      rel="shortcut icon"
+      sizes="16x16 24x24 32x32 48x48 64x64"
+      type="image/vnd.microsoft.icon"
+      href="/favicon.ico"
+    />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="57x57"
+      href="/apple-touch-icon-57x57.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="72x72"
+      href="/apple-touch-icon-72x72.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="76x76"
+      href="/apple-touch-icon-76x76.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="114x114"
+      href="/apple-touch-icon-114x114.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="120x120"
+      href="/apple-touch-icon-120x120.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="144x144"
+      href="/apple-touch-icon-144x144.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="/apple-touch-icon-152x152.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/apple-touch-icon-180x180.png"
+    />
+    <link
+      rel="mask-icon"
+      href="/assets/images/icon-swift.svg"
+      color="#F05339"
+    />
+    <link
+      rel="alternate"
+      type="application/atom+xml"
+      title="Swift.org (Atom Feed)"
+      href="/atom.xml"
+    />
+
+    
+    <link rel="canonical" href="https://www.swift.org/blog/swift-6.4-released/" />
+    
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@SwiftLang" />
+    
+    <meta name="twitter:title" content="Swift 6.4 Released" />
+    <meta
+      name="twitter:description"
+      content="Swift 6.4 is now available. Swift aims to be a great choice across the stack, from apps and servers to systems code, embedded devices, and the browser. This release deepens that support, and makes everyday code easier to write. Highlights include:
+"
+    />
+    
+
+    <meta property="og:site_name" content="Swift.org" />
+    <meta
+      property="og:image"
+      content="https://www.swift.org/apple-touch-icon-180x180.png"
+    />
+     
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Swift 6.4 Released" />
+    <meta property="og:url" content="https://www.swift.org/blog/swift-6.4-released/" />
+    <meta
+      property="og:description"
+      content="Swift 6.4 is now available. Swift aims to be a great choice across the stack, from apps and servers to systems code, embedded devices, and the browser. This release deepens that support, and makes everyday code easier to write. Highlights include:
+"
+    />
+    <meta
+      property="article:published_time"
+      content="2026-09-15T03:30:00-04:00"
+    />
+    <meta
+      property="article:modified_time"
+      content="2026-11-11T14:29:18-04:00"
+    />
+    
+  </head>
+
+  <body>
+    <script>
+      // Set theme before body content to avoid flash of light styles in dark mode
+      setColorScheme(getStoredScheme())
+    </script>
+    <main>
+      <header class="site-navigation">
+    <div class="wrapper">
+      <h1 class="logo">
+        <a href="/" title="Swift.org"> <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 191.186 59.391"><path fill="#F05138" d="M59.387 16.45a82.463 82.463 0 0 0-.027-1.792c-.035-1.301-.112-2.614-.343-3.9-.234-1.307-.618-2.523-1.222-3.71a12.464 12.464 0 0 0-5.453-5.452C51.156.992 49.941.609 48.635.374c-1.288-.232-2.6-.308-3.902-.343a85.714 85.714 0 0 0-1.792-.027C42.23 0 41.52 0 40.813 0H18.578c-.71 0-1.419 0-2.128.004-.597.004-1.195.01-1.792.027-.325.009-.651.02-.978.036-.978.047-1.959.133-2.924.307-.98.176-1.908.436-2.811.81A12.503 12.503 0 0 0 3.89 3.89a12.46 12.46 0 0 0-2.294 3.158C.992 8.235.61 9.45.374 10.758c-.231 1.286-.308 2.599-.343 3.9a85.767 85.767 0 0 0-.027 1.792C-.001 17.16 0 17.869 0 18.578v22.235c0 .71 0 1.418.004 2.128.004.597.01 1.194.027 1.791.035 1.302.112 2.615.343 3.901.235 1.307.618 2.523 1.222 3.71a12.457 12.457 0 0 0 5.453 5.453c1.186.603 2.401.986 3.707 1.22 1.287.232 2.6.31 3.902.344.597.016 1.195.023 1.793.027.709.005 1.417.004 2.127.004h22.235c.709 0 1.418 0 2.128-.004.597-.004 1.194-.011 1.792-.027 1.302-.035 2.614-.112 3.902-.343 1.306-.235 2.521-.618 3.707-1.222a12.461 12.461 0 0 0 5.453-5.452c.604-1.187.987-2.403 1.222-3.71.231-1.286.308-2.6.343-3.9.016-.598.023-1.194.027-1.792.004-.71.004-1.419.004-2.129V18.578c0-.71 0-1.419-.004-2.128z"/><path fill="#FFF" d="m47.06 36.66-.004-.004c.066-.224.134-.446.191-.675 2.465-9.821-3.55-21.432-13.731-27.546 4.461 6.048 6.434 13.374 4.681 19.78-.156.571-.344 1.12-.552 1.653-.225-.148-.51-.316-.89-.527 0 0-10.127-6.252-21.103-17.312-.288-.29 5.852 8.777 12.822 16.14-3.284-1.843-12.434-8.5-18.227-13.802.712 1.187 1.558 2.33 2.489 3.43C17.573 23.932 23.882 31.5 31.44 37.314c-5.31 3.25-12.814 3.502-20.285.003a30.646 30.646 0 0 1-5.193-3.098c3.162 5.058 8.033 9.423 13.96 11.97 7.07 3.039 14.1 2.833 19.336.05l-.004.007c.024-.016.055-.032.08-.047.214-.116.428-.234.636-.358 2.516-1.306 7.485-2.63 10.152 2.559.654 1.27 2.041-5.46-3.061-11.74z"/><path id="logotype" d="M81.93 38.542c.465 4.12 4.394 6.822 9.852 6.822 5.185 0 8.924-2.701 8.924-6.44 0-3.22-2.265-5.185-7.478-6.495l-5.048-1.282c-7.26-1.801-10.534-5.077-10.534-10.48 0-6.658 5.813-11.27 14.082-11.27 8.022 0 13.726 4.639 13.917 11.325h-5.32c-.41-4.093-3.74-6.604-8.734-6.604-4.94 0-8.378 2.538-8.378 6.249 0 2.892 2.13 4.612 7.369 5.95l4.202 1.09c8.133 1.993 11.462 5.159 11.462 10.863 0 7.259-5.759 11.816-14.928 11.816-8.514 0-14.327-4.53-14.763-11.543h5.376zM140.049 49.43h-5.35l-6.249-21.776h-.109L122.12 49.43h-5.348l-7.914-28.518h5.184l5.513 22.896h.11l6.221-22.896h5.021l6.277 22.896h.11l5.512-22.896h5.13L140.05 49.43zM151.39 13.244c0-1.718 1.419-3.11 3.138-3.11 1.746 0 3.165 1.392 3.165 3.11 0 1.72-1.419 3.139-3.165 3.139a3.157 3.157 0 0 1-3.139-3.139zm.545 7.669h5.213V49.43h-5.213V20.913zM191.186 25.116v-4.204h-5.513v-6.821h-5.185v6.821h-9.964v-2.51c.027-2.538 1.01-3.603 3.357-3.603.764 0 1.528.083 2.156.192v-4.094a18.193 18.193 0 0 0-2.756-.218c-5.568 0-7.915 2.32-7.915 7.642v2.591h-3.983v4.204h3.983V49.43h5.185V25.116H180.488v16.838c0 5.512 2.101 7.64 7.559 7.64 1.174 0 2.51-.082 3.111-.218v-4.257c-.355.055-1.392.137-1.965.137-2.428 0-3.52-1.147-3.52-3.712V25.116h5.513z"/></svg> </a>
+      </h1>
+  
+      <!-- desktop-navigation -->
+      <nav class="desktop-navigation" role="navigation">
+        <ul class="navigation-items">
+  
+  <li class="nav-item ">
+    <a href="https://docs.swift.org/latest/documentation/" data-text="Docs"><span>Docs</span></a>
+  </li>
+  
+  <li class="nav-item ">
+    <a href="/community/" data-text="Community"><span>Community</span></a>
+  </li>
+  
+  <li class="nav-item ">
+    <a href="/packages/" data-text="Packages"><span>Packages</span></a>
+  </li>
+  
+  <li class="nav-item ">
+    <a href="/blog/" data-text="Blog"><span>Blog</span></a>
+  </li>
+  
+  <li class="border">
+    <span />
+  </li>
+  <li class="nav-item ">
+    <a href="/install" data-text="Install"><span>Install <span>(6.4.2)</span></span></a>
+  </li>
+</ul>
+      </nav>
+  
+      <!-- toggle -->
+      <button
+        id="menu-toggle"
+        class="menu-item menu-toggle open"
+        aria-expanded="false"
+        aria-label="Toggle Navigation Menu"
+      />
+    </div>
+  
+    <!-- mobile-navigation -->
+    <nav class="mobile-navigation" role="navigation">
+        <ul class="navigation-items">
+  
+  <li class="nav-item ">
+    <a href="https://docs.swift.org/latest/documentation/" data-text="Docs"><span>Docs</span></a>
+  </li>
+  
+  <li class="nav-item ">
+    <a href="/community/" data-text="Community"><span>Community</span></a>
+  </li>
+  
+  <li class="nav-item ">
+    <a href="/packages/" data-text="Packages"><span>Packages</span></a>
+  </li>
+  
+  <li class="nav-item ">
+    <a href="/blog/" data-text="Blog"><span>Blog</span></a>
+  </li>
+  
+  <li class="border">
+    <span />
+  </li>
+  <li class="nav-item ">
+    <a href="/install" data-text="Install"><span>Install <span>(6.4.2)</span></span></a>
+  </li>
+</ul>
+    </nav>
+  </header>
+   <section id="post" class="section">
+  <div class="swoop swoop-1"></div>
+
+  <div class="content">
+    <h1 class="title-0">Swift 6.4 Released</h1>
+
+    
+
+    
+    
+    <div class="authors compact fullwidth">
+  
+    
+    
+      <div class="author">
+        <div class="byline">
+          <img
+            
+              src="https://www.gravatar.com/avatar/34fa393a8013e04c03deff379ac0a6f3ea7a23c5861a6f7410b409974218f5d2?s=64&d=mp"
+            
+            alt="Joe Heck"
+            title="Joe Heck works on Swift as part of the Open Source Program Office at Apple."
+            />
+          <span class="author">
+            
+              <a href="https://github.com/heckj/" rel="nofollow" title="Joe Heck (@heckj) on GitHub">Joe Heck</a>
+            
+          </span>
+        </div>
+        
+      </div>
+    
+  
+    
+    
+      <div class="author">
+        <div class="byline">
+          <img
+            
+              src="https://www.gravatar.com/avatar/b3e284dd808123c26f476d75da0b5b3c?s=64&d=mp"
+            
+            alt="Holly Borla"
+            title="Holly Borla is a member of the Swift Core Team and Language Steering Group, and the engineering manager of the Swift language team at Apple."
+            />
+          <span class="author">
+            
+              <a href="https://github.com/hborla/" rel="nofollow" title="Holly Borla (@hborla) on GitHub">Holly Borla</a>
+            
+          </span>
+        </div>
+        
+      </div>
+    
+  
+</div>
+
+    <time pubdate datetime="2026-09-15T03:30:00-04:00"
+      >September 15, 2026</time
+    >
+      
+    <img
+      class="featured hide-dark"
+      src="/assets/images/swift-6.4-released/swift-6.4@2x.png"
+      alt="The Swift logo with the text Swift 6.4"
+    />
+     
+    <img
+      class="featured hide-light"
+      src="/assets/images/swift-6.4-released/swift-6.4-dark@2x.png"
+      alt="The Swift logo with the text Swift 6.4"
+    />
+    
+    <div class="details">
+      <p>Swift 6.4 is now available. Swift aims to be a great choice across the stack, from apps and servers to systems code, embedded devices, and the browser. This release deepens that support, and makes everyday code easier to write. Highlights include:</p>
+
+<ul>
+  <li><strong>Swift Build is now the default in Swift Package Manager</strong>, so your projects build the same way on Linux, macOS, and Windows.</li>
+  <li><strong>Subprocess reaches 1.0</strong>, a stable, cross-platform way to run and interact with other programs from Swift, from command-line tools to streaming processes.</li>
+  <li><strong>Interoperability reaches further</strong>, with Swift’s <code class="language-plaintext highlighter-rouge">Span</code> now bridging directly with C++20’s <code class="language-plaintext highlighter-rouge">std::span</code>, and Swift/Java interop extending its async and callback support.</li>
+  <li><strong>Swift runs faster in the browser</strong>, with WebAssembly bridging through JavaScriptKit up to 40 times faster, and the Wasm SDK available directly from Swift.org.</li>
+  <li><strong>Embedded Swift grows more capable</strong>, with support for existential types and richer error handling for microcontroller-class targets.</li>
+  <li><strong>Performance improves while maintaining memory safety</strong>, with new array types that hold non-copyable elements without copy-on-write overhead, and the new <code class="language-plaintext highlighter-rouge">Iterable</code> protocol for iterating without copies.</li>
+</ul>
+
+<p>There’s so much more. Read on for a detailed guide to the new changes, or see the <a href="/swift-evolution/#?version=6.4">Swift Evolution dashboard</a> for the full list of proposals in Swift 6.4.</p>
+
+<h2 id="simpler-and-clearer-code" class="header-with-anchor">Simpler and clearer code <a title="Permalink for Simpler and clearer code section" href="#simpler-and-clearer-code">
+            <?xml version="1.0" encoding="utf-8"?> <svg width="18px" height="18px" viewBox="0 0 14 14" role="img" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="m 11.58824,9.823529 q 0,-0.294117 -0.20589,-0.499999 L 9.85294,7.794118 q -0.20588,-0.205883 -0.5,-0.205883 -0.30882,0 -0.52941,0.235295 0.0221,0.02206 0.13971,0.136029 0.11764,0.113971 0.15808,0.158088 0.0404,0.04412 0.1103,0.139706 0.0698,0.09559 0.0956,0.1875 0.0257,0.09191 0.0257,0.202206 0,0.294117 -0.20588,0.5 -0.20588,0.205882 -0.5,0.205882 -0.1103,0 -0.20221,-0.02573 Q 8.35293,9.301471 8.25733,9.231621 8.16173,9.161771 8.11763,9.121327 8.07353,9.080887 7.95954,8.963238 7.84557,8.845591 7.82351,8.823533 7.58086,9.051474 7.58086,9.360297 q 0,0.294118 0.20588,0.5 l 1.51471,1.522059 q 0.19853,0.19853 0.5,0.19853 0.29412,0 0.5,-0.191177 l 1.08088,-1.073529 q 0.20589,-0.205883 0.20589,-0.492648 z M 6.41912,4.639706 q 0,-0.294118 -0.20588,-0.5 L 4.69853,2.617647 q -0.20588,-0.205882 -0.5,-0.205882 -0.28677,0 -0.5,0.198529 L 2.61765,3.683823 q -0.20589,0.205883 -0.20589,0.492648 0,0.294117 0.20589,0.499999 l 1.52941,1.529412 q 0.19853,0.19853 0.5,0.19853 0.30882,0 0.52941,-0.227942 Q 5.15437,6.15441 5.03676,6.040441 4.91912,5.92647 4.87868,5.882353 4.83828,5.838233 4.76838,5.742647 q -0.0698,-0.09559 -0.0956,-0.1875 -0.0257,-0.09191 -0.0257,-0.202206 0,-0.294117 0.20588,-0.5 0.20588,-0.205882 0.5,-0.205882 0.1103,0 0.20221,0.02573 0.0919,0.02573 0.1875,0.09559 0.0956,0.06985 0.1397,0.110294 0.0441,0.04044 0.15809,0.158089 Q 6.15443,5.154409 6.17649,5.176467 6.41914,4.948526 6.41914,4.639703 z M 13,9.823529 q 0,0.882353 -0.625,1.492647 l -1.08088,1.07353 Q 10.68382,13 9.80147,13 q -0.88971,0 -1.5,-0.625 L 6.78676,10.852941 Q 6.17647,10.242647 6.17647,9.360294 q 0,-0.904412 0.64706,-1.536764 L 6.17647,7.176471 Q 5.54412,7.82353 4.64706,7.82353 q -0.88235,0 -1.5,-0.617648 L 1.617647,5.676471 Q 1,5.058824 1,4.176471 1,3.294118 1.625,2.683824 L 2.70588,1.610294 Q 3.31618,1 4.19853,1 q 0.88971,0 1.5,0.625 l 1.51471,1.522059 q 0.61029,0.610294 0.61029,1.492647 0,0.904412 -0.64706,1.536764 L 7.82353,6.823529 Q 8.45588,6.17647 9.35294,6.17647 q 0.88235,0 1.5,0.617648 l 1.52941,1.529411 Q 13,8.941176 13,9.823529 z"/></svg>
+          </a></h2>
+
+<p>Swift 6.4 streamlines your day-to-day programming to make your code simpler and clearer.</p>
+
+<ul>
+  <li><strong>More natural optional <code class="language-plaintext highlighter-rouge">some</code> and <code class="language-plaintext highlighter-rouge">any</code> types.</strong> When writing an optional <code class="language-plaintext highlighter-rouge">some</code> or <code class="language-plaintext highlighter-rouge">any</code> type, you no longer have to wrap the type in parentheses. Instead of <code class="language-plaintext highlighter-rouge">(some Rocket)?</code>, you can simply write <code class="language-plaintext highlighter-rouge">some Rocket?</code> (<a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0521-improved-optional-opaque-and-any.md">SE-0521</a>).</li>
+  <li><strong>Source-level control over compiler warnings.</strong> When you need to control the behavior of warnings in your project, such as suppressing warnings or promoting them to errors, you can now define the warning behavior directly in your code using the new <code class="language-plaintext highlighter-rouge">@diagnose</code> attribute (<a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0522-source-warning-control.md">SE-0522</a>).</li>
+  <li><strong>Clarify which API to use when multiple libraries conflict.</strong> When multiple modules define the same API name that you want to reference, you can specify which module you meant to use through <em>module selectors</em>. If your app imports two modules that both provide a type <code class="language-plaintext highlighter-rouge">CommonThing</code>, using the <code class="language-plaintext highlighter-rouge">::</code> selector lets you clearly specify which of those you intend (<a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0491-module-selectors.md">SE-0491</a>).</li>
+  <li><strong>Call async functions in a defer block.</strong> Any asynchronous code you write in a defer block is awaited and runs to completion before it exits (<a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0493-defer-async.md">SE-0493</a>).</li>
+  <li><strong>Ensure that necessary cleanup work isn’t cancelled.</strong> You can run a closure that’s shielded from the enclosing task’s cancellation through the <code class="language-plaintext highlighter-rouge">withTaskCancellationShield</code> API (<a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0504-task-cancellation-shields.md">SE-0504</a>).</li>
+</ul>
+
+<p>You can combine asynchronous calls in defer blocks and cancellation shields to make sure that cleanup work always happens, no matter how the function returns:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">func</span> <span class="nf">processFile</span><span class="p">(</span><span class="n">at</span> <span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">)</span> <span class="k">async</span> <span class="k">throws</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">handle</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">FileHandle</span><span class="p">(</span><span class="nv">forReadingFrom</span><span class="p">:</span> <span class="n">url</span><span class="p">)</span>
+
+    <span class="k">defer</span> <span class="p">{</span>
+        <span class="c1">// flushMetrics is a network call, so it can suspend after cancellation</span>
+        <span class="c1">// is requested; the shield ensures it runs to completion and isn't</span>
+        <span class="c1">// included in cancellation.</span>
+        <span class="k">await</span> <span class="n">withTaskCancellationShield</span> <span class="p">{</span>
+            <span class="k">await</span> <span class="nf">flushMetrics</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="n">url</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">?</span> <span class="n">handle</span><span class="o">.</span><span class="nf">close</span><span class="p">()</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">try</span> <span class="k">await</span> <span class="nf">processContents</span><span class="p">(</span><span class="nv">of</span><span class="p">:</span> <span class="n">handle</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="richer-core-library-apis" class="header-with-anchor">Richer core library APIs <a title="Permalink for Richer core library APIs section" href="#richer-core-library-apis">
+            <?xml version="1.0" encoding="utf-8"?> <svg width="18px" height="18px" viewBox="0 0 14 14" role="img" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="m 11.58824,9.823529 q 0,-0.294117 -0.20589,-0.499999 L 9.85294,7.794118 q -0.20588,-0.205883 -0.5,-0.205883 -0.30882,0 -0.52941,0.235295 0.0221,0.02206 0.13971,0.136029 0.11764,0.113971 0.15808,0.158088 0.0404,0.04412 0.1103,0.139706 0.0698,0.09559 0.0956,0.1875 0.0257,0.09191 0.0257,0.202206 0,0.294117 -0.20588,0.5 -0.20588,0.205882 -0.5,0.205882 -0.1103,0 -0.20221,-0.02573 Q 8.35293,9.301471 8.25733,9.231621 8.16173,9.161771 8.11763,9.121327 8.07353,9.080887 7.95954,8.963238 7.84557,8.845591 7.82351,8.823533 7.58086,9.051474 7.58086,9.360297 q 0,0.294118 0.20588,0.5 l 1.51471,1.522059 q 0.19853,0.19853 0.5,0.19853 0.29412,0 0.5,-0.191177 l 1.08088,-1.073529 q 0.20589,-0.205883 0.20589,-0.492648 z M 6.41912,4.639706 q 0,-0.294118 -0.20588,-0.5 L 4.69853,2.617647 q -0.20588,-0.205882 -0.5,-0.205882 -0.28677,0 -0.5,0.198529 L 2.61765,3.683823 q -0.20589,0.205883 -0.20589,0.492648 0,0.294117 0.20589,0.499999 l 1.52941,1.529412 q 0.19853,0.19853 0.5,0.19853 0.30882,0 0.52941,-0.227942 Q 5.15437,6.15441 5.03676,6.040441 4.91912,5.92647 4.87868,5.882353 4.83828,5.838233 4.76838,5.742647 q -0.0698,-0.09559 -0.0956,-0.1875 -0.0257,-0.09191 -0.0257,-0.202206 0,-0.294117 0.20588,-0.5 0.20588,-0.205882 0.5,-0.205882 0.1103,0 0.20221,0.02573 0.0919,0.02573 0.1875,0.09559 0.0956,0.06985 0.1397,0.110294 0.0441,0.04044 0.15809,0.158089 Q 6.15443,5.154409 6.17649,5.176467 6.41914,4.948526 6.41914,4.639703 z M 13,9.823529 q 0,0.882353 -0.625,1.492647 l -1.08088,1.07353 Q 10.68382,13 9.80147,13 q -0.88971,0 -1.5,-0.625 L 6.78676,10.852941 Q 6.17647,10.242647 6.17647,9.360294 q 0,-0.904412 0.64706,-1.536764 L 6.17647,7.176471 Q 5.54412,7.82353 4.64706,7.82353 q -0.88235,0 -1.5,-0.617648 L 1.617647,5.676471 Q 1,5.058824 1,4.176471 1,3.294118 1.625,2.683824 L 2.70588,1.610294 Q 3.31618,1 4.19853,1 q 0.88971,0 1.5,0.625 l 1.51471,1.522059 q 0.61029,0.610294 0.61029,1.492647 0,0.904412 -0.64706,1.536764 L 7.82353,6.823529 Q 8.45588,6.17647 9.35294,6.17647 q 0.88235,0 1.5,0.617648 l 1.52941,1.529411 Q 13,8.941176 13,9.823529 z"/></svg>
+          </a></h2>
+
+<p>Improvements to Foundation and the standard library make it easier to use modern APIs with existing types.</p>
+
+<p>For example, ProgressManager added API to provide async/await support (<a href="https://github.com/swiftlang/swift-foundation/blob/main/Proposals/0023-progress-manager.md">SF-0023</a>), and <code class="language-plaintext highlighter-rouge">@Observable</code> types now have fine-grained and continuous change notifications (<a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0506-advanced-observation-tracking.md">SE-0506</a>).</p>
+
+<p>The <a href="https://swiftpackageindex.com/swiftlang/swift-subprocess/documentation/subprocess">Subprocess</a> library — originally introduced as <a href="https://github.com/swiftlang/swift-foundation/blob/main/Proposals/0007-swift-subprocess.md">SF-0007</a> and released as an <a href="https://forums.swift.org/t/accepted-as-version-0-1-sf-0007-subprocess/78787">initial 0.1 version in 2025</a> — has reached 1.0. It provides a cross-platform package to run and interact with subprocesses, built from the ground up using Swift concurrency. The following example, from <a href="https://swiftpackageindex.com/swiftlang/swift-subprocess/main/documentation/subprocess/gettingstarted">Getting Started with Subprocess</a>, illustrates running a process and capturing its output.</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="k">try</span> <span class="k">await</span> <span class="kt">Subprocess</span><span class="o">.</span><span class="nf">run</span><span class="p">(</span>
+  <span class="o">.</span><span class="nf">name</span><span class="p">(</span><span class="s">"ls"</span><span class="p">),</span>
+  <span class="nv">arguments</span><span class="p">:</span> <span class="p">[</span><span class="s">"-la"</span><span class="p">],</span>
+  <span class="nv">output</span><span class="p">:</span> <span class="o">.</span><span class="nf">string</span><span class="p">(</span><span class="nv">limit</span><span class="p">:</span> <span class="mi">4096</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">standardOutput</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Swift 6.4 makes it easier to migrate existing projects to use Swift Testing. You can now safely use <code class="language-plaintext highlighter-rouge">XCTAssert</code> in Swift Testing tests or <code class="language-plaintext highlighter-rouge">#expect</code> within XCTests (<a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/testing/0021-targeted-interoperability-swift-testing-and-xctest.md">ST-0021</a>), and customize the values shown in failed expectations using the <code class="language-plaintext highlighter-rouge">CustomTestReflectable</code> protocol (<a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/testing/0022-customtestreflectable.md">ST-0022</a>). <code class="language-plaintext highlighter-rouge">swift test</code> lets you repeat test cases to focus and save time (<a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/testing/0024-per-test-case-repetitions.md">ST-0024</a>) and record attachments that conform to the <a href="https://developer.apple.com/documentation/coretransferable/transferable">Transferable</a> protocol on Apple platforms (<a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/testing/0023-attachments-transferable.md">ST-0023</a>).</p>
+
+<p>Swift now has <a href="https://docs.swift.org/latest/documentation">a documentation site</a>, and the documentation content for the standard library is now open source.</p>
+
+<h2 id="faster-builds-clearer-debugging-broader-ide-support" class="header-with-anchor">Faster builds, clearer debugging, broader IDE support <a title="Permalink for Faster builds, clearer debugging, broader IDE support section" href="#faster-builds-clearer-debugging-broader-ide-support">
+            <?xml version="1.0" encoding="utf-8"?> <svg width="18px" height="18px" viewBox="0 0 14 14" role="img" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="m 11.58824,9.823529 q 0,-0.294117 -0.20589,-0.499999 L 9.85294,7.794118 q -0.20588,-0.205883 -0.5,-0.205883 -0.30882,0 -0.52941,0.235295 0.0221,0.02206 0.13971,0.136029 0.11764,0.113971 0.15808,0.158088 0.0404,0.04412 0.1103,0.139706 0.0698,0.09559 0.0956,0.1875 0.0257,0.09191 0.0257,0.202206 0,0.294117 -0.20588,0.5 -0.20588,0.205882 -0.5,0.205882 -0.1103,0 -0.20221,-0.02573 Q 8.35293,9.301471 8.25733,9.231621 8.16173,9.161771 8.11763,9.121327 8.07353,9.080887 7.95954,8.963238 7.84557,8.845591 7.82351,8.823533 7.58086,9.051474 7.58086,9.360297 q 0,0.294118 0.20588,0.5 l 1.51471,1.522059 q 0.19853,0.19853 0.5,0.19853 0.29412,0 0.5,-0.191177 l 1.08088,-1.073529 q 0.20589,-0.205883 0.20589,-0.492648 z M 6.41912,4.639706 q 0,-0.294118 -0.20588,-0.5 L 4.69853,2.617647 q -0.20588,-0.205882 -0.5,-0.205882 -0.28677,0 -0.5,0.198529 L 2.61765,3.683823 q -0.20589,0.205883 -0.20589,0.492648 0,0.294117 0.20589,0.499999 l 1.52941,1.529412 q 0.19853,0.19853 0.5,0.19853 0.30882,0 0.52941,-0.227942 Q 5.15437,6.15441 5.03676,6.040441 4.91912,5.92647 4.87868,5.882353 4.83828,5.838233 4.76838,5.742647 q -0.0698,-0.09559 -0.0956,-0.1875 -0.0257,-0.09191 -0.0257,-0.202206 0,-0.294117 0.20588,-0.5 0.20588,-0.205882 0.5,-0.205882 0.1103,0 0.20221,0.02573 0.0919,0.02573 0.1875,0.09559 0.0956,0.06985 0.1397,0.110294 0.0441,0.04044 0.15809,0.158089 Q 6.15443,5.154409 6.17649,5.176467 6.41914,4.948526 6.41914,4.639703 z M 13,9.823529 q 0,0.882353 -0.625,1.492647 l -1.08088,1.07353 Q 10.68382,13 9.80147,13 q -0.88971,0 -1.5,-0.625 L 6.78676,10.852941 Q 6.17647,10.242647 6.17647,9.360294 q 0,-0.904412 0.64706,-1.536764 L 6.17647,7.176471 Q 5.54412,7.82353 4.64706,7.82353 q -0.88235,0 -1.5,-0.617648 L 1.617647,5.676471 Q 1,5.058824 1,4.176471 1,3.294118 1.625,2.683824 L 2.70588,1.610294 Q 3.31618,1 4.19853,1 q 0.88971,0 1.5,0.625 l 1.51471,1.522059 q 0.61029,0.610294 0.61029,1.492647 0,0.904412 -0.64706,1.536764 L 7.82353,6.823529 Q 8.45588,6.17647 9.35294,6.17647 q 0.88235,0 1.5,0.617648 l 1.52941,1.529411 Q 13,8.941176 13,9.823529 z"/></svg>
+          </a></h2>
+
+<p>Swift 6.4 brings a range of tooling improvements that make everyday development smoother, from debugging and building to editor support:</p>
+
+<ul>
+  <li><strong>More robust debugging.</strong> Swift 6.4 completes a multi-release overhaul of how the compiler tracks Swift modules in debug info — LLDB now imports modules through precise dependency tracking instead of ambiguous by-name lookups. Debug builds on Linux and Windows, and dSYM bundles on Darwin, shrink significantly since binary Swift modules are no longer embedded in them. Read the recent blog post <a href="/blog/module-tracking-in-debug-info/">Module Tracking in Swift Debug Info</a> for a dive into the details.</li>
+  <li><strong>Unified build system across IDEs.</strong> Swift Package Manager (SwiftPM) now uses <a href="https://swiftpackageindex.com/swiftlang/swift-build">Swift Build</a> as its default build platform, and includes <em>Software Bill of Materials (SBOM) Generation for Swift Package Manager</em> (<a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0509-swift-sboms-via-swiftpm.md">SE-0509</a>), providing support for generating SBOM documents in either SPDX or CycloneDX format. Read more about SwiftPM’s updates in the <a href="https://docs.swift.org/latest/documentation/packagemanagerdocs/6.4/">SwiftPM 6.4 release notes</a>, and learn how to generate an SBOM at <a href="https://docs.swift.org/latest/documentation/packagemanagerdocs/generatingsboms">Generating Software Bill of Materials (SBOM)</a>.</li>
+  <li><strong>Broader IDE support for Swift.</strong> The <a href="/blog/expanding-swift-ide-support/">VS Code extension for Swift is now available</a> on the <a href="https://open-vsx.org/extension/swiftlang/swift-vscode">Open VSX Registry</a>, so it works not only in VS Code, but also Cursor, Antigravity, Kiro, and other development tools. It also now includes <a href="https://forums.swift.org/t/gsoc-2025-bringing-swiftly-support-to-vs-code/81886">integration with Swiftly</a>, making it easier to select and use different versions of Swift toolchains with your project.</li>
+</ul>
+
+<h2 id="deeper-interoperability-and-platform-support" class="header-with-anchor">Deeper interoperability and platform support <a title="Permalink for Deeper interoperability and platform support section" href="#deeper-interoperability-and-platform-support">
+            <?xml version="1.0" encoding="utf-8"?> <svg width="18px" height="18px" viewBox="0 0 14 14" role="img" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="m 11.58824,9.823529 q 0,-0.294117 -0.20589,-0.499999 L 9.85294,7.794118 q -0.20588,-0.205883 -0.5,-0.205883 -0.30882,0 -0.52941,0.235295 0.0221,0.02206 0.13971,0.136029 0.11764,0.113971 0.15808,0.158088 0.0404,0.04412 0.1103,0.139706 0.0698,0.09559 0.0956,0.1875 0.0257,0.09191 0.0257,0.202206 0,0.294117 -0.20588,0.5 -0.20588,0.205882 -0.5,0.205882 -0.1103,0 -0.20221,-0.02573 Q 8.35293,9.301471 8.25733,9.231621 8.16173,9.161771 8.11763,9.121327 8.07353,9.080887 7.95954,8.963238 7.84557,8.845591 7.82351,8.823533 7.58086,9.051474 7.58086,9.360297 q 0,0.294118 0.20588,0.5 l 1.51471,1.522059 q 0.19853,0.19853 0.5,0.19853 0.29412,0 0.5,-0.191177 l 1.08088,-1.073529 q 0.20589,-0.205883 0.20589,-0.492648 z M 6.41912,4.639706 q 0,-0.294118 -0.20588,-0.5 L 4.69853,2.617647 q -0.20588,-0.205882 -0.5,-0.205882 -0.28677,0 -0.5,0.198529 L 2.61765,3.683823 q -0.20589,0.205883 -0.20589,0.492648 0,0.294117 0.20589,0.499999 l 1.52941,1.529412 q 0.19853,0.19853 0.5,0.19853 0.30882,0 0.52941,-0.227942 Q 5.15437,6.15441 5.03676,6.040441 4.91912,5.92647 4.87868,5.882353 4.83828,5.838233 4.76838,5.742647 q -0.0698,-0.09559 -0.0956,-0.1875 -0.0257,-0.09191 -0.0257,-0.202206 0,-0.294117 0.20588,-0.5 0.20588,-0.205882 0.5,-0.205882 0.1103,0 0.20221,0.02573 0.0919,0.02573 0.1875,0.09559 0.0956,0.06985 0.1397,0.110294 0.0441,0.04044 0.15809,0.158089 Q 6.15443,5.154409 6.17649,5.176467 6.41914,4.948526 6.41914,4.639703 z M 13,9.823529 q 0,0.882353 -0.625,1.492647 l -1.08088,1.07353 Q 10.68382,13 9.80147,13 q -0.88971,0 -1.5,-0.625 L 6.78676,10.852941 Q 6.17647,10.242647 6.17647,9.360294 q 0,-0.904412 0.64706,-1.536764 L 6.17647,7.176471 Q 5.54412,7.82353 4.64706,7.82353 q -0.88235,0 -1.5,-0.617648 L 1.617647,5.676471 Q 1,5.058824 1,4.176471 1,3.294118 1.625,2.683824 L 2.70588,1.610294 Q 3.31618,1 4.19853,1 q 0.88971,0 1.5,0.625 l 1.51471,1.522059 q 0.61029,0.610294 0.61029,1.492647 0,0.904412 -0.64706,1.536764 L 7.82353,6.823529 Q 8.45588,6.17647 9.35294,6.17647 q 0.88235,0 1.5,0.617648 l 1.52941,1.529411 Q 13,8.941176 13,9.823529 z"/></svg>
+          </a></h2>
+
+<p>Swift’s interoperability expands its reach across more of the stack: from systems-level C++ to Android’s Java runtime, and from WebAssembly (Wasm) in the browser to Embedded Swift on microcontrollers.</p>
+
+<p>Language interoperability goes deeper this release.</p>
+
+<ul>
+  <li><strong>C:</strong> Pair <code class="language-plaintext highlighter-rouge">@c</code> with <code class="language-plaintext highlighter-rouge">@implementation</code> to use a Swift function to provide the implementation for a C header with no separate C declaration. Without <code class="language-plaintext highlighter-rouge">@implementation</code>, the compiler emits the declaration into the generated header. Either way, <code class="language-plaintext highlighter-rouge">@c</code> functions can get safe wrappers, such as a function that uses <code class="language-plaintext highlighter-rouge">Span</code> in place of a raw pointer-and-count pair.</li>
+  <li><strong>C++:</strong> Swift 6.4 bridges C++20’s <code class="language-plaintext highlighter-rouge">std::span</code> with Swift’s <code class="language-plaintext highlighter-rouge">Span</code>, so you can pass a <code class="language-plaintext highlighter-rouge">Span</code> to a C++ API that expects a <code class="language-plaintext highlighter-rouge">std::span</code>, and receive a <code class="language-plaintext highlighter-rouge">std::span</code> back as a <code class="language-plaintext highlighter-rouge">Span</code>, without writing manual conversion code at the boundary.</li>
+  <li><strong>Java:</strong> The <a href="https://docs.swift.org/latest/documentation/swiftjavadocumentation">Swift/Java interop project</a>, which lets you call Swift from Java and Kotlin, extends its support for calling async and throwing functions to protocol and callback wrappers, adds automatic <code class="language-plaintext highlighter-rouge">Runnable</code> mapping for closures, variadic parameter import, and support for Java record types.</li>
+</ul>
+
+<p>Swift’s platform support deepens as well.</p>
+
+<h3 id="webassembly" class="header-with-anchor">WebAssembly <a title="Permalink for WebAssembly section" href="#webassembly">
+            <?xml version="1.0" encoding="utf-8"?> <svg width="18px" height="18px" viewBox="0 0 14 14" role="img" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="m 11.58824,9.823529 q 0,-0.294117 -0.20589,-0.499999 L 9.85294,7.794118 q -0.20588,-0.205883 -0.5,-0.205883 -0.30882,0 -0.52941,0.235295 0.0221,0.02206 0.13971,0.136029 0.11764,0.113971 0.15808,0.158088 0.0404,0.04412 0.1103,0.139706 0.0698,0.09559 0.0956,0.1875 0.0257,0.09191 0.0257,0.202206 0,0.294117 -0.20588,0.5 -0.20588,0.205882 -0.5,0.205882 -0.1103,0 -0.20221,-0.02573 Q 8.35293,9.301471 8.25733,9.231621 8.16173,9.161771 8.11763,9.121327 8.07353,9.080887 7.95954,8.963238 7.84557,8.845591 7.82351,8.823533 7.58086,9.051474 7.58086,9.360297 q 0,0.294118 0.20588,0.5 l 1.51471,1.522059 q 0.19853,0.19853 0.5,0.19853 0.29412,0 0.5,-0.191177 l 1.08088,-1.073529 q 0.20589,-0.205883 0.20589,-0.492648 z M 6.41912,4.639706 q 0,-0.294118 -0.20588,-0.5 L 4.69853,2.617647 q -0.20588,-0.205882 -0.5,-0.205882 -0.28677,0 -0.5,0.198529 L 2.61765,3.683823 q -0.20589,0.205883 -0.20589,0.492648 0,0.294117 0.20589,0.499999 l 1.52941,1.529412 q 0.19853,0.19853 0.5,0.19853 0.30882,0 0.52941,-0.227942 Q 5.15437,6.15441 5.03676,6.040441 4.91912,5.92647 4.87868,5.882353 4.83828,5.838233 4.76838,5.742647 q -0.0698,-0.09559 -0.0956,-0.1875 -0.0257,-0.09191 -0.0257,-0.202206 0,-0.294117 0.20588,-0.5 0.20588,-0.205882 0.5,-0.205882 0.1103,0 0.20221,0.02573 0.0919,0.02573 0.1875,0.09559 0.0956,0.06985 0.1397,0.110294 0.0441,0.04044 0.15809,0.158089 Q 6.15443,5.154409 6.17649,5.176467 6.41914,4.948526 6.41914,4.639703 z M 13,9.823529 q 0,0.882353 -0.625,1.492647 l -1.08088,1.07353 Q 10.68382,13 9.80147,13 q -0.88971,0 -1.5,-0.625 L 6.78676,10.852941 Q 6.17647,10.242647 6.17647,9.360294 q 0,-0.904412 0.64706,-1.536764 L 6.17647,7.176471 Q 5.54412,7.82353 4.64706,7.82353 q -0.88235,0 -1.5,-0.617648 L 1.617647,5.676471 Q 1,5.058824 1,4.176471 1,3.294118 1.625,2.683824 L 2.70588,1.610294 Q 3.31618,1 4.19853,1 q 0.88971,0 1.5,0.625 l 1.51471,1.522059 q 0.61029,0.610294 0.61029,1.492647 0,0.904412 -0.64706,1.536764 L 7.82353,6.823529 Q 8.45588,6.17647 9.35294,6.17647 q 0.88235,0 1.5,0.617648 l 1.52941,1.529411 Q 13,8.941176 13,9.823529 z"/></svg>
+          </a></h3>
+
+<p>JavaScriptKit has better performance when bridging to Wasm in Swift 6.4, with safe bridging up to 40 times faster than earlier dynamic bridging. The Wasm SDK is available from the <a href="https://www.swift.org/install/">Install Swift</a> page of <a href="https://www.swift.org">Swift.org</a>, so compiling Swift for the browser requires no extra setup beyond adding the SDK.</p>
+
+<p>Foundation updates for Swift 6.4 improve <code class="language-plaintext highlighter-rouge">FileManager</code> support on WASI (the WebAssembly System Interface).</p>
+
+<h3 id="android" class="header-with-anchor">Android <a title="Permalink for Android section" href="#android">
+            <?xml version="1.0" encoding="utf-8"?> <svg width="18px" height="18px" viewBox="0 0 14 14" role="img" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="m 11.58824,9.823529 q 0,-0.294117 -0.20589,-0.499999 L 9.85294,7.794118 q -0.20588,-0.205883 -0.5,-0.205883 -0.30882,0 -0.52941,0.235295 0.0221,0.02206 0.13971,0.136029 0.11764,0.113971 0.15808,0.158088 0.0404,0.04412 0.1103,0.139706 0.0698,0.09559 0.0956,0.1875 0.0257,0.09191 0.0257,0.202206 0,0.294117 -0.20588,0.5 -0.20588,0.205882 -0.5,0.205882 -0.1103,0 -0.20221,-0.02573 Q 8.35293,9.301471 8.25733,9.231621 8.16173,9.161771 8.11763,9.121327 8.07353,9.080887 7.95954,8.963238 7.84557,8.845591 7.82351,8.823533 7.58086,9.051474 7.58086,9.360297 q 0,0.294118 0.20588,0.5 l 1.51471,1.522059 q 0.19853,0.19853 0.5,0.19853 0.29412,0 0.5,-0.191177 l 1.08088,-1.073529 q 0.20589,-0.205883 0.20589,-0.492648 z M 6.41912,4.639706 q 0,-0.294118 -0.20588,-0.5 L 4.69853,2.617647 q -0.20588,-0.205882 -0.5,-0.205882 -0.28677,0 -0.5,0.198529 L 2.61765,3.683823 q -0.20589,0.205883 -0.20589,0.492648 0,0.294117 0.20589,0.499999 l 1.52941,1.529412 q 0.19853,0.19853 0.5,0.19853 0.30882,0 0.52941,-0.227942 Q 5.15437,6.15441 5.03676,6.040441 4.91912,5.92647 4.87868,5.882353 4.83828,5.838233 4.76838,5.742647 q -0.0698,-0.09559 -0.0956,-0.1875 -0.0257,-0.09191 -0.0257,-0.202206 0,-0.294117 0.20588,-0.5 0.20588,-0.205882 0.5,-0.205882 0.1103,0 0.20221,0.02573 0.0919,0.02573 0.1875,0.09559 0.0956,0.06985 0.1397,0.110294 0.0441,0.04044 0.15809,0.158089 Q 6.15443,5.154409 6.17649,5.176467 6.41914,4.948526 6.41914,4.639703 z M 13,9.823529 q 0,0.882353 -0.625,1.492647 l -1.08088,1.07353 Q 10.68382,13 9.80147,13 q -0.88971,0 -1.5,-0.625 L 6.78676,10.852941 Q 6.17647,10.242647 6.17647,9.360294 q 0,-0.904412 0.64706,-1.536764 L 6.17647,7.176471 Q 5.54412,7.82353 4.64706,7.82353 q -0.88235,0 -1.5,-0.617648 L 1.617647,5.676471 Q 1,5.058824 1,4.176471 1,3.294118 1.625,2.683824 L 2.70588,1.610294 Q 3.31618,1 4.19853,1 q 0.88971,0 1.5,0.625 l 1.51471,1.522059 q 0.61029,0.610294 0.61029,1.492647 0,0.904412 -0.64706,1.536764 L 7.82353,6.823529 Q 8.45588,6.17647 9.35294,6.17647 q 0.88235,0 1.5,0.617648 l 1.52941,1.529411 Q 13,8.941176 13,9.823529 z"/></svg>
+          </a></h3>
+
+<p>Swift on Android continues to advance. This release of the Swift SDK for Android is built with <a href="https://github.com/android/ndk/releases/tag/r30">the new LTS NDK 30</a>, which <a href="/blog/exploring-the-swift-sdk-for-android/#android-api-versioning">provides Android availability attributes</a> both in the Swift runtime libraries and for your Swift packages using the default NDK. Swift Build now supports Android in SwiftPM as well, removing the need for a post-install script.</p>
+
+<h3 id="embedded-swift" class="header-with-anchor">Embedded Swift <a title="Permalink for Embedded Swift section" href="#embedded-swift">
+            <?xml version="1.0" encoding="utf-8"?> <svg width="18px" height="18px" viewBox="0 0 14 14" role="img" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="m 11.58824,9.823529 q 0,-0.294117 -0.20589,-0.499999 L 9.85294,7.794118 q -0.20588,-0.205883 -0.5,-0.205883 -0.30882,0 -0.52941,0.235295 0.0221,0.02206 0.13971,0.136029 0.11764,0.113971 0.15808,0.158088 0.0404,0.04412 0.1103,0.139706 0.0698,0.09559 0.0956,0.1875 0.0257,0.09191 0.0257,0.202206 0,0.294117 -0.20588,0.5 -0.20588,0.205882 -0.5,0.205882 -0.1103,0 -0.20221,-0.02573 Q 8.35293,9.301471 8.25733,9.231621 8.16173,9.161771 8.11763,9.121327 8.07353,9.080887 7.95954,8.963238 7.84557,8.845591 7.82351,8.823533 7.58086,9.051474 7.58086,9.360297 q 0,0.294118 0.20588,0.5 l 1.51471,1.522059 q 0.19853,0.19853 0.5,0.19853 0.29412,0 0.5,-0.191177 l 1.08088,-1.073529 q 0.20589,-0.205883 0.20589,-0.492648 z M 6.41912,4.639706 q 0,-0.294118 -0.20588,-0.5 L 4.69853,2.617647 q -0.20588,-0.205882 -0.5,-0.205882 -0.28677,0 -0.5,0.198529 L 2.61765,3.683823 q -0.20589,0.205883 -0.20589,0.492648 0,0.294117 0.20589,0.499999 l 1.52941,1.529412 q 0.19853,0.19853 0.5,0.19853 0.30882,0 0.52941,-0.227942 Q 5.15437,6.15441 5.03676,6.040441 4.91912,5.92647 4.87868,5.882353 4.83828,5.838233 4.76838,5.742647 q -0.0698,-0.09559 -0.0956,-0.1875 -0.0257,-0.09191 -0.0257,-0.202206 0,-0.294117 0.20588,-0.5 0.20588,-0.205882 0.5,-0.205882 0.1103,0 0.20221,0.02573 0.0919,0.02573 0.1875,0.09559 0.0956,0.06985 0.1397,0.110294 0.0441,0.04044 0.15809,0.158089 Q 6.15443,5.154409 6.17649,5.176467 6.41914,4.948526 6.41914,4.639703 z M 13,9.823529 q 0,0.882353 -0.625,1.492647 l -1.08088,1.07353 Q 10.68382,13 9.80147,13 q -0.88971,0 -1.5,-0.625 L 6.78676,10.852941 Q 6.17647,10.242647 6.17647,9.360294 q 0,-0.904412 0.64706,-1.536764 L 6.17647,7.176471 Q 5.54412,7.82353 4.64706,7.82353 q -0.88235,0 -1.5,-0.617648 L 1.617647,5.676471 Q 1,5.058824 1,4.176471 1,3.294118 1.625,2.683824 L 2.70588,1.610294 Q 3.31618,1 4.19853,1 q 0.88971,0 1.5,0.625 l 1.51471,1.522059 q 0.61029,0.610294 0.61029,1.492647 0,0.904412 -0.64706,1.536764 L 7.82353,6.823529 Q 8.45588,6.17647 9.35294,6.17647 q 0.88235,0 1.5,0.617648 l 1.52941,1.529411 Q 13,8.941176 13,9.823529 z"/></svg>
+          </a></h3>
+
+<p>The earlier post <a href="/blog/embedded-swift-improvements-coming-in-swift-6.4/">Embedded Swift Improvements Coming in Swift 6.4</a> covers Embedded Swift’s other improvements in this release in more depth, including generalized support for existential types (such as <code class="language-plaintext highlighter-rouge">any Protocol</code>), which lets you naturally express heterogeneous collections and throw and catch any <code class="language-plaintext highlighter-rouge">Error</code>.</p>
+
+<p>Embedded Swift also gains a new <code class="language-plaintext highlighter-rouge">EmbeddedRestrictions</code> warning that you can enable across a whole target:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Package.swift — enable EmbeddedRestrictions warnings for the target</span>
+<span class="o">.</span><span class="nf">target</span><span class="p">(</span>
+    <span class="nv">name</span><span class="p">:</span> <span class="s">"FirmwareCore"</span><span class="p">,</span>
+    <span class="nv">swiftSettings</span><span class="p">:</span> <span class="p">[</span>
+        <span class="o">.</span><span class="nf">treatWarning</span><span class="p">(</span><span class="s">"EmbeddedRestrictions"</span><span class="p">,</span> <span class="nv">as</span><span class="p">:</span> <span class="o">.</span><span class="n">warning</span><span class="p">)</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="faster-code-that-stays-safe" class="header-with-anchor">Faster code that stays safe <a title="Permalink for Faster code that stays safe section" href="#faster-code-that-stays-safe">
+            <?xml version="1.0" encoding="utf-8"?> <svg width="18px" height="18px" viewBox="0 0 14 14" role="img" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="m 11.58824,9.823529 q 0,-0.294117 -0.20589,-0.499999 L 9.85294,7.794118 q -0.20588,-0.205883 -0.5,-0.205883 -0.30882,0 -0.52941,0.235295 0.0221,0.02206 0.13971,0.136029 0.11764,0.113971 0.15808,0.158088 0.0404,0.04412 0.1103,0.139706 0.0698,0.09559 0.0956,0.1875 0.0257,0.09191 0.0257,0.202206 0,0.294117 -0.20588,0.5 -0.20588,0.205882 -0.5,0.205882 -0.1103,0 -0.20221,-0.02573 Q 8.35293,9.301471 8.25733,9.231621 8.16173,9.161771 8.11763,9.121327 8.07353,9.080887 7.95954,8.963238 7.84557,8.845591 7.82351,8.823533 7.58086,9.051474 7.58086,9.360297 q 0,0.294118 0.20588,0.5 l 1.51471,1.522059 q 0.19853,0.19853 0.5,0.19853 0.29412,0 0.5,-0.191177 l 1.08088,-1.073529 q 0.20589,-0.205883 0.20589,-0.492648 z M 6.41912,4.639706 q 0,-0.294118 -0.20588,-0.5 L 4.69853,2.617647 q -0.20588,-0.205882 -0.5,-0.205882 -0.28677,0 -0.5,0.198529 L 2.61765,3.683823 q -0.20589,0.205883 -0.20589,0.492648 0,0.294117 0.20589,0.499999 l 1.52941,1.529412 q 0.19853,0.19853 0.5,0.19853 0.30882,0 0.52941,-0.227942 Q 5.15437,6.15441 5.03676,6.040441 4.91912,5.92647 4.87868,5.882353 4.83828,5.838233 4.76838,5.742647 q -0.0698,-0.09559 -0.0956,-0.1875 -0.0257,-0.09191 -0.0257,-0.202206 0,-0.294117 0.20588,-0.5 0.20588,-0.205882 0.5,-0.205882 0.1103,0 0.20221,0.02573 0.0919,0.02573 0.1875,0.09559 0.0956,0.06985 0.1397,0.110294 0.0441,0.04044 0.15809,0.158089 Q 6.15443,5.154409 6.17649,5.176467 6.41914,4.948526 6.41914,4.639703 z M 13,9.823529 q 0,0.882353 -0.625,1.492647 l -1.08088,1.07353 Q 10.68382,13 9.80147,13 q -0.88971,0 -1.5,-0.625 L 6.78676,10.852941 Q 6.17647,10.242647 6.17647,9.360294 q 0,-0.904412 0.64706,-1.536764 L 6.17647,7.176471 Q 5.54412,7.82353 4.64706,7.82353 q -0.88235,0 -1.5,-0.617648 L 1.617647,5.676471 Q 1,5.058824 1,4.176471 1,3.294118 1.625,2.683824 L 2.70588,1.610294 Q 3.31618,1 4.19853,1 q 0.88971,0 1.5,0.625 l 1.51471,1.522059 q 0.61029,0.610294 0.61029,1.492647 0,0.904412 -0.64706,1.536764 L 7.82353,6.823529 Q 8.45588,6.17647 9.35294,6.17647 q 0.88235,0 1.5,0.617648 l 1.52941,1.529411 Q 13,8.941176 13,9.823529 z"/></svg>
+          </a></h2>
+
+<p>Swift 6.4 makes it easier to avoid unnecessary copies of your data while staying memory-safe, extending earlier work on <code class="language-plaintext highlighter-rouge">Span</code>, non-copyable types, and <code class="language-plaintext highlighter-rouge">InlineArray</code>.</p>
+
+<ul>
+  <li><strong>Work with values in memory without copying them.</strong> Borrow and mutate accessors let you read or update a <code class="language-plaintext highlighter-rouge">Span</code> or <code class="language-plaintext highlighter-rouge">InlineArray</code> through a property (<a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0507-borrow-accessors.md">SE-0507</a>), non-copyable types can now conform to <code class="language-plaintext highlighter-rouge">Equatable</code>, <code class="language-plaintext highlighter-rouge">Comparable</code>, and <code class="language-plaintext highlighter-rouge">Hashable</code>, and new <code class="language-plaintext highlighter-rouge">Ref</code> and <code class="language-plaintext highlighter-rouge">MutableRef</code> types give you a first-class, storable container that lets you borrow or mutate one value at a time (<a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0519-ref-mutableref-types.md">SE-0519</a>). Optionals of non-copyable types now work the same way, so you can inspect or update what’s inside an <code class="language-plaintext highlighter-rouge">Optional</code> without consuming it (<a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0532-optional-noncopyable-improvements.md">SE-0532</a>).</li>
+  <li><strong>Build collections and heap-allocated values without unnecessary memory allocation.</strong> <code class="language-plaintext highlighter-rouge">UniqueBox</code> gives you a smart pointer that uniquely owns a heap value, including non-copyable values, without reference counting (<a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0517-uniquebox.md">SE-0517</a>). <code class="language-plaintext highlighter-rouge">UniqueArray</code> stores non-copyable elements without the copy-on-write allocations you would see when using <code class="language-plaintext highlighter-rouge">Array</code> and provides a buffer that grows dynamically (<a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0527-rigidarray-uniquearray.md">SE-0527</a>). You can loop over elements and borrow them with the <code class="language-plaintext highlighter-rouge">Iterable</code> protocol, instead of copying each value, which extends beyond what the <code class="language-plaintext highlighter-rouge">Sequence</code> protocol supports (<a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0516-borrowing-sequence.md">SE-0516</a>).</li>
+  <li><strong>Access raw memory safely, without using unsafe-annotated APIs.</strong> <code class="language-plaintext highlighter-rouge">withTemporaryAllocation</code> provides a scratch buffer that is automatically initialized and cleaned up (<a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0524-span-temporary-allocation.md">SE-0524</a>). A new safe loading API lets <code class="language-plaintext highlighter-rouge">RawSpan</code> and its variants load and store bytes safely, replacing the unsafe-flagged functions (<a href="https://github.com/swiftlang/swift-evolution/blob/main/proposals/0525-rawspan-safe-loading-api.md">SE-0525</a>).</li>
+</ul>
+
+<h2 id="thank-you" class="header-with-anchor">Thank you <a title="Permalink for Thank you section" href="#thank-you">
+            <?xml version="1.0" encoding="utf-8"?> <svg width="18px" height="18px" viewBox="0 0 14 14" role="img" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="m 11.58824,9.823529 q 0,-0.294117 -0.20589,-0.499999 L 9.85294,7.794118 q -0.20588,-0.205883 -0.5,-0.205883 -0.30882,0 -0.52941,0.235295 0.0221,0.02206 0.13971,0.136029 0.11764,0.113971 0.15808,0.158088 0.0404,0.04412 0.1103,0.139706 0.0698,0.09559 0.0956,0.1875 0.0257,0.09191 0.0257,0.202206 0,0.294117 -0.20588,0.5 -0.20588,0.205882 -0.5,0.205882 -0.1103,0 -0.20221,-0.02573 Q 8.35293,9.301471 8.25733,9.231621 8.16173,9.161771 8.11763,9.121327 8.07353,9.080887 7.95954,8.963238 7.84557,8.845591 7.82351,8.823533 7.58086,9.051474 7.58086,9.360297 q 0,0.294118 0.20588,0.5 l 1.51471,1.522059 q 0.19853,0.19853 0.5,0.19853 0.29412,0 0.5,-0.191177 l 1.08088,-1.073529 q 0.20589,-0.205883 0.20589,-0.492648 z M 6.41912,4.639706 q 0,-0.294118 -0.20588,-0.5 L 4.69853,2.617647 q -0.20588,-0.205882 -0.5,-0.205882 -0.28677,0 -0.5,0.198529 L 2.61765,3.683823 q -0.20589,0.205883 -0.20589,0.492648 0,0.294117 0.20589,0.499999 l 1.52941,1.529412 q 0.19853,0.19853 0.5,0.19853 0.30882,0 0.52941,-0.227942 Q 5.15437,6.15441 5.03676,6.040441 4.91912,5.92647 4.87868,5.882353 4.83828,5.838233 4.76838,5.742647 q -0.0698,-0.09559 -0.0956,-0.1875 -0.0257,-0.09191 -0.0257,-0.202206 0,-0.294117 0.20588,-0.5 0.20588,-0.205882 0.5,-0.205882 0.1103,0 0.20221,0.02573 0.0919,0.02573 0.1875,0.09559 0.0956,0.06985 0.1397,0.110294 0.0441,0.04044 0.15809,0.158089 Q 6.15443,5.154409 6.17649,5.176467 6.41914,4.948526 6.41914,4.639703 z M 13,9.823529 q 0,0.882353 -0.625,1.492647 l -1.08088,1.07353 Q 10.68382,13 9.80147,13 q -0.88971,0 -1.5,-0.625 L 6.78676,10.852941 Q 6.17647,10.242647 6.17647,9.360294 q 0,-0.904412 0.64706,-1.536764 L 6.17647,7.176471 Q 5.54412,7.82353 4.64706,7.82353 q -0.88235,0 -1.5,-0.617648 L 1.617647,5.676471 Q 1,5.058824 1,4.176471 1,3.294118 1.625,2.683824 L 2.70588,1.610294 Q 3.31618,1 4.19853,1 q 0.88971,0 1.5,0.625 l 1.51471,1.522059 q 0.61029,0.610294 0.61029,1.492647 0,0.904412 -0.64706,1.536764 L 7.82353,6.823529 Q 8.45588,6.17647 9.35294,6.17647 q 0.88235,0 1.5,0.617648 l 1.52941,1.529411 Q 13,8.941176 13,9.823529 z"/></svg>
+          </a></h2>
+
+<p>Swift 6.4 reflects the contributions of many people across the Swift community, through code, proposals, forum discussions, and feedback. The community’s thoughts and real-world experience provide invaluable insights and motivation!</p>
+
+<p>If you’d like to get involved in what comes next, the <a href="https://forums.swift.org/">Swift Forums</a> are a great place to start.</p>
+
+<h2 id="get-started-with-swift-64" class="header-with-anchor">Get started with Swift 6.4 <a title="Permalink for Get started with Swift 6.4 section" href="#get-started-with-swift-64">
+            <?xml version="1.0" encoding="utf-8"?> <svg width="18px" height="18px" viewBox="0 0 14 14" role="img" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><path d="m 11.58824,9.823529 q 0,-0.294117 -0.20589,-0.499999 L 9.85294,7.794118 q -0.20588,-0.205883 -0.5,-0.205883 -0.30882,0 -0.52941,0.235295 0.0221,0.02206 0.13971,0.136029 0.11764,0.113971 0.15808,0.158088 0.0404,0.04412 0.1103,0.139706 0.0698,0.09559 0.0956,0.1875 0.0257,0.09191 0.0257,0.202206 0,0.294117 -0.20588,0.5 -0.20588,0.205882 -0.5,0.205882 -0.1103,0 -0.20221,-0.02573 Q 8.35293,9.301471 8.25733,9.231621 8.16173,9.161771 8.11763,9.121327 8.07353,9.080887 7.95954,8.963238 7.84557,8.845591 7.82351,8.823533 7.58086,9.051474 7.58086,9.360297 q 0,0.294118 0.20588,0.5 l 1.51471,1.522059 q 0.19853,0.19853 0.5,0.19853 0.29412,0 0.5,-0.191177 l 1.08088,-1.073529 q 0.20589,-0.205883 0.20589,-0.492648 z M 6.41912,4.639706 q 0,-0.294118 -0.20588,-0.5 L 4.69853,2.617647 q -0.20588,-0.205882 -0.5,-0.205882 -0.28677,0 -0.5,0.198529 L 2.61765,3.683823 q -0.20589,0.205883 -0.20589,0.492648 0,0.294117 0.20589,0.499999 l 1.52941,1.529412 q 0.19853,0.19853 0.5,0.19853 0.30882,0 0.52941,-0.227942 Q 5.15437,6.15441 5.03676,6.040441 4.91912,5.92647 4.87868,5.882353 4.83828,5.838233 4.76838,5.742647 q -0.0698,-0.09559 -0.0956,-0.1875 -0.0257,-0.09191 -0.0257,-0.202206 0,-0.294117 0.20588,-0.5 0.20588,-0.205882 0.5,-0.205882 0.1103,0 0.20221,0.02573 0.0919,0.02573 0.1875,0.09559 0.0956,0.06985 0.1397,0.110294 0.0441,0.04044 0.15809,0.158089 Q 6.15443,5.154409 6.17649,5.176467 6.41914,4.948526 6.41914,4.639703 z M 13,9.823529 q 0,0.882353 -0.625,1.492647 l -1.08088,1.07353 Q 10.68382,13 9.80147,13 q -0.88971,0 -1.5,-0.625 L 6.78676,10.852941 Q 6.17647,10.242647 6.17647,9.360294 q 0,-0.904412 0.64706,-1.536764 L 6.17647,7.176471 Q 5.54412,7.82353 4.64706,7.82353 q -0.88235,0 -1.5,-0.617648 L 1.617647,5.676471 Q 1,5.058824 1,4.176471 1,3.294118 1.625,2.683824 L 2.70588,1.610294 Q 3.31618,1 4.19853,1 q 0.88971,0 1.5,0.625 l 1.51471,1.522059 q 0.61029,0.610294 0.61029,1.492647 0,0.904412 -0.64706,1.536764 L 7.82353,6.823529 Q 8.45588,6.17647 9.35294,6.17647 q 0.88235,0 1.5,0.617648 l 1.52941,1.529411 Q 13,8.941176 13,9.823529 z"/></svg>
+          </a></h2>
+
+<p>Try out Swift 6.4 today by following the instructions on the <a href="/install/">Install Swift</a> page, or download the new 6.4 toolchain with Swiftly.</p>
+ 
+        <hr />
+        <h2>Authors</h2>
+        <div class="authors">
+  
+    
+    
+      <div class="author">
+        <div class="byline">
+          <img
+            
+              src="https://www.gravatar.com/avatar/34fa393a8013e04c03deff379ac0a6f3ea7a23c5861a6f7410b409974218f5d2?s=64&d=mp"
+            
+            alt="Joe Heck"
+            title=""
+            />
+          <span class="author">
+            
+              <a href="https://github.com/heckj/" rel="nofollow" title="Joe Heck (@heckj) on GitHub">Joe Heck</a>
+            
+          </span>
+        </div>
+        
+          
+          
+            <div class="about">Joe Heck works on Swift as part of the Open Source Program Office at Apple.</div>
+          
+        
+      </div>
+    
+  
+    
+    
+      <div class="author">
+        <div class="byline">
+          <img
+            
+              src="https://www.gravatar.com/avatar/b3e284dd808123c26f476d75da0b5b3c?s=64&d=mp"
+            
+            alt="Holly Borla"
+            title=""
+            />
+          <span class="author">
+            
+              <a href="https://github.com/hborla/" rel="nofollow" title="Holly Borla (@hborla) on GitHub">Holly Borla</a>
+            
+          </span>
+        </div>
+        
+          
+          
+            <div class="about">Holly Borla is a member of the Swift Core Team and Language Steering Group, and the engineering manager of the Swift language team at Apple.</div>
+          
+        
+      </div>
+    
+  
+</div>
+      
+
+      <hr />
+
+      <h2>Continue Reading</h2>
+
+      
+      <nav class="section card-grid">
+        <div class="content">
+          <ul class="content-card-grid">
+            
+            <li>
+              
+<div class="content-card">
+  <span class="content-card-title title-4">Module Tracking in Swift Debug Info</span>
+  
+  <time
+    class="content-card-date body"
+    pubdate
+    datetime="2026-09-11T11:30:00-04:00"
+    >September 11, 2026</time
+  >
+  
+  <p class="content-card-excerpt body">When your Swift program hits a breakpoint and stops so you can inspect it, the debugger’s expression evaluator has to find the exact Swift module your code was built from. Until now, that lookup wasn’t always precise. The upcoming Swift 6.4 release will include changes, begun in Swift 6.3, that address this by updating how the Swift compiler references explicitly-built Swift modules in debug info.
+</p>
+  <a class="content-card-cta body" href="/blog/module-tracking-in-debug-info/"
+    >Read more</a
+  >
+</div>
+
+            </li>
+             
+            <li>
+              
+<div class="content-card">
+  <span class="content-card-title title-4">What's new in Swift: September 2026 Edition</span>
+  
+  <time
+    class="content-card-date body"
+    pubdate
+    datetime="2026-10-08T13:00:00-04:00"
+    >October 8, 2026</time
+  >
+  
+  <p class="content-card-excerpt body">Welcome to “What’s new in Swift,” a curated digest of releases, videos, and discussions in the Swift project and community.
+</p>
+  <a class="content-card-cta body" href="/blog/whats-new-in-swift-september-2026/"
+    >Read more</a
+  >
+</div>
+
+            </li>
+            
+          </ul>
+        </div>
+      </nav>
+      
+    </div>
+  </div>
+</section>
+ <footer class="global-footer">
+  <div class="container">
+    <div class="footer-navigation-container">
+      <nav aria-label="Main">
+    <a class="logo" href="/" title="Swift.org"> <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 191.186 59.391"><path fill="#F05138" d="M59.387 16.45a82.463 82.463 0 0 0-.027-1.792c-.035-1.301-.112-2.614-.343-3.9-.234-1.307-.618-2.523-1.222-3.71a12.464 12.464 0 0 0-5.453-5.452C51.156.992 49.941.609 48.635.374c-1.288-.232-2.6-.308-3.902-.343a85.714 85.714 0 0 0-1.792-.027C42.23 0 41.52 0 40.813 0H18.578c-.71 0-1.419 0-2.128.004-.597.004-1.195.01-1.792.027-.325.009-.651.02-.978.036-.978.047-1.959.133-2.924.307-.98.176-1.908.436-2.811.81A12.503 12.503 0 0 0 3.89 3.89a12.46 12.46 0 0 0-2.294 3.158C.992 8.235.61 9.45.374 10.758c-.231 1.286-.308 2.599-.343 3.9a85.767 85.767 0 0 0-.027 1.792C-.001 17.16 0 17.869 0 18.578v22.235c0 .71 0 1.418.004 2.128.004.597.01 1.194.027 1.791.035 1.302.112 2.615.343 3.901.235 1.307.618 2.523 1.222 3.71a12.457 12.457 0 0 0 5.453 5.453c1.186.603 2.401.986 3.707 1.22 1.287.232 2.6.31 3.902.344.597.016 1.195.023 1.793.027.709.005 1.417.004 2.127.004h22.235c.709 0 1.418 0 2.128-.004.597-.004 1.194-.011 1.792-.027 1.302-.035 2.614-.112 3.902-.343 1.306-.235 2.521-.618 3.707-1.222a12.461 12.461 0 0 0 5.453-5.452c.604-1.187.987-2.403 1.222-3.71.231-1.286.308-2.6.343-3.9.016-.598.023-1.194.027-1.792.004-.71.004-1.419.004-2.129V18.578c0-.71 0-1.419-.004-2.128z"/><path fill="#FFF" d="m47.06 36.66-.004-.004c.066-.224.134-.446.191-.675 2.465-9.821-3.55-21.432-13.731-27.546 4.461 6.048 6.434 13.374 4.681 19.78-.156.571-.344 1.12-.552 1.653-.225-.148-.51-.316-.89-.527 0 0-10.127-6.252-21.103-17.312-.288-.29 5.852 8.777 12.822 16.14-3.284-1.843-12.434-8.5-18.227-13.802.712 1.187 1.558 2.33 2.489 3.43C17.573 23.932 23.882 31.5 31.44 37.314c-5.31 3.25-12.814 3.502-20.285.003a30.646 30.646 0 0 1-5.193-3.098c3.162 5.058 8.033 9.423 13.96 11.97 7.07 3.039 14.1 2.833 19.336.05l-.004.007c.024-.016.055-.032.08-.047.214-.116.428-.234.636-.358 2.516-1.306 7.485-2.63 10.152 2.559.654 1.27 2.041-5.46-3.061-11.74z"/><path id="logotype" d="M81.93 38.542c.465 4.12 4.394 6.822 9.852 6.822 5.185 0 8.924-2.701 8.924-6.44 0-3.22-2.265-5.185-7.478-6.495l-5.048-1.282c-7.26-1.801-10.534-5.077-10.534-10.48 0-6.658 5.813-11.27 14.082-11.27 8.022 0 13.726 4.639 13.917 11.325h-5.32c-.41-4.093-3.74-6.604-8.734-6.604-4.94 0-8.378 2.538-8.378 6.249 0 2.892 2.13 4.612 7.369 5.95l4.202 1.09c8.133 1.993 11.462 5.159 11.462 10.863 0 7.259-5.759 11.816-14.928 11.816-8.514 0-14.327-4.53-14.763-11.543h5.376zM140.049 49.43h-5.35l-6.249-21.776h-.109L122.12 49.43h-5.348l-7.914-28.518h5.184l5.513 22.896h.11l6.221-22.896h5.021l6.277 22.896h.11l5.512-22.896h5.13L140.05 49.43zM151.39 13.244c0-1.718 1.419-3.11 3.138-3.11 1.746 0 3.165 1.392 3.165 3.11 0 1.72-1.419 3.139-3.165 3.139a3.157 3.157 0 0 1-3.139-3.139zm.545 7.669h5.213V49.43h-5.213V20.913zM191.186 25.116v-4.204h-5.513v-6.821h-5.185v6.821h-9.964v-2.51c.027-2.538 1.01-3.603 3.357-3.603.764 0 1.528.083 2.156.192v-4.094a18.193 18.193 0 0 0-2.756-.218c-5.568 0-7.915 2.32-7.915 7.642v2.591h-3.983v4.204h3.983V49.43h5.185V25.116H180.488v16.838c0 5.512 2.101 7.64 7.559 7.64 1.174 0 2.51-.082 3.111-.218v-4.257c-.355.055-1.392.137-1.965.137-2.428 0-3.52-1.147-3.52-3.712V25.116h5.513z"/></svg> </a>
+
+    <ul>
+        
+        <li class="item ">
+            <a href="https://docs.swift.org/latest/documentation/" data-text="Docs">Docs</a>
+        </li>
+        
+        <li class="item ">
+            <a href="/community/" data-text="Community">Community</a>
+        </li>
+        
+        <li class="item ">
+            <a href="/packages/" data-text="Packages">Packages</a>
+        </li>
+        
+        <li class="item ">
+            <a href="/blog/" data-text="Blog">Blog</a>
+        </li>
+        
+        <li class="item ">
+            <a href="/install/" data-text="Install">Install</a>
+        </li>
+        
+    </ul>
+</nav>
+
+      <nav aria-label="Tools">
+    <h3>Tools</h3>
+    <ul>
+        
+        <li class="item ">
+            <a href="https://developer.apple.com/xcode/" data-text="Xcode">Xcode</a>
+        </li>
+        
+        <li class="item ">
+            <a href="/documentation/articles/getting-started-with-vscode-swift.html" data-text="Visual Studio Code">Visual Studio Code</a>
+        </li>
+        
+        <li class="item ">
+            <a href="/documentation/articles/zero-to-swift-emacs.html" data-text="Emacs">Emacs</a>
+        </li>
+        
+        <li class="item ">
+            <a href="/documentation/articles/zero-to-swift-nvim.html" data-text="Neovim">Neovim</a>
+        </li>
+        
+        <li class="item ">
+            <a href="/documentation/articles/getting-started-with-cursor-swift.html" data-text="Cursor">Cursor</a>
+        </li>
+        
+        <li class="item ">
+            <a href="https://github.com/swiftlang/sourcekit-lsp/tree/main/Documentation/Editor%20Integration.md" data-text="Other Editors">Other Editors</a>
+        </li>
+        
+    </ul>
+</nav>
+
+      <nav aria-label="Community">
+    <h3>Community</h3>
+    <ul>
+        
+        <li class="item ">
+            <a href="/community/" data-text="Overview">Overview</a>
+        </li>
+        
+        <li class="item ">
+            <a href="/swift-evolution/" data-text="Swift Evolution">Swift Evolution</a>
+        </li>
+        
+        <li class="item ">
+            <a href="/diversity/" data-text="Diversity">Diversity</a>
+        </li>
+        
+        <li class="item ">
+            <a href="/mentorship/" data-text="Mentorship">Mentorship</a>
+        </li>
+        
+        <li class="item ">
+            <a href="/contributing/" data-text="Contributing">Contributing</a>
+        </li>
+        
+    </ul>
+</nav>
+
+      <nav class="governance" aria-label="Governance">
+    <h3>Governance</h3>
+    <ul>
+        
+        <li class="item ">
+            <a href="/code-of-conduct/" data-text="Code of Conduct">Code of Conduct</a>
+        </li>
+        
+        <li class="item ">
+            <a href="/legal/license.html" data-text="License">License</a>
+        </li>
+        
+        <li class="item ">
+            <a href="/security/" data-text="Security">Security</a>
+        </li>
+        
+    </ul>
+
+      <form
+  class="color-scheme-toggle"
+  role="radiogroup"
+  tabindex="0"
+  id="color-scheme-toggle"
+>
+  <legend class="visuallyhidden">Color scheme preference</legend>
+  <label class="scheme-light" for="scheme-light">
+    <input
+      id="scheme-light"
+      type="radio"
+      name="color-scheme-preference"
+      value="light"
+    />
+    <span class="color-scheme-toggle-label">Light</span>
+  </label>
+  <label class="scheme-dark" for="scheme-dark">
+    <input
+      id="scheme-dark"
+      type="radio"
+      name="color-scheme-preference"
+      value="dark"
+    />
+    <span class="color-scheme-toggle-label">Dark</span>
+  </label>
+  <label class="scheme-auto-wrapper" for="scheme-auto" id="scheme-auto-wrapper">
+    <input
+      id="scheme-auto"
+      type="radio"
+      name="color-scheme-preference"
+      value="auto"
+    />
+    <span class="color-scheme-toggle-label">Auto</span>
+  </label>
+</form>
+</nav>
+    </div>
+
+    <div class="sub-navigation">
+      <div class="legals">
+        <div class="copyright">
+    
+    <p>
+      Copyright © 2026 Apple Inc. All rights reserved.
+    </p>
+    <p>
+      Swift and the Swift logo are trademarks of Apple Inc.
+    </p>
+    
+     <p>Android is a trademark of Google LLC.</p>
+    
+</div>
+        <nav aria-label="Legals">
+    <ul>
+        
+            <li class="item ">
+                <a href="//www.apple.com/privacy/privacy-policy/">Privacy Policy</a>
+            </li>
+        
+            <li class="item ">
+                <a href="//www.apple.com/legal/privacy/en-ww/cookies/">Cookies</a>
+            </li>
+        
+            <li class="item ">
+                <a href="/openapi">API</a>
+            </li>
+        
+    </ul>
+</nav>
+      </div>
+
+      <nav class="socials" aria-label="Socials">
+    <ul>
+        
+            <li class="item ">
+                <a href="https://x.com/swiftlang" rel="me" title="Follow @SwiftLang on X"><i class="x"></i></a>
+            </li>
+        
+            <li class="item ">
+                <a href="https://bsky.app/profile/swift.org" rel="me" title="Follow @swift.org on Bluesky"><i class="bluesky"></i></a>
+            </li>
+        
+            <li class="item ">
+                <a href="https://mastodon.social/@swiftlang" rel="me" title="Follow @swiftLang on Mastodon"><i class="mastodon"></i></a>
+            </li>
+        
+            <li class="item ">
+                <a href="/atom.xml" rel="me" title="Subscribe to Site Updates"><i class="feed"></i></a>
+            </li>
+        
+    </ul>
+</nav>
+
+    </div>
+  </div>
+</footer>
+
+    </main>
+
+    <script src="/assets/javascripts/new-javascripts/application.js"></script>
+     
+    <!-- metrics -->
+    <script>
+      /* RSID: */
+      var s_account = 'awdswiftorg'
+    </script>
+    
+    <script src="https://developer.apple.com/assets/metrics/scripts/analytics.js"></script>
+    <script>
+      s.pageName = AC && AC.Tracking && AC.Tracking.pageName()
+
+      /************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
+      var s_code = s.t()
+      if (s_code) document.write(s_code)
+    </script>
+    
+    <!-- /metrics -->
+  </body>
+</html>

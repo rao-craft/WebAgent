@@ -1,0 +1,35 @@
+{
+  "$id" : "https://github.com/rao-craft/WebAgent/blob/main/Schema/web.input.schema.json",
+  "$schema" : "https://json-schema.org/draft/2020-12/schema",
+  "description" : "Every field a call to web may give; `directory` is Craft's, never the model's.",
+  "properties" : {
+    "depth" : {
+      "description" : "1 also reads up to three pages on the same site that the linked pages link to, nearest the request first; 0 or left out reads only the pages themselves",
+      "type" : "integer"
+    },
+    "pages" : {
+      "description" : "how many pages to read, 1 to 12; 6 when left out",
+      "type" : "integer"
+    },
+    "query" : {
+      "description" : "what to search for, phrased for a search engine: the subject, names, versions, dates; left out, the person's own words are searched",
+      "type" : "string"
+    },
+    "search" : {
+      "description" : "false reads the links alone and searches nothing; left out, the engines are searched too",
+      "type" : "boolean"
+    },
+    "urls" : {
+      "description" : "pages to read directly, when the person named or linked them; the links in the person's message are read without being listed here",
+      "items" : {
+        "type" : "string"
+      },
+      "type" : "array"
+    }
+  },
+  "required" : [
+
+  ],
+  "title" : "What web takes (craft-agent/1)",
+  "type" : "object"
+}

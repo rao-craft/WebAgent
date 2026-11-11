@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Swift 6.4 Release Process - Announcements - Swift Forums</title>
+    <meta name="description" content="Swift 6.4 Release Process
+This post describes the release process, and estimated schedule for Swift 6.4. 
+Snapshots of Swift 6.4
+Downloadable snapshots of the Swift 6.4 release branch will be posted regularly as part of c…">
+    <meta name="generator" content="Discourse 2026.11.0-latest.1 - https://github.com/discourse/discourse version 070315f944090ab2fd8d4143732ef56051da581f">
+<link rel="icon" type="image/vnd.microsoft.icon" href="https://global.discourse-cdn.com/swift/optimized/2X/6/610ef4c64700c53fad713dda8c9563c461d82e41_2_32x32.ico">
+<link rel="apple-touch-icon" type="image/png" href="https://global.discourse-cdn.com/swift/optimized/1X/0a90dde98a223f5841eeca49d89dc9f57592e8d6_2_180x180.png">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#fff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#111111">
+
+<meta name="color-scheme" content="light dark">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, viewport-fit=cover">
+<link rel="canonical" href="https://forums.swift.org/t/swift-6-4-release-process/85421" />
+
+<meta name="discourse-track-view-session-id" content="ywWU79Nq3pZXhsaAsTxDY6XX4QOBwwdx">
+  <link rel="search" type="application/opensearchdescription+xml" href="https://forums.swift.org/opensearch.xml" title="Swift Forums Search">
+
+    
+    <link href="https://sea2.discourse-cdn.com/swift/stylesheets/color_definitions_light-default_-1_6_cb5e94395973373a973479fce48edc6e98112659.css?__ws=forums.swift.org" media="(prefers-color-scheme: light)" rel="stylesheet" class="light-scheme"/><link href="https://sea2.discourse-cdn.com/swift/stylesheets/color_definitions_dark_1_6_a863873f5bdf4b3fcd63caa307bd25921ff1650e.css?__ws=forums.swift.org" media="(prefers-color-scheme: dark)" rel="stylesheet" class="dark-scheme" data-scheme-id="1"/>
+
+<link href="https://sea2.discourse-cdn.com/swift/stylesheets/common_3c2f8c6e2d2c32190e07dc0400fbd1d32badf976.css?__ws=forums.swift.org" media="all" rel="stylesheet" data-target="common"  />
+
+
+
+  <link href="https://sea2.discourse-cdn.com/swift/stylesheets/boards_3c2f8c6e2d2c32190e07dc0400fbd1d32badf976.css?__ws=forums.swift.org" media="all" rel="stylesheet" data-target="boards"  />
+  <link href="https://sea2.discourse-cdn.com/swift/stylesheets/checklist_3c2f8c6e2d2c32190e07dc0400fbd1d32badf976.css?__ws=forums.swift.org" media="all" rel="stylesheet" data-target="checklist"  />
+  <link href="https://sea2.discourse-cdn.com/swift/stylesheets/discourse-akismet_3c2f8c6e2d2c32190e07dc0400fbd1d32badf976.css?__ws=forums.swift.org" media="all" rel="stylesheet" data-target="discourse-akismet"  />
+  <link href="https://sea2.discourse-cdn.com/swift/stylesheets/discourse-data-explorer_3c2f8c6e2d2c32190e07dc0400fbd1d32badf976.css?__ws=forums.swift.org" media="all" rel="stylesheet" data-target="discourse-data-explorer"  />
+  <link href="https://sea2.discourse-cdn.com/swift/stylesheets/discourse-details_3c2f8c6e2d2c32190e07dc0400fbd1d32badf976.css?__ws=forums.swift.org" media="all" rel="stylesheet" data-target="discourse-details"  />
+  <link href="https://sea2.discourse-cdn.com/swift/stylesheets/discourse-github_3c2f8c6e2d2c32190e07dc0400fbd1d32badf976.css?__ws=forums.swift.org" media="all" rel="stylesheet" data-target="discourse-github"  />
+  <link href="https://sea2.discourse-cdn.com/swift/stylesheets/discourse-lazy-videos_3c2f8c6e2d2c32190e07dc0400fbd1d32badf976.css?__ws=forums.swift.org" media="all" rel="stylesheet" data-target="discourse-lazy-videos"  />
+  <link href="https://sea2.discourse-cdn.com/swift/stylesheets/discourse-local-dates_3c2f8c6e2d2c32190e07dc0400fbd1d32badf976.css?__ws=forums.swift.org" media="all" rel="stylesheet" data-target="discourse-local-dates"  />
+  <link href="https://sea2.discourse-cdn.com/swift/stylesheets/discourse-policy_3c2f8c6e2d2c32190e07dc0400fbd1d32badf976.css?__ws=forums.swift.org" media="all" rel="stylesheet" data-target="discourse-policy"  />
+  <link href="https://sea2.discourse-cdn.com/swift/stylesheets/discourse-presence_3c2f8c6e2d2c32190e07dc0400fbd1d32badf976.css?__ws=forums.swift.org" media="all" rel="stylesheet" data-target="discourse-presence"  />
+  <link href="https://sea2.discourse-cdn.com/swift/stylesheets/discourse-reactions_3c2f8c6e2d2c32190e07dc0400fbd1d32badf976.css?__ws=forums.swift.org" media="all" rel="stylesheet" data-target="discourse-reactions"  />
+  <link href="https://sea2.discourse-cdn.com/swift/stylesheets/discourse-solved_3c2f8c6e2d2c32190e07dc0400fbd1d32badf976.css?__ws=forums.swift.org" media="all" rel="stylesheet" data-target="discourse-solved"  />
+  <link href="https://sea2.discourse-cdn.com/swift/stylesheets/discourse-templates_3c2f8c6e2d2c32190e07dc0400fbd1d32badf976.css?__ws=forums.swift.org" media="all" rel="stylesheet" data-target="discourse-templates"  />
+  <link href="https://sea2.discourse-cdn.com/swift/stylesheets/discourse-topic-voting_3c2f8c6e2d2c32190e07dc0400fbd1d32badf976.css?__ws=forums.swift.org" media="all" rel="stylesheet" data-target="discourse-topic-voting"  />
+  <link href="https://sea2.discourse-cdn.com/swift/stylesheets/footnote_3c2f8c6e2d2c32190e07dc0400fbd1d32badf976.css?__ws=forums.swift.org" media="all" rel="stylesheet" data-target="footnote"  />
+  <link href="https://sea2.discourse-cdn.com/swift/stylesheets/hosted-site_3c2f8c6e2d2c32190e07dc0400fbd1d32badf976.css?__ws=forums.swift.org" media="all" rel="stylesheet" data-target="hosted-site"  />
+  <link href="https://sea2.discourse-cdn.com/swift/stylesheets/poll_3c2f8c6e2d2c32190e07dc0400fbd1d32badf976.css?__ws=forums.swift.org" media="all" rel="stylesheet" data-target="poll"  />
+  <link href="https://sea2.discourse-cdn.com/swift/stylesheets/spoiler-alert_3c2f8c6e2d2c32190e07dc0400fbd1d32badf976.css?__ws=forums.swift.org" media="all" rel="stylesheet" data-target="spoiler-alert"  />
+  <link href="https://sea2.discourse-cdn.com/swift/stylesheets/discourse-reactions_mobile_3c2f8c6e2d2c32190e07dc0400fbd1d32badf976.css?__ws=forums.swift.org" media="(width < 40rem)" rel="stylesheet" data-target="discourse-reactions_mobile"  />
+  <link href="https://sea2.discourse-cdn.com/swift/stylesheets/discourse-reactions_desktop_3c2f8c6e2d2c32190e07dc0400fbd1d32badf976.css?__ws=forums.swift.org" media="(width >= 40rem)" rel="stylesheet" data-target="discourse-reactions_desktop"  />
+  <link href="https://sea2.discourse-cdn.com/swift/stylesheets/poll_desktop_3c2f8c6e2d2c32190e07dc0400fbd1d32badf976.css?__ws=forums.swift.org" media="(width >= 40rem)" rel="stylesheet" data-target="poll_desktop"  />
+
+  <link href="https://sea2.discourse-cdn.com/swift/stylesheets/common_theme_7_447064feea605c8b58a202bc0b734956488aaf0d.css?__ws=forums.swift.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="7" data-theme-name="discourse mermaid"/>
+<link href="https://sea2.discourse-cdn.com/swift/stylesheets/common_theme_6_dff87f4496578bba0c6d4cb65d17cf0cc5ab8c62.css?__ws=forums.swift.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="6" data-theme-name="discourse-swift-forums-theme"/>
+<link href="https://sea2.discourse-cdn.com/swift/stylesheets/common_theme_5_b5cf5d2ded8b7a8def3d09aca263123e3587730c.css?__ws=forums.swift.org" media="all" rel="stylesheet" data-target="common_theme" data-theme-id="5" data-theme-name="swift header"/>
+  
+  
+
+
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    
+        <link rel="alternate nofollow" type="application/rss+xml" title="RSS feed of &#39;Swift 6.4 Release Process&#39;" href="https://forums.swift.org/t/swift-6-4-release-process/85421.rss" />
+    <meta property="og:site_name" content="Swift Forums" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://global.discourse-cdn.com/swift/original/3X/a/8/a897e24d0ae9f4c1db17724959bb441d87d6c778.png" />
+<meta property="og:image" content="https://global.discourse-cdn.com/swift/original/1X/0a90dde98a223f5841eeca49d89dc9f57592e8d6.png" />
+<meta property="og:url" content="https://forums.swift.org/t/swift-6-4-release-process/85421" />
+<meta name="twitter:url" content="https://forums.swift.org/t/swift-6-4-release-process/85421" />
+<meta property="og:title" content="Swift 6.4 Release Process" />
+<meta name="twitter:title" content="Swift 6.4 Release Process" />
+<meta property="og:description" content="Swift 6.4 Release Process This post describes the release process, and estimated schedule for Swift 6.4.  Snapshots of Swift 6.4 Downloadable snapshots of the Swift 6.4 release branch will be posted regularly as part of continuous integration testing. As support is available, snapshot downloads will be added for newly supported platforms.  Once Swift 6.4 is released, the official final builds will also be posted in addition to the snapshots.  Getting Changes into Swift 6.4 On May 4th, 2026 the r..." />
+<meta name="twitter:description" content="Swift 6.4 Release Process This post describes the release process, and estimated schedule for Swift 6.4.  Snapshots of Swift 6.4 Downloadable snapshots of the Swift 6.4 release branch will be posted regularly as part of continuous integration testing. As support is available, snapshot downloads will be added for newly supported platforms.  Once Swift 6.4 is released, the official final builds will also be posted in addition to the snapshots.  Getting Changes into Swift 6.4 On May 4th, 2026 the r..." />
+<meta property="og:article:section" content="Development" />
+<meta property="og:article:section:color" content="0E76BD" />
+<meta property="og:article:section" content="Announcements" />
+<meta property="og:article:section:color" content="12A89D" />
+<meta name="twitter:label1" value="Reading time" />
+<meta name="twitter:data1" value="6 mins 🕑" />
+<meta name="twitter:label2" value="Likes" />
+<meta name="twitter:data2" value="56 ❤" />
+<meta property="article:published_time" content="2026-03-18T18:02:29+00:00" />
+<meta property="og:ignore_canonical" content="true" />
+
+        <link rel="next" href="/t/swift-6-4-release-process/85421?page=2">
+
+    <link rel="alternate" type="text/markdown" href="https://forums.swift.org/t/swift-6-4-release-process/85421.md">
+    
+
+  </head>
+  <body class="crawler ">
+    
+    <header>
+  <a href="/">Swift Forums</a>
+</header>
+
+    <div id="main-outlet" class="wrap" role="main">
+        <div id="topic-title">
+    <h1>
+      <a href="/t/swift-6-4-release-process/85421">Swift 6.4 Release Process</a>
+    </h1>
+
+      <div class="topic-category" itemscope itemtype="http://schema.org/BreadcrumbList">
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="/c/development/16" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #0E76BD'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Development</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="1" />
+          </span>
+          <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="/c/development/dev-announce/17" class="badge-wrapper bullet" itemprop="item">
+              <span class='badge-category-bg' style='background-color: #12A89D'></span>
+              <span class='badge-category clear-badge'>
+                <span class='category-name' itemprop='name'>Announcements</span>
+              </span>
+            </a>
+            <meta itemprop="position" content="2" />
+          </span>
+        <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+          <meta itemprop="name" content="Swift 6.4 Release Process" />
+          <link itemprop="item" href="https://forums.swift.org/t/swift-6-4-release-process/85421" />
+          <meta itemprop="position" content="3" />
+        </span>
+      </div>
+
+  </div>
+
+  
+
+    <div itemscope="itemscope" itemtype="http://schema.org/DiscussionForumPosting">
+      <meta itemprop='headline' content='Swift 6.4 Release Process'>
+      <link itemprop='url' href='https://forums.swift.org/t/swift-6-4-release-process/85421'>
+      <meta itemprop='datePublished' content='2026-03-18T18:02:29Z'>
+      <meta itemprop='keywords' content=''>
+          <meta itemprop='articleSection' content='Announcements'>
+        <div itemprop='publisher' itemscope itemtype="http://schema.org/Organization">
+          <meta itemprop='name' content='Swift Forums'>
+            <div itemprop='logo' itemscope itemtype="http://schema.org/ImageObject">
+              <meta itemprop='url' content='https://global.discourse-cdn.com/swift/original/2X/0/0d7ab3b633e07bf8ec99bdc18e22ad89d8934801.png'>
+            </div>
+        </div>
+
+      
+
+
+
+          <div id='post_1'  class='topic-body crawler-post'>
+            <div class='crawler-post-meta'>
+              <span class="creator" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+                <a rel='nofollow' href='https://forums.swift.org/u/mishal_shah'><span itemprop="name">mishal_shah</span></a>
+                  <meta itemprop='url' content='https://forums.swift.org/u/mishal_shah'>
+                (Mishal Shah)
+              </span>
+
+                <link itemprop="mainEntityOfPage" href="https://forums.swift.org/t/swift-6-4-release-process/85421">
+
+
+              <span class="crawler-post-infos">
+                  <time  datetime='2026-03-18T18:02:29Z' class='post-time'>
+                    March 18, 2026,  6:02pm
+                  </time>
+                  <meta itemprop='dateModified' content='2026-05-04T20:45:48Z'>
+              <span itemprop="position">1</span>
+              </span>
+            </div>
+            <div class='post' itemprop="text">
+              <h1><a name="p-392010-swift-64-release-process-1" class="anchor" href="#p-392010-swift-64-release-process-1" aria-label="Heading link"></a>Swift 6.4 Release Process</h1>
+<p>This post describes the release process, and estimated schedule for Swift 6.4.</p>
+<h2><a name="p-392010-snapshots-of-swift-64-2" class="anchor" href="#p-392010-snapshots-of-swift-64-2" aria-label="Heading link"></a>Snapshots of Swift 6.4</h2>
+<p>Downloadable snapshots of the Swift 6.4 release branch will be posted regularly as part of <a href="https://ci.swift.org/">continuous integration</a> testing. As support is available, snapshot downloads will be added for newly supported platforms.</p>
+<p>Once Swift 6.4 is released, the official final builds will also be posted in addition to the snapshots.</p>
+<h2><a name="p-392010-getting-changes-into-swift-64-3" class="anchor" href="#p-392010-getting-changes-into-swift-64-3" aria-label="Heading link"></a>Getting Changes into Swift 6.4</h2>
+<p>On <strong>May 4th, 2026</strong> the <code>release/6.4.x</code> branch will be cut from <code>main</code> in the swift repository and related project repositories. This will contain the changes that will be released in Swift 6.4. After the branch is cut, changes can be landed on the branch via pull request if they meet the criteria for the release.</p>
+<blockquote>
+<p><img src="https://emoji.discourse-cdn.com/apple/warning.png?v=15" title=":warning:" class="emoji" alt=":warning:" loading="lazy" width="20" height="20"> Until the new branch is created on May 4, 2026, the <code>main</code> branch should be treated as a release branch. Major changes should be avoided during this time, and the focus should be on converging the release. This approach will allow us to branch later and minimize the overhead of cherry-picking changes into the release branch early on.</p>
+</blockquote>
+<h3><a name="p-392010-philosophy-on-taking-changes-into-swift-64-4" class="anchor" href="#p-392010-philosophy-on-taking-changes-into-swift-64-4" aria-label="Heading link"></a>Philosophy on Taking Changes into Swift 6.4</h3>
+<ul>
+<li>All language and API changes for Swift 6.4 will go through the <a href="https://github.com/apple/swift-evolution">Swift Evolution</a> process. Evolution proposals should aim to be completed by the branch date in order to increase their chances of impacting the Swift 6.4 release. Exceptions will be considered on a case-by-case basis, particularly if they tie in with the core goal of the release.</li>
+<li>Other changes (e.g., bug fixes, diagnostic improvements, SourceKit interface improvements) will be accepted based on their risk and impact.</li>
+<li>Low-risk test tweaks will also be accepted late into the release branch if it aids in the qualification of the release.</li>
+<li>As the release converges, the criteria for accepted changes will become increasingly restrictive.</li>
+</ul>
+<h2><a name="p-392010-impacted-repositories-5" class="anchor" href="#p-392010-impacted-repositories-5" aria-label="Heading link"></a>Impacted Repositories</h2>
+<p>The following repositories will have a <code>release/6.4.x</code> branch to track<br>
+sources as part of Swift 6.4 release:</p>
+<ul>
+<li><a href="https://github.com/swiftlang/indexstore-db">indexstore-db</a></li>
+<li><a href="https://github.com/swiftlang/sourcekit-lsp">sourcekit-lsp</a></li>
+<li><a href="https://github.com/swiftlang/swift-build">swift-build</a></li>
+<li><a href="https://github.com/swiftlang/swift-cmark">swift-cmark</a></li>
+<li><a href="https://github.com/swiftlang/swift-corelibs-blocksruntime">swift-corelibs-blocksruntime</a></li>
+<li><a href="https://github.com/swiftlang/swift-corelibs-foundation">swift-corelibs-foundation</a></li>
+<li><a href="https://github.com/apple/swift-corelibs-libdispatch">swift-corelibs-libdispatch</a></li>
+<li><a href="https://github.com/swiftlang/swift-corelibs-xctest">swift-corelibs-xctest</a></li>
+<li><a href="https://github.com/swiftlang/swift-docc-render-artifact">swift-docc-render-artifact</a></li>
+<li><a href="https://github.com/swiftlang/swift-docc-render" title="https://github.com/swiftlang/swift-docc-render">swift-docc-render</a></li>
+<li><a href="https://github.com/swiftlang/swift-docc-symbolkit">swift-docc-symbolkit</a></li>
+<li><a href="https://github.com/swiftlang/swift-docc">swift-docc</a></li>
+<li><a href="https://github.com/swiftlang/swift-driver">swift-driver</a></li>
+<li><a href="https://github.com/swiftlang/swift-experimental-string-processing">swift-experimental-string-processing</a></li>
+<li><a href="https://github.com/swiftlang/swift-format">swift-format</a></li>
+<li><a href="https://github.com/swiftlang/swift-foundation-icu">swift-foundation-icu</a></li>
+<li><a href="https://github.com/swiftlang/swift-foundation">swift-foundation</a></li>
+<li><a href="https://github.com/swiftlang/swift-integration-tests">swift-integration-tests</a></li>
+<li><a href="https://github.com/swiftlang/swift-llbuild">swift-llbuild</a></li>
+<li><a href="https://github.com/swiftlang/swift-llvm-bindings">swift-llvm-bindings</a></li>
+<li><a href="https://github.com/swiftlang/swift-lmdb">swift-lmdb</a></li>
+<li><a href="https://github.com/swiftlang/swift-markdown">swift-markdown</a></li>
+<li><a href="https://github.com/swiftlang/swift-package-manager">swift-package-manager</a></li>
+<li><a href="https://github.com/swiftlang/swift-stress-tester">swift-stress-tester</a></li>
+<li><a href="https://github.com/swiftlang/swift-syntax">swift-syntax</a></li>
+<li><a href="https://github.com/swiftlang/swift-testing">swift-testing</a></li>
+<li><a href="https://github.com/swiftlang/swift-tools-support-core">swift-tools-support-core</a></li>
+<li><a href="https://github.com/swiftlang/swift-xcode-playground-support">swift-xcode-playground-support</a></li>
+<li><a href="https://github.com/swiftlang/swift">swift</a></li>
+</ul>
+<p>The <a href="https://github.com/swiftlang/llvm-project">llvm-project</a> will have a corresponding swift/release/6.4.x branch from stable/21.x.</p>
+<h2><a name="p-392010-release-managers-6" class="anchor" href="#p-392010-release-managers-6" aria-label="Heading link"></a>Release Managers</h2>
+<p>The overall management of the release will be overseen by the following individuals, who will announce when stricter control of change goes into effect for the Swift 6.4 release as the release converges.</p>
+<ul>
+<li>Ben Cohen (<a class="mention" href="/u/ben-cohen">@ben-cohen</a>, <a href="https://github.com/airspeedswift">GitHub: airspeedswift</a>) is the overall release manager for Swift 6.4.</li>
+<li>Holly Borla  (<a class="mention" href="/u/hborla">@hborla</a>  , <a href="https://github.com/hborla">GitHub: hborla</a>) is the release manager for the Swift Compiler, <a href="https://github.com/swiftlang/sourcekit-lsp">sourcekit-lsp</a>, <a href="https://github.com/swiftlang/indexstore-db">indexstore-db</a>, <a href="https://github.com/swiftlang/swift-syntax">swift-syntax</a>, and <a href="https://github.com/swiftlang/swift-stress-tester">swift-stress-tester</a>.</li>
+<li>Ravi Kandhadai Madhavan (<a class="mention" href="/u/ravikandhadai">@ravikandhadai</a>, <a href="https://github.com/ravimad">GitHub: ravimad</a>) is the release manager for <a href="https://github.com/swiftlang/llvm-project">llvm-project</a>.</li>
+<li>Fred Riss (<a class="mention" href="/u/frederic_riss">@Frederic_Riss</a>, GitHub: <a href="https://github.com/fredriss">fredriss</a>) is the release manager for LLDB in <a href="https://github.com/swiftlang/llvm-project">llvm-project</a>.</li>
+<li>Steve Canon (<a class="mention" href="/u/scanon">@scanon</a>, <a href="https://github.com/stephentyrone">GitHub: stephentyrone</a>) is the release manager for the Swift Standard Library.</li>
+<li>Tony Parker (<a class="mention" href="/u/tony_parker">@Tony_Parker</a>, <a href="https://github.com/parkera">GitHub: parkera</a>) is the release manager for <a href="https://github.com/swiftlang/swift-corelibs-foundation">swift-corelibs-foundation</a>, <a href="https://github.com/swiftlang/swift-foundation">swift-foundation</a>, and <a href="https://github.com/swiftlang/swift-foundation-icu">swift-foundation-icu</a>.</li>
+<li>Aaron Morrison (<a class="mention" href="/u/akmorrison">@akmorrison</a>, <a href="https://github.com/akmorrison">GitHub: akmorrison</a>) is the release manager for <a href="https://github.com/apple/swift-corelibs-libdispatch">swift-corelibs-libdispatch</a>.</li>
+<li>Stuart Montgomery (<a class="mention" href="/u/smontgomery">@smontgomery</a>  , <a href="https://github.com/stmontgomery">GitHub: stmontgomery</a>) is the release manager for <a href="https://github.com/swiftlang/swift-corelibs-xctest">swift-corelibs-xctest</a> and <a href="https://github.com/swiftlang/swift-testing">swift-testing</a>.</li>
+<li>Robert Connell (<a class="mention" href="/u/rconnell">@rconnell</a>  , <a href="https://github.com/rconnell9">GitHub: rconnell9</a>) is the release manager for <a href="https://github.com/swiftlang/swift-package-manager">swift-package-manager</a>, <a href="https://github.com/swiftlang/swift-build">swift-build</a>, <a href="https://github.com/swiftlang/swift-llbuild">swift-llbuild</a> and <a href="https://github.com/swiftlang/swift-tools-support-core">swift-tools-support-core</a>.</li>
+<li>Franklin Schrans (<a class="mention" href="/u/franklin">@franklin</a>, <a href="https://github.com/franklinsch">GitHub: franklinsch</a>) is the release manager for <a href="https://github.com/swiftlang/swift-docc">swift-docc</a>, <a href="https://github.com/swiftlang/swift-lmdb">swift-lmdb</a>, <a href="https://github.com/swiftlang/swift-docc-render" title="https://github.com/swiftlang/swift-docc-render">swift-docc-render</a>, <a href="https://github.com/swiftlang/swift-docc-render-artifact">swift-docc-render-artifact</a>, <a href="https://github.com/swiftlang/swift-docc-symbolkit">swift-docc-symbolkit</a>.</li>
+<li>Vera Mitchell (<a class="mention" href="/u/quietmisdreavus">@QuietMisdreavus</a> , <a href="https://github.com/QuietMisdreavus">GitHub: QuietMisdreavus</a>) is the release manager for <a href="https://github.com/swiftlang/swift-markdown">swift-markdown</a> and <a href="https://github.com/swiftlang/swift-cmark">swift-cmark</a></li>
+<li>Tony Allevato (<a class="mention" href="/u/allevato">@allevato</a>, <a href="https://github.com/allevato">GitHub: allevato</a>) is the release manager for <a href="https://github.com/swiftlang/swift-format">swift-format</a>.</li>
+</ul>
+<h3><a name="p-392010-platform-release-managers-7" class="anchor" href="#p-392010-platform-release-managers-7" aria-label="Heading link"></a>Platform Release Managers</h3>
+<ul>
+<li>Nicole Jacque (<a class="mention" href="/u/nicole_jacque">@Nicole_Jacque</a>, <a href="https://github.com/najacque">GitHub: najacque</a>) is the release manager for the Darwin platform.</li>
+<li>Mishal Shah (<a class="mention" href="/u/mishal_shah">@mishal_shah</a> , <a href="https://github.com/shahmishal">GitHub: shahmishal</a>) is the release manager for Linux, WASM and FreeBSD platforms.</li>
+<li>Saleem Abdulrasool (<a class="mention" href="/u/compnerd">@compnerd</a>, <a href="https://github.com/compnerd">GitHub: compnerd</a>) is the release manager for the Windows platform.</li>
+<li>Marc Prud'hommeaux (<a class="mention" href="/u/marcprux">@marcprux</a> , <a href="https://github.com/marcprux">GitHub: marcprux</a>) is the release manager for Swift SDK for Android.</li>
+<li>Mishal Shah (<a class="mention" href="/u/mishal_shah">@mishal_shah</a>, <a href="https://github.com/shahmishal">GitHub: shahmishal</a>) will be the release coordinator responsible for production of nightly and release snapshots and coordinating sign-off on repositories and platforms for the release.</li>
+</ul>
+<p>Please feel free to post on the <a href="https://forums.swift.org/c/development/compiler">development forum</a> or contact <a href="https://github.com/tkremenek">Ted Kremenek</a> directly concerning any questions about the release management process.</p>
+<h2><a name="p-392010-pull-requests-for-release-branch-8" class="anchor" href="#p-392010-pull-requests-for-release-branch-8" aria-label="Heading link"></a>Pull Requests for Release Branch</h2>
+<p>In order for a pull request to be considered for inclusion in the release branch (<code>release/6.4.x</code> ) after it has been cut, the pull request must have:</p>
+<ul>
+<li>A title starting with a designation containing the release version number of the target branch.</li>
+<li><a href="https://github.com/swiftlang/.github/blob/main/PULL_REQUEST_TEMPLATE/release.md?plain=1">This</a> form filled out in its description. An item that is not applicable may be left blank or completed with an indication thereof, but must not be omitted altogether.</li>
+</ul>
+<p>To switch to this template when drafting a pull request in a <a href="https://github.com/swiftlang">swiftlang</a> repository in a browser, append the <code>template=release.md</code> query parameter to the current URL and refresh. For example:</p>
+<pre data-code-wrap="swift"><code class="lang-swift">-https://github.com/swiftlang/swift/compare/main...my-branch?quick_pull=1
++https://github.com/swiftlang/swift/compare/main...my-branch?quick_pull=1&amp;template=release.md
+</code></pre>
+<p><strong>All changes</strong> going on the <code>release/6.4.x</code> branch <strong>must go through pull requests</strong> that are accepted by the corresponding release manager.</p>
+            </div>
+
+              <div itemprop="interactionStatistic" itemscope="itemscope" itemtype="http://schema.org/InteractionCounter">
+                  <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+                  <meta itemprop="userInteractionCount" content="15" />
+                <span class='post-likes'>15 Likes</span>
+              </div>
+
+                <div class='crawler-linkback-list'>
+                    <div>
+                      <a href="https://forums.swift.org/t/possible-miscompiles-in-optimizehoptoexecutor/85804/7">Possible miscompiles in OptimizeHopToExecutor</a>
+                    </div>
+                </div>
+
+            
+
+
+          </div>
+          <div id='post_2' itemprop="comment" itemscope="itemscope" itemtype="http://schema.org/Comment" class='topic-body crawler-post'>
+            <div class='crawler-post-meta'>
+              <span class="creator" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+                <a rel='nofollow' href='https://forums.swift.org/u/rintaro'><span itemprop="name">rintaro</span></a>
+                  <meta itemprop='url' content='https://forums.swift.org/u/rintaro'>
+                (Rintaro Ishizaki)
+              </span>
+
+
+
+              <span class="crawler-post-infos">
+                  <time itemprop="datePublished" datetime='2026-03-20T21:12:49Z' class='post-time'>
+                    March 20, 2026,  9:12pm
+                  </time>
+                  <meta itemprop='dateModified' content='2026-03-20T21:12:49Z'>
+              <span itemprop="position">2</span>
+              </span>
+            </div>
+            <div class='post' itemprop="text">
+              <p><a class="mention" href="/u/mishal_shah">@mishal_shah</a> Could you add <code>swift-tools-protocols</code> to the branching repos? It's now branch-based since <a href="https://github.com/swiftlang/swift/pull/87886" class="inline-onebox" rel="noopener nofollow ugc">[update-checkout] Use swift-tools-protocols:main instead of a tag by rintaro · Pull Request #87886 · swiftlang/swift · GitHub</a></p>
+            </div>
+
+              <div itemprop="interactionStatistic" itemscope="itemscope" itemtype="http://schema.org/InteractionCounter">
+                  <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+                  <meta itemprop="userInteractionCount" content="1" />
+                <span class='post-likes'>1 Like</span>
+              </div>
+
+
+            
+
+
+          </div>
+          <div id='post_3' itemprop="comment" itemscope="itemscope" itemtype="http://schema.org/Comment" class='topic-body crawler-post'>
+            <div class='crawler-post-meta'>
+              <span class="creator" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+                <a rel='nofollow' href='https://forums.swift.org/u/mishal_shah'><span itemprop="name">mishal_shah</span></a>
+                  <meta itemprop='url' content='https://forums.swift.org/u/mishal_shah'>
+                (Mishal Shah)
+              </span>
+
+
+
+              <span class="crawler-post-infos">
+                  <time itemprop="datePublished" datetime='2026-03-30T17:08:40Z' class='post-time'>
+                    March 30, 2026,  5:08pm
+                  </time>
+                  <meta itemprop='dateModified' content='2026-03-30T17:08:40Z'>
+              <span itemprop="position">3</span>
+              </span>
+            </div>
+            <div class='post' itemprop="text">
+              <p>The <code>main</code> branch is now in convergence, which means major changes, such as large refactoring or new features, should be avoided. This strategy is intended to maintain the stability of the Swift 6.4 release leading up to the May 4th branch. For any work that requires broad changes or introduces new features, create a feature branch and open a draft pull request. All updates to the <code>swiftlang/swift</code> repository’s <code>main</code> branch require approval from the release managers. A pull request targeting swiftlang/swift will automatically add release managers. You can also contact them via <a class="mention-group notify" href="/groups/release-managers">@release-managers</a> in the forum group.</p>
+            </div>
+
+              <div itemprop="interactionStatistic" itemscope="itemscope" itemtype="http://schema.org/InteractionCounter">
+                  <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+                  <meta itemprop="userInteractionCount" content="0" />
+                <span class='post-likes'></span>
+              </div>
+
+
+            
+
+
+          </div>
+          <div id='post_4' itemprop="comment" itemscope="itemscope" itemtype="http://schema.org/Comment" class='topic-body crawler-post'>
+            <div class='crawler-post-meta'>
+              <span class="creator" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+                <a rel='nofollow' href='https://forums.swift.org/u/mishal_shah'><span itemprop="name">mishal_shah</span></a>
+                  <meta itemprop='url' content='https://forums.swift.org/u/mishal_shah'>
+                (Mishal Shah)
+              </span>
+
+
+
+              <span class="crawler-post-infos">
+                  <time itemprop="datePublished" datetime='2026-04-10T20:35:25Z' class='post-time'>
+                    April 10, 2026,  8:35pm
+                  </time>
+                  <meta itemprop='dateModified' content='2026-04-10T20:35:25Z'>
+              <span itemprop="position">4</span>
+              </span>
+            </div>
+            <div class='post' itemprop="text">
+              <p>In order for a pull request to be considered for the <code>main</code> branch, the pull request must have the <a href="https://github.com/swiftlang/.github/blob/main/PULL_REQUEST_TEMPLATE/release.md?plain=1">release nomination</a> form filled out in its description. We’re also updating the pull request template to include this form and make it easier to find. If the pull request isn’t ready for review by release managers, please keep it in draft. We are also extending the release managers’ approval. The complete list of repositories is <code>swiftlang/swift</code> , <code>swiftlang/llvm-project</code> , <code>swiftlang/swift-driver</code> , and <code>swiftlang/swift-syntax</code> .</p>
+<p>Needs:</p>
+<ul>
+<li>A completed <a href="https://github.com/swiftlang/.github/blob/main/PULL_REQUEST_TEMPLATE/release.md?plain=1">release nomination</a> form that explains the fixes and the intended for this release.</li>
+<li>A technical review by a code owner.</li>
+<li>Final approval by a branch manager after tests have passed and code owner review is completed.</li>
+</ul>
+<p>Examples:</p>
+<ul>
+<li>Bug fixes should be made when the fix is low risk or when the bug has a high impact.
+<ul>
+<li>For instance, most improvements to diagnostics are usually low risk.</li>
+<li>A miscompile can have serious consequences, so fixes with moderate risk may be appropriate. For example, rejecting the code that causes a miscompile and triggers a compiler error may be justified, even if some valid code no longer compiles.</li>
+<li>Even if a bug fix meets these criteria, try to keep the changes as limited as possible.</li>
+</ul>
+</li>
+<li>You can also work on implementing Swift Evolution proposals that have been accepted or are currently being reviewed by the steering group.
+<ul>
+<li>Make changes behind an experimental flag only with clear guidance from a steering group.</li>
+</ul>
+</li>
+</ul>
+<p>If your pull request is not intended for merging before the branch date, please keep it in <strong>draft</strong> until after the Swift 6.4 branch is created.</p>
+            </div>
+
+              <div itemprop="interactionStatistic" itemscope="itemscope" itemtype="http://schema.org/InteractionCounter">
+                  <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+                  <meta itemprop="userInteractionCount" content="3" />
+                <span class='post-likes'>3 Likes</span>
+              </div>
+
+
+            
+
+
+          </div>
+          <div id='post_5' itemprop="comment" itemscope="itemscope" itemtype="http://schema.org/Comment" class='topic-body crawler-post'>
+            <div class='crawler-post-meta'>
+              <span class="creator" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+                <a rel='nofollow' href='https://forums.swift.org/u/broken-circle'><span itemprop="name">broken-circle</span></a>
+                  <meta itemprop='url' content='https://forums.swift.org/u/broken-circle'>
+                
+              </span>
+
+
+
+              <span class="crawler-post-infos">
+                  <time itemprop="datePublished" datetime='2026-04-23T15:00:57Z' class='post-time'>
+                    April 23, 2026,  3:00pm
+                  </time>
+                  <meta itemprop='dateModified' content='2026-04-23T15:00:57Z'>
+              <span itemprop="position">5</span>
+              </span>
+            </div>
+            <div class='post' itemprop="text">
+              <p><a class="mention" href="/u/mishal_shah">@mishal_shah</a> Quick question from a new contributor about reviewer assignment under convergence. I just merged my first PR and have a few more planned.</p>
+<p>With <code>.github/CODEOWNERS</code> now routing everything to <code>@swiftlang/swift-branch-managers</code>, new PRs no longer auto-request the subsystem reviewers who would typically do the initial technical review. Since I don't have write access to request reviewers manually, my plan is to tag the relevant subsystem owners from the pre-convergence <code>.github/CODEOWNERS</code> in a PR comment asking for review. Is that the right approach, or is there a preferred workflow for new/external contributors under the current setup?</p>
+<p>Related: Will <code>.github/CODEOWNERS</code> return to its prior per-path mapping after the 6.4 branch is cut on May 4th, or is this the ongoing state for <code>main</code> between releases going forward? This affects whether it makes sense to just hold non-urgent PRs until after the branch cut.</p>
+<p>Thanks!</p>
+            </div>
+
+              <div itemprop="interactionStatistic" itemscope="itemscope" itemtype="http://schema.org/InteractionCounter">
+                  <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+                  <meta itemprop="userInteractionCount" content="0" />
+                <span class='post-likes'></span>
+              </div>
+
+
+            
+
+
+          </div>
+          <div id='post_6' itemprop="comment" itemscope="itemscope" itemtype="http://schema.org/Comment" class='topic-body crawler-post'>
+            <div class='crawler-post-meta'>
+              <span class="creator" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+                <a rel='nofollow' href='https://forums.swift.org/u/mishal_shah'><span itemprop="name">mishal_shah</span></a>
+                  <meta itemprop='url' content='https://forums.swift.org/u/mishal_shah'>
+                (Mishal Shah)
+              </span>
+
+
+
+              <span class="crawler-post-infos">
+                  <time itemprop="datePublished" datetime='2026-04-24T16:13:33Z' class='post-time'>
+                    April 24, 2026,  4:13pm
+                  </time>
+                  <meta itemprop='dateModified' content='2026-04-24T16:13:33Z'>
+              <span itemprop="position">6</span>
+              </span>
+            </div>
+            <div class='post' itemprop="text">
+              <aside class="quote no-group" data-username="broken-circle" data-post="5" data-topic="85421">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt="" width="24" height="24" src="https://sea2.discourse-cdn.com/swift/user_avatar/forums.swift.org/broken-circle/48/44882_2.png" class="avatar"> broken-circle:</div>
+<blockquote>
+<p>With <code>.github/CODEOWNERS</code> now routing everything to <code>@swiftlang/swift-branch-managers</code>, new PRs no longer auto-request the subsystem reviewers who would typically do the initial technical review. Since I don't have write access to request reviewers manually, my plan is to tag the relevant subsystem owners from the pre-convergence <code>.github/CODEOWNERS</code> in a PR comment asking for review. Is that the right approach, or is there a preferred workflow for new/external contributors under the current setup?</p>
+</blockquote>
+</aside>
+<p>Yes, this is correct approach. Unfortunately, GitHub tooling does not support model we are using  currently.</p>
+<aside class="quote no-group" data-username="broken-circle" data-post="5" data-topic="85421">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt="" width="24" height="24" src="https://sea2.discourse-cdn.com/swift/user_avatar/forums.swift.org/broken-circle/48/44882_2.png" class="avatar"> broken-circle:</div>
+<blockquote>
+<p>Related: Will <code>.github/CODEOWNERS</code> return to its prior per-path mapping after the 6.4 branch is cut on May 4th, or is this the ongoing state for <code>main</code> between releases going forward? This affects whether it makes sense to just hold non-urgent PRs until after the branch cut.</p>
+</blockquote>
+</aside>
+<p>Yes, it will return back after we cut the branch on May 4th.</p>
+            </div>
+
+              <div itemprop="interactionStatistic" itemscope="itemscope" itemtype="http://schema.org/InteractionCounter">
+                  <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+                  <meta itemprop="userInteractionCount" content="3" />
+                <span class='post-likes'>3 Likes</span>
+              </div>
+
+
+            
+
+
+          </div>
+          <div id='post_7' itemprop="comment" itemscope="itemscope" itemtype="http://schema.org/Comment" class='topic-body crawler-post'>
+            <div class='crawler-post-meta'>
+              <span class="creator" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+                <a rel='nofollow' href='https://forums.swift.org/u/mishal_shah'><span itemprop="name">mishal_shah</span></a>
+                  <meta itemprop='url' content='https://forums.swift.org/u/mishal_shah'>
+                (Mishal Shah)
+              </span>
+
+
+
+              <span class="crawler-post-infos">
+                  <time itemprop="datePublished" datetime='2026-05-05T05:29:26Z' class='post-time'>
+                    May 5, 2026,  5:29am
+                  </time>
+                  <meta itemprop='dateModified' content='2026-05-05T05:29:26Z'>
+              <span itemprop="position">7</span>
+              </span>
+            </div>
+            <div class='post' itemprop="text">
+              <p>We have created branches for Swift 6.4.x (<code>release/6.4.x</code>), and the <code>main</code> branch no longer requires approval from the <a class="mention-group notify" href="/groups/release-managers">@release-managers</a> to merge changes.</p>
+            </div>
+
+              <div itemprop="interactionStatistic" itemscope="itemscope" itemtype="http://schema.org/InteractionCounter">
+                  <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+                  <meta itemprop="userInteractionCount" content="4" />
+                <span class='post-likes'>4 Likes</span>
+              </div>
+
+
+            
+
+
+          </div>
+          <div id='post_8' itemprop="comment" itemscope="itemscope" itemtype="http://schema.org/Comment" class='topic-body crawler-post'>
+            <div class='crawler-post-meta'>
+              <span class="creator" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+                <a rel='nofollow' href='https://forums.swift.org/u/vanvoorden'><span itemprop="name">vanvoorden</span></a>
+                  <meta itemprop='url' content='https://forums.swift.org/u/vanvoorden'>
+                (Rick van Voorden)
+              </span>
+
+
+
+              <span class="crawler-post-infos">
+                  <time itemprop="datePublished" datetime='2026-05-13T21:38:13Z' class='post-time'>
+                    May 13, 2026,  9:38pm
+                  </time>
+                  <meta itemprop='dateModified' content='2026-05-13T21:38:13Z'>
+              <span itemprop="position">8</span>
+              </span>
+            </div>
+            <div class='post' itemprop="text">
+              <p>No big rush… but was there any estimate when we might have toolchains available from <code>swiftly install 6.4-snapshot</code>?</p>
+            </div>
+
+              <div itemprop="interactionStatistic" itemscope="itemscope" itemtype="http://schema.org/InteractionCounter">
+                  <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+                  <meta itemprop="userInteractionCount" content="0" />
+                <span class='post-likes'></span>
+              </div>
+
+
+            
+
+
+          </div>
+          <div id='post_9' itemprop="comment" itemscope="itemscope" itemtype="http://schema.org/Comment" class='topic-body crawler-post'>
+            <div class='crawler-post-meta'>
+              <span class="creator" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+                <a rel='nofollow' href='https://forums.swift.org/u/Finagolfin'><span itemprop="name">Finagolfin</span></a>
+                  <meta itemprop='url' content='https://forums.swift.org/u/Finagolfin'>
+                
+              </span>
+
+
+
+              <span class="crawler-post-infos">
+                  <time itemprop="datePublished" datetime='2026-05-14T04:32:49Z' class='post-time'>
+                    May 14, 2026,  4:32am
+                  </time>
+                  <meta itemprop='dateModified' content='2026-05-14T04:32:49Z'>
+              <span itemprop="position">9</span>
+              </span>
+            </div>
+            <div class='post' itemprop="text">
+              <p>The 6.4 snapshots will be produced by 6.4 CI, which are being set up now after the branch. Last spring, it took a couple weeks from <a href="https://forums.swift.org/t/swift-6-2-release-process/78371">the 6.2 branch</a> till the first snapshot on April 21.</p>
+            </div>
+
+              <div itemprop="interactionStatistic" itemscope="itemscope" itemtype="http://schema.org/InteractionCounter">
+                  <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+                  <meta itemprop="userInteractionCount" content="1" />
+                <span class='post-likes'>1 Like</span>
+              </div>
+
+
+            
+
+
+          </div>
+          <div id='post_10' itemprop="comment" itemscope="itemscope" itemtype="http://schema.org/Comment" class='topic-body crawler-post'>
+            <div class='crawler-post-meta'>
+              <span class="creator" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+                <a rel='nofollow' href='https://forums.swift.org/u/clackary'><span itemprop="name">clackary</span></a>
+                  <meta itemprop='url' content='https://forums.swift.org/u/clackary'>
+                (Clack Cole)
+              </span>
+
+
+
+              <span class="crawler-post-infos">
+                  <time itemprop="datePublished" datetime='2026-06-02T21:32:56Z' class='post-time'>
+                    June 2, 2026,  9:32pm
+                  </time>
+                  <meta itemprop='dateModified' content='2026-06-02T21:32:56Z'>
+              <span itemprop="position">10</span>
+              </span>
+            </div>
+            <div class='post' itemprop="text">
+              <p>Just checking on the status of the snapshot toolchains. I see the 6.4.x snapshot tags are getting cut regularly, but I still haven't seen a toolchain produced for any of these on <a href="http://swift.org" rel="noopener nofollow ugc">swift.org</a> or via swiftly.</p>
+            </div>
+
+              <div itemprop="interactionStatistic" itemscope="itemscope" itemtype="http://schema.org/InteractionCounter">
+                  <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+                  <meta itemprop="userInteractionCount" content="2" />
+                <span class='post-likes'>2 Likes</span>
+              </div>
+
+
+            
+
+
+          </div>
+          <div id='post_11' itemprop="comment" itemscope="itemscope" itemtype="http://schema.org/Comment" class='topic-body crawler-post'>
+            <div class='crawler-post-meta'>
+              <span class="creator" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+                <a rel='nofollow' href='https://forums.swift.org/u/vanvoorden'><span itemprop="name">vanvoorden</span></a>
+                  <meta itemprop='url' content='https://forums.swift.org/u/vanvoorden'>
+                (Rick van Voorden)
+              </span>
+
+
+
+              <span class="crawler-post-infos">
+                  <time itemprop="datePublished" datetime='2026-06-02T21:57:26Z' class='post-time'>
+                    June 2, 2026,  9:57pm
+                  </time>
+                  <meta itemprop='dateModified' content='2026-06-02T21:57:26Z'>
+              <span itemprop="position">11</span>
+              </span>
+            </div>
+            <div class='post' itemprop="text">
+              <aside class="quote no-group" data-username="Finagolfin" data-post="9" data-topic="85421">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt="" width="24" height="24" src="https://sea2.discourse-cdn.com/swift/user_avatar/forums.swift.org/finagolfin/48/34388_2.png" class="avatar"> Finagolfin:</div>
+<blockquote>
+<p>The 6.4 snapshots will be produced by 6.4 CI, which are being set up now after the branch.</p>
+</blockquote>
+</aside>
+<p>Is there anything the community can do to help unblock the snapshots? Are there any good first issue tasks that a volunteer could help work on?</p>
+            </div>
+
+              <div itemprop="interactionStatistic" itemscope="itemscope" itemtype="http://schema.org/InteractionCounter">
+                  <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+                  <meta itemprop="userInteractionCount" content="0" />
+                <span class='post-likes'></span>
+              </div>
+
+
+            
+
+
+          </div>
+          <div id='post_12' itemprop="comment" itemscope="itemscope" itemtype="http://schema.org/Comment" class='topic-body crawler-post'>
+            <div class='crawler-post-meta'>
+              <span class="creator" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+                <a rel='nofollow' href='https://forums.swift.org/u/Finagolfin'><span itemprop="name">Finagolfin</span></a>
+                  <meta itemprop='url' content='https://forums.swift.org/u/Finagolfin'>
+                
+              </span>
+
+
+
+              <span class="crawler-post-infos">
+                  <time itemprop="datePublished" datetime='2026-06-02T22:15:35Z' class='post-time'>
+                    June 2, 2026, 10:15pm
+                  </time>
+                  <meta itemprop='dateModified' content='2026-06-02T22:15:35Z'>
+              <span itemprop="position">12</span>
+              </span>
+            </div>
+            <div class='post' itemprop="text">
+              <aside class="quote no-group" data-username="vanvoorden" data-post="11" data-topic="85421">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt="" width="24" height="24" src="https://sea2.discourse-cdn.com/swift/user_avatar/forums.swift.org/vanvoorden/48/33619_2.png" class="avatar"> vanvoorden:</div>
+<blockquote>
+<p>Is there anything the community can do to help unblock the snapshots?</p>
+</blockquote>
+</aside>
+<p>I don't know, but I doubt it. <a href="https://download.swift.org/swift-6.4.x-branch/fedora41/swift-6.4.x-DEVELOPMENT-SNAPSHOT-2026-05-31-a/swift-6.4.x-DEVELOPMENT-SNAPSHOT-2026-05-31-a-fedora41.tar.gz" rel="noopener nofollow ugc">Most are</a> already <a href="https://download.swift.org/swift-6.4.x-branch/android-sdk/swift-6.4.x-DEVELOPMENT-SNAPSHOT-2026-05-31-a/swift-6.4.x-DEVELOPMENT-SNAPSHOT-2026-05-31-a_android.artifactbundle.tar.gz" rel="noopener nofollow ugc">available</a> on <a href="http://swift.org" rel="noopener nofollow ugc">swift.org</a>, it's just a matter of adding the links on the install webpage and so on, once the CI team is ready.</p>
+<aside class="quote no-group" data-username="vanvoorden" data-post="11" data-topic="85421">
+<div class="title">
+<div class="quote-controls"></div>
+<img alt="" width="24" height="24" src="https://sea2.discourse-cdn.com/swift/user_avatar/forums.swift.org/vanvoorden/48/33619_2.png" class="avatar"> vanvoorden:</div>
+<blockquote>
+<p>Are there any good first issue tasks that a volunteer could help work on?</p>
+</blockquote>
+</aside>
+<p>The main issue we always need help with is breaking CI, which falls on the way-overloaded CI team. These three CI "trigger" all the snapshot toolchain builds, so you can look at those individual CI links in the log and see what the problems are then report or help with them:</p>
+<ul>
+<li><a href="https://ci.swift.org/job/oss-swift-6.3-package-trigger/" rel="noopener nofollow ugc">6.3</a></li>
+<li><a href="https://ci.swift.org/job/oss-swift-6.4.x-package-trigger/" rel="noopener nofollow ugc">6.4.x</a></li>
+<li><a href="https://ci.swift.org/job/oss-swift-package-trigger/" rel="noopener nofollow ugc">trunk 6.5</a></li>
+</ul>
+<p>You will notice that the macOS arm64 CI are currently ignored when tagging snapshots, as are new CI like Ubuntu 26.04 that are still being worked on.</p>
+            </div>
+
+              <div itemprop="interactionStatistic" itemscope="itemscope" itemtype="http://schema.org/InteractionCounter">
+                  <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+                  <meta itemprop="userInteractionCount" content="1" />
+                <span class='post-likes'>1 Like</span>
+              </div>
+
+
+            
+
+
+          </div>
+          <div id='post_13' itemprop="comment" itemscope="itemscope" itemtype="http://schema.org/Comment" class='topic-body crawler-post'>
+            <div class='crawler-post-meta'>
+              <span class="creator" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+                <a rel='nofollow' href='https://forums.swift.org/u/mishal_shah'><span itemprop="name">mishal_shah</span></a>
+                  <meta itemprop='url' content='https://forums.swift.org/u/mishal_shah'>
+                (Mishal Shah)
+              </span>
+
+
+
+              <span class="crawler-post-infos">
+                  <time itemprop="datePublished" datetime='2026-06-02T22:18:07Z' class='post-time'>
+                    June 2, 2026, 10:18pm
+                  </time>
+                  <meta itemprop='dateModified' content='2026-06-02T22:18:07Z'>
+              <span itemprop="position">13</span>
+              </span>
+            </div>
+            <div class='post' itemprop="text">
+              <p>Apologies for the delay in releasing the nightly toolchain for release/6.4.x. We recently resolved issues with the Windows toolchain build, which had caused the delay. The nightly toolchain should be available by the end of the day.</p>
+            </div>
+
+              <div itemprop="interactionStatistic" itemscope="itemscope" itemtype="http://schema.org/InteractionCounter">
+                  <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+                  <meta itemprop="userInteractionCount" content="7" />
+                <span class='post-likes'>7 Likes</span>
+              </div>
+
+
+            
+
+
+          </div>
+          <div id='post_14' itemprop="comment" itemscope="itemscope" itemtype="http://schema.org/Comment" class='topic-body crawler-post'>
+            <div class='crawler-post-meta'>
+              <span class="creator" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+                <a rel='nofollow' href='https://forums.swift.org/u/sliemeobn'><span itemprop="name">sliemeobn</span></a>
+                  <meta itemprop='url' content='https://forums.swift.org/u/sliemeobn'>
+                (Simon Leeb)
+              </span>
+
+
+
+              <span class="crawler-post-infos">
+                  <time itemprop="datePublished" datetime='2026-06-03T10:57:53Z' class='post-time'>
+                    June 3, 2026, 10:57am
+                  </time>
+                  <meta itemprop='dateModified' content='2026-06-03T10:57:53Z'>
+              <span itemprop="position">14</span>
+              </span>
+            </div>
+            <div class='post' itemprop="text">
+              <p>I guess you are aware, but the whole 6.4.x stuff is very much not working with <code>swiftly</code> at the moment.</p>
+<p>The instruction on <a href="http://swift.org" rel="noopener nofollow ugc">swift.org</a> results in an error</p>
+<pre data-code-wrap="sh"><code class="lang-sh">&gt; swiftly install 6.4.x-snapshot
+Error: invalid toolchain selector: "6.4.x-snapshot"
+</code></pre>
+<p>And using 6.4-snapshot does not work either:</p>
+<pre data-code-wrap="sh"><code class="lang-sh">&gt; swiftly list-available 6.4-snapshot
+Error: Unexpected response, expected status code: ok, response: undocumented(statusCode: 404, OpenAPIRuntime.UndocumentedPayload(headerFields: [(field: Server: Apple, next: 65535), (field: Date: Wed, 03 Jun 2026 10:57:05 GMT, next: 65535), (field: Content-Type: text/html, next: 65535), (field: Content-Length: 146, next: 65535), (field: Strict-Transport-Security: max-age=31536000; includeSubdomains, next: 65535), (field: X-Frame-Options: SAMEORIGIN, next: 65535), (field: X-XSS-Protection: 1; mode=block, next: 65535), (field: Age: 2, next: 65535), (field: Via: https/1.1 defra2-xdc-mx-021.ts.apple.com (acdn/302.16436), https/1.1 defra1-edge-fx-022.ts.apple.com (acdn/302.16436), next: 65535), (field: X-Cache: hit-stale, miss, next: 65535), (field: CDNUUID: db278d73-f56a-49ab-93eb-d378f6f2413a-10638219304, next: 65535), (field: Connection: keep-alive, next: 65535)], body: Optional(OpenAPIRuntime.HTTPBody)))
+</code></pre>
+<p>edit:<br>
+I just saw <a class="mention" href="/u/finagolfin">@Finagolfin</a> created a github issue as well: <a href="https://github.com/swiftlang/swiftly/issues/548" class="inline-onebox" rel="noopener nofollow ugc">The new 6.4 snapshots are unsupported · Issue #548 · swiftlang/swiftly · GitHub</a></p>
+            </div>
+
+              <div itemprop="interactionStatistic" itemscope="itemscope" itemtype="http://schema.org/InteractionCounter">
+                  <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+                  <meta itemprop="userInteractionCount" content="2" />
+                <span class='post-likes'>2 Likes</span>
+              </div>
+
+
+            
+
+
+          </div>
+          <div id='post_15' itemprop="comment" itemscope="itemscope" itemtype="http://schema.org/Comment" class='topic-body crawler-post'>
+            <div class='crawler-post-meta'>
+              <span class="creator" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+                <a rel='nofollow' href='https://forums.swift.org/u/mishal_shah'><span itemprop="name">mishal_shah</span></a>
+                  <meta itemprop='url' content='https://forums.swift.org/u/mishal_shah'>
+                (Mishal Shah)
+              </span>
+
+
+
+              <span class="crawler-post-infos">
+                  <time itemprop="datePublished" datetime='2026-06-04T19:13:38Z' class='post-time'>
+                    June 4, 2026,  7:13pm
+                  </time>
+                  <meta itemprop='dateModified' content='2026-06-04T19:13:38Z'>
+              <span itemprop="position">15</span>
+              </span>
+            </div>
+            <div class='post' itemprop="text">
+              <p>This is now resolved in Swiftly 1.1.2 release.</p>
+<p>To update swiftly to 1.1.2</p>
+<pre data-code-wrap="swift"><code class="lang-swift">swiftly self-update
+</code></pre>
+            </div>
+
+              <div itemprop="interactionStatistic" itemscope="itemscope" itemtype="http://schema.org/InteractionCounter">
+                  <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+                  <meta itemprop="userInteractionCount" content="1" />
+                <span class='post-likes'>1 Like</span>
+              </div>
+
+
+            
+
+
+          </div>
+          <div id='post_16' itemprop="comment" itemscope="itemscope" itemtype="http://schema.org/Comment" class='topic-body crawler-post'>
+            <div class='crawler-post-meta'>
+              <span class="creator" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+                <a rel='nofollow' href='https://forums.swift.org/u/sliemeobn'><span itemprop="name">sliemeobn</span></a>
+                  <meta itemprop='url' content='https://forums.swift.org/u/sliemeobn'>
+                (Simon Leeb)
+              </span>
+
+
+
+              <span class="crawler-post-infos">
+                  <time itemprop="datePublished" datetime='2026-06-04T19:18:18Z' class='post-time'>
+                    June 4, 2026,  7:18pm
+                  </time>
+                  <meta itemprop='dateModified' content='2026-06-04T19:18:18Z'>
+              <span itemprop="position">16</span>
+              </span>
+            </div>
+            <div class='post' itemprop="text">
+              <p>is it just me or is the self update not working? (on macOS)</p>
+<pre data-code-wrap="sh"><code class="lang-sh">swiftly self-update
+Checking for swiftly updates...
+Checking for swiftly updates...
+A new version of swiftly is available: 1.1.2
+                            Downloading swiftly 1.1.2
+100% [=============================================================]
+Downloaded 9.8 MiB of 9.8 MiB
+
+Extracting the swiftly package...
+installer: Error - the package path specified was invalid: '/var/folders/7w/fd5kdmmj5mqd5j5yjznxs5g40000gn/T/swiftly-7E52CA25-3595-4E84-A70E-5CA7EB9593C9'.
+Error: RunProgramError(exitCode: 1, program: "installer", arguments: ["-pkg", "/var/folders/7w/fd5kdmmj5mqd5j5yjznxs5g40000gn/T/swiftly-7E52CA25-3595-4E84-A70E-5CA7EB9593C9", "-target", "CurrentUserHomeDirectory"])
+</code></pre>
+            </div>
+
+              <div itemprop="interactionStatistic" itemscope="itemscope" itemtype="http://schema.org/InteractionCounter">
+                  <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+                  <meta itemprop="userInteractionCount" content="1" />
+                <span class='post-likes'>1 Like</span>
+              </div>
+
+
+            
+
+
+          </div>
+          <div id='post_17' itemprop="comment" itemscope="itemscope" itemtype="http://schema.org/Comment" class='topic-body crawler-post'>
+            <div class='crawler-post-meta'>
+              <span class="creator" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+                <a rel='nofollow' href='https://forums.swift.org/u/Les_Pruszynski'><span itemprop="name">Les_Pruszynski</span></a>
+                  <meta itemprop='url' content='https://forums.swift.org/u/Les_Pruszynski'>
+                (Les Pruszynski)
+              </span>
+
+
+
+              <span class="crawler-post-infos">
+                  <time itemprop="datePublished" datetime='2026-06-04T19:31:28Z' class='post-time'>
+                    June 4, 2026,  7:31pm
+                  </time>
+                  <meta itemprop='dateModified' content='2026-06-04T19:31:28Z'>
+              <span itemprop="position">17</span>
+              </span>
+            </div>
+            <div class='post' itemprop="text">
+              <p>Not working for me either.</p>
+            </div>
+
+              <div itemprop="interactionStatistic" itemscope="itemscope" itemtype="http://schema.org/InteractionCounter">
+                  <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+                  <meta itemprop="userInteractionCount" content="1" />
+                <span class='post-likes'>1 Like</span>
+              </div>
+
+
+            
+
+
+          </div>
+          <div id='post_18' itemprop="comment" itemscope="itemscope" itemtype="http://schema.org/Comment" class='topic-body crawler-post'>
+            <div class='crawler-post-meta'>
+              <span class="creator" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+                <a rel='nofollow' href='https://forums.swift.org/u/vanvoorden'><span itemprop="name">vanvoorden</span></a>
+                  <meta itemprop='url' content='https://forums.swift.org/u/vanvoorden'>
+                (Rick van Voorden)
+              </span>
+
+
+
+              <span class="crawler-post-infos">
+                  <time itemprop="datePublished" datetime='2026-06-04T21:03:32Z' class='post-time'>
+                    June 4, 2026,  9:03pm
+                  </time>
+                  <meta itemprop='dateModified' content='2026-06-04T21:03:32Z'>
+              <span itemprop="position">18</span>
+              </span>
+            </div>
+            <div class='post' itemprop="text">
+              <p>I think this might be the fix?</p>
+<aside class="onebox githubpullrequest" data-onebox-src="https://github.com/swiftlang/swiftly/pull/552">
+  <header class="source">
+
+      <a href="https://github.com/swiftlang/swiftly/pull/552" target="_blank" rel="noopener">github.com/swiftlang/swiftly</a>
+  </header>
+
+  <article class="onebox-body">
+    <div class="github-row" data-github-private-repo="false">
+
+
+
+    <div class="github-icon-container" title="Pull Request">
+      <svg width="60" height="60" class="github-icon" viewBox="0 0 12 16" aria-hidden="true"><path fill-rule="evenodd" d="M11 11.28V5c-.03-.78-.34-1.47-.94-2.06C9.46 2.35 8.78 2.03 8 2H7V0L4 3l3 3V4h1c.27.02.48.11.69.31.21.2.3.42.31.69v6.28A1.993 1.993 0 0 0 10 15a1.993 1.993 0 0 0 1-3.72zm-1 2.92c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zM4 3c0-1.11-.89-2-2-2a1.993 1.993 0 0 0-1 3.72v6.56A1.993 1.993 0 0 0 2 15a1.993 1.993 0 0 0 1-3.72V4.72c.59-.34 1-.98 1-1.72zm-.8 10c0 .66-.55 1.2-1.2 1.2-.65 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"></path></svg>
+    </div>
+
+  <div class="github-info-container">
+
+
+
+      <h4>
+        <a href="https://github.com/swiftlang/swiftly/pull/552" target="_blank" rel="noopener">Update tmpfile for swiftly pkg to use platform file extension (#552)</a>
+      </h4>
+
+    <div class="branches">
+      <code>main</code> ← <code>jadams/fix-macos-swiftly-selfupdate</code>
+    </div>
+
+      <div class="github-info">
+        <div class="date">
+          opened <span class="discourse-local-date" data-format="ll" data-date="2026-06-04" data-time="19:49:46" data-timezone="UTC">07:49PM - 04 Jun 26 UTC</span>
+        </div>
+
+        <div class="user">
+          <a href="https://github.com/justice-adams-apple" target="_blank" rel="noopener">
+            <img alt="" src="https://global.discourse-cdn.com/swift/original/3X/9/0/9034d7a469dc8e7ad453bc6be65b8c68395e1295.jpeg" class="onebox-avatar-inline" width="20" height="20" data-dominant-color="6D819F">
+            justice-adams-apple
+          </a>
+        </div>
+
+        <div class="lines" title="1 commits changed 1 files with 1 additions and 1 deletions">
+          <a href="https://github.com/swiftlang/swiftly/pull/552/files" target="_blank" rel="noopener">
+            <span class="added">+1</span>
+            <span class="removed">-1</span>
+          </a>
+        </div>
+      </div>
+  </div>
+</div>
+
+  <div class="github-row">
+    <p class="github-body-container">When performing a self update make sure the swiftly pkg file has the appropriate<span class="show-more-container"><a href="https://github.com/swiftlang/swiftly/pull/552" target="_blank" rel="noopener" class="show-more">…</a></span><span class="excerpt hidden"> pkg file extension</span></p>
+  </div>
+
+  </article>
+
+  <div class="onebox-metadata">
+    
+    
+  </div>
+
+  <div style="clear: both"></div>
+</aside>
+
+            </div>
+
+              <div itemprop="interactionStatistic" itemscope="itemscope" itemtype="http://schema.org/InteractionCounter">
+                  <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+                  <meta itemprop="userInteractionCount" content="0" />
+                <span class='post-likes'></span>
+              </div>
+
+
+            
+
+
+          </div>
+          <div id='post_19' itemprop="comment" itemscope="itemscope" itemtype="http://schema.org/Comment" class='topic-body crawler-post'>
+            <div class='crawler-post-meta'>
+              <span class="creator" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+                <a rel='nofollow' href='https://forums.swift.org/u/mishal_shah'><span itemprop="name">mishal_shah</span></a>
+                  <meta itemprop='url' content='https://forums.swift.org/u/mishal_shah'>
+                (Mishal Shah)
+              </span>
+
+
+
+              <span class="crawler-post-infos">
+                  <time itemprop="datePublished" datetime='2026-06-04T21:12:22Z' class='post-time'>
+                    June 4, 2026,  9:12pm
+                  </time>
+                  <meta itemprop='dateModified' content='2026-06-04T21:12:22Z'>
+              <span itemprop="position">19</span>
+              </span>
+            </div>
+            <div class='post' itemprop="text">
+              <p>The self update bug was resolved in main and did not make it into 1.1.2 release.</p>
+<p>To workaround the issue: <a href="https://www.swift.org/swiftly/documentation/swiftly/trouble/#Self-update-swiftly-from-version-110-fails-with-macOS" class="inline-onebox">Documentation</a></p>
+            </div>
+
+              <div itemprop="interactionStatistic" itemscope="itemscope" itemtype="http://schema.org/InteractionCounter">
+                  <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+                  <meta itemprop="userInteractionCount" content="2" />
+                <span class='post-likes'>2 Likes</span>
+              </div>
+
+
+            
+
+
+          </div>
+          <div id='post_20' itemprop="comment" itemscope="itemscope" itemtype="http://schema.org/Comment" class='topic-body crawler-post'>
+            <div class='crawler-post-meta'>
+              <span class="creator" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+                <a rel='nofollow' href='https://forums.swift.org/u/mishal_shah'><span itemprop="name">mishal_shah</span></a>
+                  <meta itemprop='url' content='https://forums.swift.org/u/mishal_shah'>
+                (Mishal Shah)
+              </span>
+
+
+
+              <span class="crawler-post-infos">
+                  <time itemprop="datePublished" datetime='2026-08-25T07:55:39Z' class='post-time'>
+                    August 25, 2026,  7:55am
+                  </time>
+                  <meta itemprop='dateModified' content='2026-08-25T07:55:39Z'>
+              <span itemprop="position">20</span>
+              </span>
+            </div>
+            <div class='post' itemprop="text">
+              <p>We have created a new branch called <code>release/6.4.0</code>. This branch will only be accepting extremely limited changes at this time. Additionally, we have created a branch named <code>release/6.4.1</code> from <code>release/6.4.0</code> for the next minor release after 6.4.0. The <code>release/6.4.x</code> branch will be used for future minor releases starting from version 6.4.2.</p>
+            </div>
+
+              <div itemprop="interactionStatistic" itemscope="itemscope" itemtype="http://schema.org/InteractionCounter">
+                  <meta itemprop="interactionType" content="http://schema.org/LikeAction"/>
+                  <meta itemprop="userInteractionCount" content="6" />
+                <span class='post-likes'>6 Likes</span>
+              </div>
+
+
+            
+
+
+          </div>
+
+    </div>
+
+      <div role='navigation' itemscope itemtype='http://schema.org/SiteNavigationElement' class="topic-body crawler-post">
+            <span itemprop='name'><b><a rel="next" itemprop="url" href="/t/swift-6-4-release-process/85421?page=2">next page →</a></b></span>
+      </div>
+
+    
+
+
+
+
+    </div>
+    <footer class="container wrap">
+  <nav class='crawler-nav'>
+    <ul>
+      <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+        <span itemprop='name'>
+          <a href='/' itemprop="url">Home </a>
+        </span>
+      </li>
+      <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+        <span itemprop='name'>
+          <a href='/categories' itemprop="url">Categories </a>
+        </span>
+      </li>
+      
+      <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+        <span itemprop='name'>
+          <a href='/guidelines' itemprop="url">Guidelines </a>
+        </span>
+      </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='/tos' itemprop="url">Terms of Service </a>
+          </span>
+        </li>
+        <li itemscope itemtype='http://schema.org/SiteNavigationElement'>
+          <span itemprop='name'>
+            <a href='https://www.apple.com/legal/privacy/en-ww/' itemprop="url">Privacy Policy </a>
+          </span>
+        </li>
+    </ul>
+  </nav>
+  <p class='powered-by-link'>Powered by <a href="https://www.discourse.org">Discourse</a>, best viewed with JavaScript enabled</p>
+</footer>
+
+    
+    
+  </body>
+  
+</html>

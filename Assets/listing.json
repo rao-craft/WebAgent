@@ -1,0 +1,19 @@
+{
+  "name": "Web",
+  "tagline": "The web for a request: four search engines at once, an isolated crawl of your links and the best results, facts with their sources.",
+  "category": "data",
+  "keywords": [
+    "web",
+    "search",
+    "crawl",
+    "research",
+    "sources",
+    "citations",
+    "duckduckgo",
+    "wikipedia"
+  ],
+  "platforms": [
+    "macOS 26"
+  ],
+  "license": "MIT"
+}

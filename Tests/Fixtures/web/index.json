@@ -1,0 +1,64 @@
+{
+  "https://html.duckduckgo.com/html/": {
+    "file": "duckduckgo.html",
+    "type": "text/html"
+  },
+  "https://search.brave.com/search": {
+    "file": "brave.html",
+    "type": "text/html"
+  },
+  "https://www.bing.com/search": {
+    "file": "bing.html",
+    "type": "text/html"
+  },
+  "https://en.wikipedia.org/w/rest.php/v1/search/page": {
+    "file": "wikipedia.json",
+    "type": "application/json"
+  },
+  "https://www.swift.org/blog/swift-6.4-released/": {
+    "file": "swift-blog.html",
+    "type": "text/html"
+  },
+  "https://forums.swift.org/t/swift-6-4-release-process/85421": {
+    "file": "forums.html",
+    "type": "text/html"
+  },
+  "https://docs.swift.org/latest/documentation/packagemanagerdocs/6.4/": {
+    "file": "swiftpm-docs.html",
+    "type": "text/html"
+  },
+  "https://www.swift.org/robots.txt": {
+    "file": "swift-robots.txt",
+    "type": "text/plain"
+  },
+  "https://forums.swift.org/robots.txt": {
+    "file": "forums-robots.txt",
+    "type": "text/plain"
+  },
+  "https://docs.swift.org/robots.txt": {
+    "status": 404
+  },
+  "https://www.swift.com/robots.txt": {
+    "file": "closed-robots.txt",
+    "type": "text/plain"
+  },
+  "https://www.swift.com/": {
+    "file": "swift-blog.html",
+    "type": "text/html"
+  },
+  "https://developer.apple.com/robots.txt": {
+    "status": 503
+  },
+  "https://example.com/logo.png": {
+    "file": "closed-robots.txt",
+    "type": "image/png"
+  },
+  "https://www.avanderlee.com/concurrency/swift-6-4-whats-new-in-concurrency/": {
+    "file": "avanderlee.html",
+    "type": "text/html"
+  },
+  "https://www.avanderlee.com/robots.txt": {
+    "file": "avanderlee-robots.txt",
+    "type": "text/plain"
+  }
+}
