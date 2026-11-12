@@ -36,6 +36,26 @@ What it pins:
 
 ## Runs on this Mac
 
+### In Craft: a made-up link that looped (fixed)
+
+*2026-11-12 · Craft, the local model (Qwopus3.5-122B) · live web*
+
+Asked to find a comet shader with `$web` and put it in `index.html`, the model searched twice (both answered), then
+called `{"query": "CosmosMuseum cosmos-meteor-shower index.html source code", "search": false, "urls":
+["https://github.com/CosmosMuseum/cosmos-meteor-shower"]}`: a repository that does not exist. GitHub answered 404, and
+web refused as `reach` ("The web is out of reach from this Mac: github.com answered 404. Try again when it is
+online."), so the model called again with the same link three times while Craft held the edit for the required `$web`.
+
+After the fix, the same call from a terminal:
+
+```sh
+swift run webcrawl --query "realistic comet GLSL shader" --no-search https://github.com/CosmosMuseum/cosmos-meteor-shower
+```
+
+**Notes**: `Skipped github.com: answered 404` · `The link could not be read; searching for “realistic comet GLSL shader”
+instead` · `21 results, 14 distinct pages` · `Read 4/6: shader.gallery (drawn in WebKit)` … `12 facts from 6 pages`.
+Pinned by `testALinkThatIsGoneFallsBackToTheSearch` and `testALinkThatIsGoneWithNothingToSearchIsTheCallsToFix`.
+
 Setup: MacBook Pro M4 Max, macOS 27, Swift 6.4.2, the agent installed into Craft with `craft agents add`.
 
 ### Live: a question and a link

@@ -58,8 +58,11 @@ public struct WebAgent: GraniteAgentPackage {
         Answer from the sources and credit each fact inline as (found on <site>), e.g. (found on swift.org); never \
         credit a page that is not in `sources`, never invent one, and say plainly what they do not cover. End the reply \
         with a short "Web work" section: the engines searched and the query, how many results and pages, the pages \
-        read by site, and anything skipped. It writes no file. A call with no words and no link is refused; a web out \
-        of reach is refused with try-later.
+        read by site, and anything skipped. It writes no file. Only give `urls` you were given or found in `sources`, \
+        never an address you made up. A link that answers 404 is gone or private (the crawl signs in nowhere): when \
+        every link fails and there is a `query`, it searches instead and says so; otherwise it is refused as a call to \
+        fix, so never call again with the same link. A call with no words and no link is refused; a web or engines \
+        out of reach are refused with try-later.
         """
     /// A call is the network's time, not the cores': two at once.
     public static let lanes: Int? = 2

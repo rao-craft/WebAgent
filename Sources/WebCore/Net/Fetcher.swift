@@ -56,6 +56,14 @@ public enum FetchError: Error, Equatable, CustomStringConvertible {
         case .unrecorded: return "not recorded"
         }
     }
+
+    /// The network failed, not the page: nothing answered, or nothing in time.
+    public var isNetwork: Bool {
+        switch self {
+        case .unreachable, .timedOut: return true
+        case .refused, .unrecorded: return false
+        }
+    }
 }
 
 /// How the run reaches the web: live, or from recorded answers in tests.

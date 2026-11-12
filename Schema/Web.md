@@ -44,6 +44,12 @@ With an `AgentRefusal`: a kind and reasons, each with its fix. `input` and `call
 Each change made to make this agent more precise, dated, with the regime run that measured it and what it
 made of what it was asked before and after (`TESTING.md`). Newest first.
 
+### 2026-11-12 · a link that is gone is the call's to fix, not try-later
+
+A link that answered (404, 403, a page with nothing to read) was refused as `reach`, "the web is out of reach", so a model given a made-up GitHub address with `search: false` called again with the same link until the turn gave up. Now `reach` is only for a network that did not answer (`unreachable`) or engines that gave no results (`enginesDown`). When every link fails and there is a `query`, the engines are searched instead and a note says so; with nothing to search, it is refused as `call` (`unreadable`), naming each link and why, and telling the model not to call again with the same link. The guide says to give only `urls` the model was given or found in `sources`.
+
+Measured: the looping call (`{"query": …, "search": false, "urls": ["https://github.com/CosmosMuseum/cosmos-meteor-shower"]}`) now answers with six search results; before, three refusals and a stopped turn.
+
 ### 2026-11-11 · the first version: sources and work in the answer
 
 web answers `granite-answer/1` with no file (`paths: []`) and two keys of its own: `sources`, the pages read, numbered, each with its site, an excerpt and facts whose `quote` is the page's own words; and `work`, the engines searched, the pages read and skipped, and how the facts were found. Its `notes` tell the model to credit each fact inline as (found on <site>) and to end the reply with a short "Web work" section. A call with nothing to look up is refused as `call`; a web out of reach as `reach`. Web sources in Craft's own Sources sheet are to come, and need Craft.

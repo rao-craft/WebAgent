@@ -20,6 +20,9 @@ public struct CrawlOutcome: Sendable {
     public var pages: [Page] = []
     public var crawled: [WebWork.Crawled] = []
     public var skipped: [WebWork.Skipped] = []
+    /// Skips the network caused (nothing answered, or not in time), as against a page that answered and was gone,
+    /// closed or empty.
+    public var unreachable = 0
 }
 
 /// The isolated crawl: the prompt's links first, then (one step deep, when asked) the same-site links they carry,
@@ -102,6 +105,7 @@ public struct Crawler: Sendable {
                     note("Read \(outcome.pages.count)/\(limits.pages): \(URLNormal.site(page.url))\(page.rendered ? " (drawn in WebKit)" : "")")
                 case .failure(let skip):
                     outcome.skipped.append(WebWork.Skipped(url: target.url.absoluteString, why: skip.why))
+                    if skip.network { outcome.unreachable += 1 }
                     note("Skipped \(URLNormal.site(target.url)): \(skip.why)")
                 }
                 if Task.isCancelled { group.cancelAll(); return }
@@ -110,7 +114,10 @@ public struct Crawler: Sendable {
         }
     }
 
-    struct Skip: Error { var why: String }
+    struct Skip: Error {
+        var why: String
+        var network = false
+    }
 
     /// One page: its host checked, its robots kept (unless the person linked it), fetched, read, drawn when its
     /// words need scripts.
@@ -124,8 +131,10 @@ public struct Crawler: Sendable {
         let fetched: Fetched
         do {
             fetched = try await fetcher.fetch(FetchRequest(url: target.url, timeout: limits.requestTimeout, maxBytes: limits.maxBytes))
+        } catch let error as FetchError {
+            return .failure(Skip(why: "\(error)", network: error.isNetwork))
         } catch {
-            return .failure(Skip(why: "\(error)"))
+            return .failure(Skip(why: "\(error)", network: true))
         }
         guard (200..<300).contains(fetched.status) else { return .failure(Skip(why: "answered \(fetched.status)")) }
 

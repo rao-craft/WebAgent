@@ -60,5 +60,9 @@
   "https://www.avanderlee.com/robots.txt": {
     "file": "avanderlee-robots.txt",
     "type": "text/plain"
+  },
+  "https://github.com/CosmosMuseum/cosmos-meteor-shower": {
+    "status": 404,
+    "type": "text/html"
   }
 }

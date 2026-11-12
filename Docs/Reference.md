@@ -73,8 +73,14 @@ The answer is a `WebResult` in `granite-answer/1`, with no file (`paths: []`):
 - The answer stays under 20,000 characters, below Craft's 30,000 for a tool's answer: excerpts shorten first, then
   each page keeps fewer facts, then the last pages go, each step said in `problems`.
 
-A call with no words and no link is refused as `call` (fix the call); a web out of reach (every engine and every link)
-as `reach` (try later).
+Refusals, and when a call answers instead:
+
+- No words and no link: `call` (`nothingAsked`).
+- Every link answered and none could be read (404, 403, nothing to read): with a `query`, the engines are searched
+  instead and the first note says so; without one, `call` (`unreadable`), each link named with why, and the model told
+  not to call again with the same link.
+- No engine gave results (busy, turning readers away) and no link: `reach` (`enginesDown`), try in a minute.
+- Nothing answered at all, the network's failure: `reach` (`unreachable`), try when the Mac is online.
 
 ## The crawl
 

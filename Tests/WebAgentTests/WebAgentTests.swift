@@ -40,7 +40,8 @@ final class WebAgentTests: XCTestCase {
     func testTheGuideSaysHowToCiteAndAccount() {
         let guide = AnyAgentPackage(WebAgent.self).guide
         for words in ["DuckDuckGo, Brave, Bing and Wikipedia", "(found on <site>)", "(found on swift.org)", "never invent one",
-                      "\"Web work\" section", "`query`", "`search: false`", "`depth: 1`", "robots.txt", "writes no file", "Before answering".lowercased()] {
+                      "\"Web work\" section", "`query`", "`search: false`", "`depth: 1`", "robots.txt", "writes no file", "Before answering".lowercased(),
+                      "never an address you made up", "never call again with the same link"] {
             XCTAssertTrue(guide.lowercased().contains(words.lowercased()), "the guide says \(words)")
         }
     }
@@ -76,6 +77,8 @@ final class WebAgentTests: XCTestCase {
             XCTAssertEqual(AgentRefusal.of(error)?.kind, .call, "\(error)")
         }
         XCTAssertEqual(WebError.unreachable("offline").refusal.kind, .reach)
+        XCTAssertEqual(WebError.enginesDown("Brave answered 429").refusal.kind, .reach)
+        XCTAssertEqual(WebError.unreadable("https://github.com/a/b answered 404").refusal.kind, .call, "a gone link is the call's to fix, never try-later")
     }
 
     func testABigAnswerIsFittedNotCut() throws {

@@ -39,15 +39,24 @@ public struct WebOutcome: Sendable {
 public enum WebError: Error, Equatable, CustomStringConvertible {
     /// Nothing to search for and no link to read.
     case nothingAsked
-    /// Every engine and every link out of reach.
+    /// Nothing answered at all: the network failed, not the pages. Try later.
     case unreachable(String)
+    /// The engines answered without results (busy, or turning automated readers away). Try later.
+    case enginesDown(String)
+    /// Every link answered and none could be read: gone, private, closed or empty. The call is the one to fix.
+    case unreadable(String)
 
     public var description: String {
         switch self {
         case .nothingAsked:
             return "There is nothing to look up: give `query` (what to search for) or `urls` (pages to read), or ask with words or a link."
         case .unreachable(let why):
-            return "The web is out of reach from this Mac: \(why). Try again when it is online."
+            return "Nothing on the web answered this Mac (\(why)): it looks offline. Try again when it is online."
+        case .enginesDown(let why):
+            return "No search engine gave results (\(why)). Try again in a minute, or give `urls` to read pages directly."
+        case .unreadable(let why):
+            return "No page could be read: \(why). Do not call web again with the same link: check the address, or search instead "
+                + "(give `query` and leave `search` out)."
         }
     }
 }
@@ -82,68 +91,62 @@ public struct WebRun: Sendable {
 
         let links = (LinkFinder.links(from: request.urls) + LinkFinder.links(in: request.ask ?? ""))
             .reduce(into: [URL]()) { kept, url in if !kept.contains(where: { URLNormal.key($0) == URLNormal.key(url) }) { kept.append(url) } }
+        let linkKeys = Set(links.map(URLNormal.key))
         work.linked = links.map(\.absoluteString)
         let asked = request.query?.trimmingCharacters(in: .whitespacesAndNewlines)
         let query = (asked?.isEmpty == false ? asked : nil) ?? request.ask.map(LinkFinder.query(from:)).flatMap { $0.isEmpty ? nil : $0 }
-        let searching = request.search && query != nil
+        var searching = request.search && query != nil
         guard searching || !links.isEmpty else { throw WebError.nothingAsked }
         let terms = Distiller.terms([query, request.ask].compactMap { $0 }.joined(separator: " "))
         if !links.isEmpty { note("Reading \(links.count == 1 ? "the link" : "the \(links.count) links") in the prompt") }
 
         // The engines, all at once.
-        var lists: [[Hit]] = []
+        var fused: [Fusion.Fused] = []
+        var enginesOffline = false
         if searching, let query {
-            note("Searching \(Self.list(engines.map(\.name))) for “\(query)”")
-            let fetcher = fetcher
-            let results = await withTaskGroup(of: (Int, String, Result<[Hit], Error>, Int).self) { group in
-                for (index, engine) in engines.enumerated() {
-                    group.addTask {
-                        let clock = ContinuousClock.now
-                        do {
-                            let hits = try await engine.search(query, using: fetcher)
-                            return (index, engine.name, .success(hits), Self.ms(since: clock))
-                        } catch {
-                            return (index, engine.name, .failure(error), Self.ms(since: clock))
-                        }
-                    }
-                }
-                var all: [(Int, String, Result<[Hit], Error>, Int)] = []
-                for await result in group { all.append(result) }
-                return all.sorted { $0.0 < $1.0 }
+            (fused, enginesOffline) = await search(query, into: &work, problems: &problems)
+            if links.isEmpty, fused.isEmpty, work.searched.allSatisfy({ $0.error != nil && $0.error != "no results" }) {
+                let why = work.searched.map { "\($0.engine) \($0.error ?? "")" }.joined(separator: "; ")
+                throw enginesOffline ? WebError.unreachable(why) : WebError.enginesDown(why)
             }
-            for (_, name, result, ms) in results {
-                switch result {
-                case .success(let hits):
-                    lists.append(hits)
-                    work.searched.append(.init(engine: name, query: query, hits: hits.count, ms: ms, error: hits.isEmpty ? "no results" : nil))
-                    if hits.isEmpty { problems.append(WebProblem(kind: "engine", text: "\(name) gave no results.")) }
-                case .failure(let error):
-                    work.searched.append(.init(engine: name, query: query, hits: 0, ms: ms, error: "\(error)"))
-                    problems.append(WebProblem(kind: "engine", text: "\(name) gave nothing: \(error)."))
-                }
-            }
-            work.results = lists.reduce(0) { $0 + $1.count }
-        }
-        let fused = Fusion.fuse(lists)
-        work.unique = fused.count
-        if searching { note("\(work.results) results, \(fused.count) distinct pages") }
-        if searching, links.isEmpty, fused.isEmpty, work.searched.allSatisfy({ $0.error != nil && $0.error != "no results" }) {
-            throw WebError.unreachable(work.searched.map { "\($0.engine) \($0.error ?? "")" }.joined(separator: "; "))
         }
 
         // The crawl.
         var limits = CrawlLimits(pages: min(max(request.pages, Self.pageRange.lowerBound), Self.pageRange.upperBound))
         limits.pages = max(limits.pages, min(links.count, Self.pageRange.upperBound))
         let crawler = Crawler(fetcher: fetcher, renderer: renderer, limits: limits, note: note)
-        let crawl = await crawler.crawl(
+        var crawl = await crawler.crawl(
             prompt: links.map { Target(url: $0, origin: .prompt) },
-            search: fused.map { Target(url: $0.url, origin: .search, engines: $0.engines, title: $0.title, snippet: $0.snippet) },
-            depth: min(max(request.depth, 0), 1), terms: terms)
+            search: Self.targets(fused), depth: min(max(request.depth, 0), 1), terms: terms)
+
+        // Every link failed and nothing was searched: a link that is gone or private is no reason to stop when
+        // there are words to search for, so the engines are asked instead, and the answer says so.
+        if crawl.pages.isEmpty, !links.isEmpty, !searching, let query {
+            let failed = Self.list(crawl.skipped.map { "\($0.url) \($0.why)" })
+            note("\(links.count == 1 ? "The link" : "No link") could not be read; searching for “\(query)” instead")
+            notes.append("\(links.count == 1 ? "The link could not be read" : "None of the links could be read") (\(failed)), so the engines were searched for “\(query)” instead.")
+            searching = true
+            (fused, enginesOffline) = await search(query, into: &work, problems: &problems)
+            fused.removeAll { linkKeys.contains(URLNormal.key($0.url)) }
+            let more = await crawler.crawl(prompt: [], search: Self.targets(fused), depth: 0, terms: terms)
+            crawl.pages += more.pages
+            crawl.crawled += more.crawled
+            crawl.skipped += more.skipped
+            crawl.unreachable += more.unreachable
+        }
         work.crawled = crawl.crawled
         work.skipped = Array(crawl.skipped.prefix(Self.skippedKept))
         work.skippedTotal = crawl.skipped.count
+
         if crawl.pages.isEmpty, !links.isEmpty, fused.isEmpty {
-            throw WebError.unreachable(crawl.skipped.map { "\(URLNormal.site(URL(string: $0.url)!)) \($0.why)" }.joined(separator: "; "))
+            let linkSkips = crawl.skipped.filter { skip in URL(string: skip.url).map { linkKeys.contains(URLNormal.key($0)) } ?? false }
+            let offline = crawl.unreachable == crawl.skipped.count && (work.searched.isEmpty || enginesOffline)
+            if offline {
+                throw WebError.unreachable(linkSkips.map { "\($0.url) \($0.why)" }.joined(separator: "; "))
+            }
+            var why = Self.list(linkSkips.map { "\($0.url) \(Self.explained($0.why))" })
+            if searching, let query { why += "; and the search for “\(query)” found nothing to read" }
+            throw WebError.unreadable(why)
         }
 
         // The pages in the order the answer numbers them: the person's links, their links, then the results.
@@ -213,8 +216,9 @@ public struct WebRun: Sendable {
             let answered = work.searched.filter { $0.hits > 0 }.map(\.engine)
             notes.append("Searched \(list(work.searched.map(\.engine))) for “\(query)”: \(work.results) results from \(list(answered.isEmpty ? ["none"] : answered)), \(work.unique) distinct pages.")
         }
-        if !work.linked.isEmpty {
-            notes.append("Read the \(work.linked.count == 1 ? "link" : "\(work.linked.count) links") in the prompt directly: \(work.linked.joined(separator: ", ")).")
+        let read = sources.filter { $0.via == .prompt }.map(\.url)
+        if !read.isEmpty {
+            notes.append("Read \(read.count == 1 ? "the link" : "\(read.count) links") in the prompt directly: \(read.joined(separator: ", ")).")
         }
         let drawn = work.crawled.filter(\.rendered).count
         let sites = list(Array(NSOrderedSet(array: sources.map(\.site)).compactMap { $0 as? String }))
@@ -242,6 +246,68 @@ public struct WebRun: Sendable {
         let rest = sorted.dropFirst(4).reduce(0) { $0 + $1.value }
         if rest > 0 { parts.append("\(rest) for other reasons") }
         return parts.joined(separator: ", ")
+    }
+
+    /// The engines asked at once, their results fused, each engine's answer logged; whether every failure was the
+    /// network's.
+    func search(_ query: String, into work: inout WebWork, problems: inout [WebProblem]) async -> ([Fusion.Fused], Bool) {
+        note("Searching \(Self.list(engines.map(\.name))) for “\(query)”")
+        let fetcher = fetcher
+        let results = await withTaskGroup(of: (Int, String, Result<[Hit], Error>, Int).self) { group in
+            for (index, engine) in engines.enumerated() {
+                group.addTask {
+                    let clock = ContinuousClock.now
+                    do {
+                        let hits = try await engine.search(query, using: fetcher)
+                        return (index, engine.name, .success(hits), Self.ms(since: clock))
+                    } catch {
+                        return (index, engine.name, .failure(error), Self.ms(since: clock))
+                    }
+                }
+            }
+            var all: [(Int, String, Result<[Hit], Error>, Int)] = []
+            for await result in group { all.append(result) }
+            return all.sorted { $0.0 < $1.0 }
+        }
+        var lists: [[Hit]] = []
+        var failures = 0
+        var offline = 0
+        for (_, name, result, ms) in results {
+            switch result {
+            case .success(let hits):
+                lists.append(hits)
+                work.searched.append(.init(engine: name, query: query, hits: hits.count, ms: ms, error: hits.isEmpty ? "no results" : nil))
+                if hits.isEmpty { problems.append(WebProblem(kind: "engine", text: "\(name) gave no results.")) }
+            case .failure(let error):
+                failures += 1
+                if (error as? FetchError)?.isNetwork ?? (error is URLError) { offline += 1 }
+                work.searched.append(.init(engine: name, query: query, hits: 0, ms: ms, error: "\(error)"))
+                problems.append(WebProblem(kind: "engine", text: "\(name) gave nothing: \(error)."))
+            }
+        }
+        let fused = Fusion.fuse(lists)
+        work.results += lists.reduce(0) { $0 + $1.count }
+        work.unique += fused.count
+        note("\(lists.reduce(0) { $0 + $1.count }) results, \(fused.count) distinct pages")
+        return (fused, failures > 0 && offline == failures && lists.allSatisfy(\.isEmpty))
+    }
+
+    static func targets(_ fused: [Fusion.Fused]) -> [Target] {
+        fused.map { Target(url: $0.url, origin: .search, engines: $0.engines, title: $0.title, snippet: $0.snippet) }
+    }
+
+    /// A skip's reason as the model can act on it.
+    static func explained(_ why: String) -> String {
+        switch why {
+        case "answered 404", "answered 410":
+            return "\(why): no such page, or a private one (the crawl signs in nowhere)"
+        case "answered 401", "answered 403":
+            return "\(why): it needs a login, or turns automated readers away"
+        case "the host does not resolve":
+            return "\(why): a wrong address, or this Mac is offline"
+        default:
+            return why
+        }
     }
 
     static func list(_ items: [String]) -> String {

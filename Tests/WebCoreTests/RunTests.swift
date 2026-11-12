@@ -42,7 +42,7 @@ final class RunTests: XCTestCase {
         XCTAssertEqual(outcome.work.linked, ["https://www.swift.com/", "https://www.swift.org/blog/swift-6.4-released/"])
         XCTAssertEqual(outcome.sources.map(\.url), ["https://www.swift.com/", "https://www.swift.org/blog/swift-6.4-released/"])
         XCTAssertTrue(outcome.sources.allSatisfy { $0.via == .prompt && $0.engines.isEmpty })
-        XCTAssertTrue(outcome.notes.contains { $0.hasPrefix("Read the 2 links in the prompt directly") })
+        XCTAssertTrue(outcome.notes.contains { $0.hasPrefix("Read 2 links in the prompt directly") })
     }
 
     func testAModelsFactIsKeptOnlyWhenItQuotesThePage() async throws {
@@ -83,15 +83,63 @@ final class RunTests: XCTestCase {
     }
 
     func testEveryEngineOutOfReachIsTryLater() async throws {
+        struct Offline: Fetching {
+            func fetch(_ request: FetchRequest) async throws -> Fetched { throw FetchError.unreachable("offline") }
+            var resolvesHosts: Bool { false }
+        }
+        do {
+            _ = try await WebRun(engines: SearchEngines.standard(environment: [:]), fetcher: Offline(), renderer: NoRenderer())
+                .run(WebRequest(query: "swift"))
+            XCTFail("nothing answered")
+        } catch let error as WebError {
+            guard case .unreachable = error else { return XCTFail("\(error)") }
+        }
+        do {
+            _ = try await WebRun(engines: SearchEngines.standard(environment: [:]), fetcher: Offline(), renderer: NoRenderer())
+                .run(WebRequest(urls: ["https://www.swift.org/blog/"], search: false))
+            XCTFail("nothing answered")
+        } catch let error as WebError {
+            guard case .unreachable = error else { return XCTFail("a link the network could not reach is try-later: \(error)") }
+        }
+    }
+
+    func testEnginesThatAnswerWithoutResultsAreNotAnOfflineMac() async throws {
         let empty = FileManager.default.temporaryDirectory.appendingPathComponent("web-\(UUID().uuidString.prefix(8))")
         try FileManager.default.createDirectory(at: empty, withIntermediateDirectories: true)
         try Data("{}".utf8).write(to: empty.appendingPathComponent("index.json"))
         do {
             _ = try await WebRun(engines: SearchEngines.standard(environment: [:]), fetcher: RecordedFetcher(folder: empty), renderer: NoRenderer())
                 .run(WebRequest(query: "swift"))
-            XCTFail("nothing answered")
+            XCTFail("no engine gave results")
         } catch let error as WebError {
-            guard case .unreachable = error else { return XCTFail("\(error)") }
+            guard case .enginesDown = error else { return XCTFail("\(error)") }
+            XCTAssertFalse(error.description.contains("offline"), error.description)
+        }
+    }
+
+    /// The call that looped in Craft on 2026-11-12: a made-up GitHub link, `search: false`, a query beside it.
+    func testALinkThatIsGoneFallsBackToTheSearch() async throws {
+        let notes = Notes()
+        let outcome = try await run(WebRequest(query: "swift 6.4 release", urls: ["https://github.com/CosmosMuseum/cosmos-meteor-shower"],
+                                               search: false, pages: 2), notes: notes)
+        XCTAssertEqual(outcome.query, "swift 6.4 release")
+        XCTAssertEqual(outcome.sources.map(\.site), ["swift.org", "forums.swift.org"])
+        XCTAssertTrue(outcome.sources.allSatisfy { $0.via == .search })
+        XCTAssertTrue(outcome.work.skipped.contains { $0.url == "https://github.com/CosmosMuseum/cosmos-meteor-shower" && $0.why == "answered 404" })
+        XCTAssertEqual(outcome.notes.first, "The link could not be read (https://github.com/CosmosMuseum/cosmos-meteor-shower answered 404), "
+                       + "so the engines were searched for “swift 6.4 release” instead.")
+        XCTAssertFalse(outcome.notes.contains { $0.hasPrefix("Read the link in the prompt") }, "it was not read: \(outcome.notes)")
+        XCTAssertTrue(notes.all.contains { $0.contains("searching for “swift 6.4 release” instead") }, "\(notes.all)")
+    }
+
+    func testALinkThatIsGoneWithNothingToSearchIsTheCallsToFix() async throws {
+        do {
+            _ = try await run(WebRequest(urls: ["https://github.com/CosmosMuseum/cosmos-meteor-shower"], search: false))
+            XCTFail("a 404 and nothing to search for")
+        } catch let error as WebError {
+            guard case .unreadable = error else { return XCTFail("a page that answered is not an offline web: \(error)") }
+            XCTAssertTrue(error.description.contains("answered 404: no such page, or a private one"), error.description)
+            XCTAssertTrue(error.description.contains("Do not call web again with the same link"), error.description)
         }
     }
 }
