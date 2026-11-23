@@ -15,5 +15,12 @@
   "platforms": [
     "macOS 26"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "illustrations": [
+    {
+      "path": "Assets/illustrations/what-you-get.png",
+      "alt": "A Craft reply crediting facts inline as found on swift.org, ending in a Web work section, beside a list of numbered source pages and the agent’s card reading page 3 of 6.",
+      "caption": "Web answers with each fact credited to its page."
+    }
+  ]
 }
